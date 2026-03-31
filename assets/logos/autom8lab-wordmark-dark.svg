@@ -1,0 +1,10 @@
+<svg width="200" height="36" viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logomark -->
+  <circle cx="16" cy="10" r="8" fill="none" stroke="#c9a66b" stroke-width="2"/>
+  <circle cx="16" cy="26" r="8" fill="none" stroke="#c9a66b" stroke-width="2"/>
+  <circle cx="16" cy="18" r="2.5" fill="#c9a66b"/>
+  <!-- Text -->
+  <text x="38" y="24" fill="#ffffff" font-size="20" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.3">
+    AUTOM<tspan fill="#c9a66b">8</tspan>LAB
+  </text>
+</svg>

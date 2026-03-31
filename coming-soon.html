@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autom8Lab — AI Consulting for Business</title>
+  <meta name="description" content="We help traditional businesses make more money and save more time through AI consulting, training, and done-for-you implementation.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       MAIN CONTENT — Single Centered Section
+       ============================================ -->
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-8 py-20">
+    <div class="max-w-3xl mx-auto text-center">
+
+      <!-- Logo Icon (inlined for cPanel compatibility) -->
+      <div class="mb-8 fade-in">
+        <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto" role="img" aria-label="Autom8Lab">
+          <circle cx="24" cy="14" r="10" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+          <circle cx="24" cy="34" r="10" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+          <circle cx="24" cy="24" r="3.5" fill="#3b82f6"/>
+        </svg>
+      </div>
+
+      <!-- Eyebrow -->
+      <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">
+        Launching Soon
+      </span>
+
+      <!-- Rotating Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-10 fade-in">
+        <span class="headline-rotator" aria-live="polite">
+          <span class="headline-item hero-gradient active">Your Competitors Are Using AI. Are You?</span>
+          <span class="headline-item hero-gradient">AI Is Here. Let Us Set It Up For You.</span>
+          <span class="headline-item hero-gradient">We Install AI Systems That Make You Money</span>
+        </span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl text-[#94a3b8] max-w-2xl mx-auto mb-4 leading-relaxed fade-in">
+        We help traditional businesses make more money and save more time through AI consulting, training, and done-for-you implementation.
+      </p>
+      <p class="text-lg md:text-xl text-white font-medium max-w-2xl mx-auto mb-10 fade-in">
+        No fluff. No theory. Just systems that work.
+      </p>
+
+      <!-- Divider -->
+      <div class="w-16 h-px bg-[#1e293b] mx-auto mb-10 fade-in"></div>
+
+      <!-- Body Text -->
+      <p class="text-base md:text-lg text-[#64748b] max-w-xl mx-auto mb-12 leading-relaxed fade-in">
+        We're launching soon. If you're a business owner who's been curious about AI but doesn't have the time or technical know-how to figure it out &mdash; we built this for you.
+      </p>
+
+      <!-- CTA Button -->
+      <div class="fade-in">
+        <a
+          href="https://calendly.com/cosminlungu/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow"
+        >
+          Book Your Free AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-8 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+        <div class="text-sm text-[#64748b]">Coming Soon</div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Headline Rotator -->
+  <script>
+    (function () {
+      const items = document.querySelectorAll('.headline-item');
+      if (items.length < 2) return;
+
+      let current = 0;
+
+      setInterval(() => {
+        // Hide current
+        items[current].classList.remove('active');
+
+        // Advance index
+        current = (current + 1) % items.length;
+
+        // Force animation restart by toggling display
+        const next = items[current];
+        next.style.animation = 'none';
+        next.offsetHeight; // trigger reflow
+        next.style.animation = '';
+        next.classList.add('active');
+      }, 4000);
+    })();
+  </script>
+
+</body>
+</html>

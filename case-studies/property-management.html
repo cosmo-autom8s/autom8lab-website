@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Management Case Study — Autom8Lab</title>
+  <meta name="description" content="How a property management firm cut maintenance chaos by 64% and gave the owner 11 hours back per week with AI systems from Autom8Lab.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Decorative quote mark font */
+    .quote-decoration {
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    /* Before/After table row hover */
+    .results-row {
+      transition: background-color 0.2s ease;
+    }
+    .results-row:hover {
+      background-color: #1a1a1a;
+    }
+
+    /* Core system badge background */
+    .core-badge {
+      background-color: rgba(201, 166, 107, 0.1);
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="../index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="../index.html#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="../index.html#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="../about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="../free-resources.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="../index.html#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="../index.html#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="../about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="../free-resources.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Eyebrow -->
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">
+          Case Study: Property Management
+        </span>
+
+        <!-- Headline -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-tight fade-in">
+          <span class="hero-gradient">How a Property Management Firm Cut Maintenance Chaos by 64% and Gave the Owner 11 Hours Back Per Week</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg md:text-xl text-[#94a3b8] max-w-2xl mx-auto mb-16 leading-relaxed fade-in">
+          A residential property management company managing 187 units across 14 properties. They knew things were slipping through the cracks. Here's what changed.
+        </p>
+
+        <!-- Metrics Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 fade-in">
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">64%</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Maintenance Resolved<br>Without Owner</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">11+<span class="text-2xl md:text-3xl"> hrs</span></div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Owner Time Saved<br>Per Week</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">19</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">At-Risk Tenants<br>Retained</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">+.5</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Google Rating<br>Increase</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         THE CLIENT
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Client</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">The Snapshot</h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          A residential property management company in Tampa, Florida, managing 187 units across 14 properties. A mix of single-family rentals and small multifamily buildings.
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          4 employees: the owner, one leasing agent, one maintenance coordinator, and a part-time office admin.
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          The owner, Jennifer, started 11 years ago as a real estate agent. Took on a few rentals for clients. Then a few more. Now she runs a business she never planned to build and can't step away from.
+        </p>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          Software: Buildium for accounting and tenant portal, Google Sheets for "everything else," WhatsApp for maintenance emergencies, and a growing sense that none of it actually talks to each other.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WAS ACTUALLY HAPPENING
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Situation</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-16 fade-in">What Was Actually Happening</h2>
+
+        <!-- Block 1: The Maintenance Chaos -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Maintenance Chaos</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "Requests come in from everywhere. Buildium portal, email, text messages, WhatsApp, sometimes a tenant just calls my personal cell. My maintenance coordinator has three different lists going and things still fall through. Last month a tenant posted a one-star review because a leak took 9 days. We thought it was fixed on day 2."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            Maintenance is the #1 source of stress across the industry. Jennifer was spending 20+ hours a month just tracking requests across channels, not even fixing them.
+          </p>
+        </div>
+
+        <!-- Block 2: The Tenant Screening Trap -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Tenant Screening Trap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I approved a tenant last year. Perfect application, verified income, great references. Three months later, eviction process. Turns out the paystubs were fake. I still don't know how I missed it."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            70% of property managers report an increase in fraudulent applications. Only 25% have any systematic detection method. Jennifer was doing it manually, trusting documents that looked right until they weren't.
+          </p>
+        </div>
+
+        <!-- Block 3: The Owner Report Burden -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Owner Report Burden</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I have 6 property owners who expect monthly reports. Every month I spend basically an entire day pulling numbers from Buildium, formatting them in Google Docs, and answering follow-up questions that could've been in the report. One owner calls me every week asking things I've already sent him."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            The reports were taking time away from operations, and owners still weren't satisfied. 40% of property managers say they lack visibility into strategic decisions, and their property owners feel it too.
+          </p>
+        </div>
+
+        <!-- Block 4: The Owner Trap -->
+        <div class="fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Owner Trap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I got into this for the flexibility. Eleven years later, I check my phone before I get out of bed. I handle 'emergencies' on vacation. My husband jokes that the tenants are my real family. He's not entirely joking."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            She became a business owner by accident, and now works more hours than any of her employees. Jennifer was closer to 55 hours a week.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #1
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            The maintenance requests used to run my life. Now they run through the system. I still see everything, but I only touch what actually needs me. That's the difference between managing properties and being managed by them.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Jennifer, Owner, PM Firm
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE INSTALLED
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">What We Installed</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">The Systems</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Card 1: Single Intake Queue -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">01</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Single Intake Queue</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every maintenance request &mdash; portal, email, text, WhatsApp, voicemail &mdash; enters one queue. No more three lists. No more "I thought you had it."</p>
+          </div>
+
+          <!-- Card 2: Auto-Triage + SLA Alerts -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">02</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Auto-Triage + SLA Alerts</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Requests auto-sorted by urgency. Leaks and HVAC get flagged immediately. Routine requests get 48-hour SLA. Owner gets alerted only when something breaches SLA, not for every ticket.</p>
+          </div>
+
+          <!-- Card 3: Tenant Communication Bot -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">03</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Tenant Communication Bot</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Trained on the 30 most common questions: "When is rent due?" "How do I submit a maintenance request?" "What's the pet policy?" Handles 60%+ of inbound messages. Escalates to human when needed.</p>
+          </div>
+
+          <!-- Card 4: Vendor Coordination Tracker -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">04</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Vendor Coordination Tracker</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every work order has clear owner, scheduled time, and status. Jennifer can see where every request stands without calling her maintenance coordinator. Vendors get automated reminders.</p>
+          </div>
+
+          <!-- Card 5: Tenant Screening Workflow -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">05</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Tenant Screening Workflow</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Document verification flags, income consistency checks, reference follow-up automation. Doesn't replace human judgment &mdash; but catches the obvious fakes before they get to Jennifer's desk.</p>
+          </div>
+
+          <!-- Card 6: Owner Report Automation -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">06</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Owner Report Automation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Monthly reports generated automatically from Buildium data. Sent on the 5th of every month. Owners can see occupancy, maintenance summary, rent collection, and upcoming renewals &mdash; without calling Jennifer.</p>
+          </div>
+
+          <!-- Card 7: Lapsed Tenant Re-engagement -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">07</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Lapsed Tenant Re-engagement</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Identifies tenants who haven't renewed or have gone quiet. Automated check-ins before lease end. Flags high-value tenants for personal outreach. Turned "we lost them" into "we kept them."</p>
+          </div>
+
+          <!-- Card 8: Review Recovery System -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">08</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Review Recovery System</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Follow-up after maintenance completion. Happy tenants get prompted for Google review. Unhappy tenants get routed to Jennifer before they post publicly. Caught 6 potential negative reviews in the first 60 days.</p>
+          </div>
+
+          <!-- Card 9: Owner's Daily Brief — CORE SYSTEM (permanent gold border) -->
+          <div class="bg-[#111827] border-2 border-[#3b82f6] rounded-2xl px-8 py-6 hover:bg-[#1a1a1a] transition-all duration-300 relative fade-in">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">09</span>
+              <span class="core-badge text-[10px] font-semibold text-[#3b82f6] uppercase tracking-widest px-2.5 py-1 rounded-full">Core System</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Owner's Daily Brief</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Morning summary: what needs attention today, what's overdue, what's coming this week. Email triage suggestions. No more checking 4 apps before coffee.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT CHANGED — RESULTS
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Results</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">What Changed</h2>
+        </div>
+
+        <!-- Before / After Table -->
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden mb-20 fade-in">
+
+          <!-- Table Header -->
+          <div class="grid grid-cols-3 border-b border-[#1e293b] px-6 md:px-8 py-4">
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Metric</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest text-center">Before</div>
+            <div class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest text-center">After</div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Maintenance tracked in one system</div>
+            <div class="text-sm text-[#64748b] text-center">~40%</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">100%</div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Resolved without owner involvement</div>
+            <div class="text-sm text-[#64748b] text-center">~30%</div>
+            <div class="text-lg md:text-xl font-bold text-[#3b82f6] text-center">64%</div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Average maintenance response time</div>
+            <div class="text-sm text-[#64748b] text-center">3.2 days</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">1.1 days</div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Owner admin time</div>
+            <div class="text-sm text-[#64748b] text-center">22+ hrs/week</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">11 hrs/week</div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Monthly report prep time</div>
+            <div class="text-sm text-[#64748b] text-center">6+ hrs/month</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">45 min/month</div>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Google rating</div>
+            <div class="text-sm text-[#64748b] text-center">4.2 stars</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">4.7 stars</div>
+          </div>
+
+          <!-- Row 7 -->
+          <div class="results-row grid grid-cols-3 items-center px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Tenant renewals (90-day period)</div>
+            <div class="text-sm text-[#64748b] text-center">71%</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">84%</div>
+          </div>
+
+        </div>
+
+        <!-- The Stories -->
+        <div class="max-w-3xl mx-auto">
+          <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-12 fade-in">The Stories Behind the Numbers</h3>
+
+          <!-- Story 1 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Leak That Didn't Become a Review</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Week 2, a tenant reported a bathroom leak via WhatsApp at 9pm. Old system: it would've sat in Jennifer's personal messages until morning. New system: auto-logged, flagged urgent, vendor notified by 9:15pm. Fixed by noon next day. Tenant left a 5-star review mentioning "fast response." That review would've been 1 star.
+            </p>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Fake Paystub Catch</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              First month, screening workflow flagged an application with income docs that didn't match employer verification. Jennifer would've approved it manually. The PDF looked perfect. Estimated cost avoided: $4,000+ in eviction and vacancy costs.
+            </p>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Owner Who Stopped Calling</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              One property owner called Jennifer 3&ndash;4 times per month asking about rent collection and maintenance status. After automated reports started, calls dropped to once per month and it was actually about strategy, not status updates.
+            </p>
+          </div>
+
+          <!-- Story 4 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Renewals That Almost Didn't Happen</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Lapsed tenant system identified 23 tenants whose leases were ending within 90 days and who hadn't responded to renewal notices. Personal outreach converted 19 of them. At ~$4,000 turnover cost per unit, that's over $75,000 in avoided vacancy and re-leasing costs.
+            </p>
+          </div>
+
+          <!-- Story 5 -->
+          <div class="fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Sunday Morning Test</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Jennifer tracked her time for a month. Before: checking messages by 7am, including weekends. Maintenance "emergencies" interrupting family time. After: Sunday check-in takes 10 minutes. Real emergencies get routed automatically. Everything else waits for Monday.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #2
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            Last Sunday I took my family to brunch. Didn't check my phone once. My husband asked if I was feeling okay. That's how different things are now. The emergencies still get handled. They just don't need me anymore.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Jennifer, Owner, PM Firm
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE DIDN'T TOUCH
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Scope Clarity</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">What We Didn't Touch</h2>
+
+        <div class="space-y-4 mb-10 fade-in">
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Buildium stayed as the core accounting and tenant portal &mdash; we integrated alongside it</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Lease agreements and legal docs handled by her existing process</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Tenant payment processing untouched</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Banking and bookkeeping exactly as they were</p>
+          </div>
+        </div>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          We added a layer on top of what she already had. We didn't ask her to learn a new platform or rip out what was working.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         TIMELINE
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Timeline</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">How Long This Took</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 fade-in">
+
+          <!-- Phase 1 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 1&ndash;2</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Discovery &amp; Mapping</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Documented intake channels, interviewed staff, identified top 10 pain points.</p>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 3&ndash;4</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Core Installation</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Single queue, triage rules, vendor tracker, owner daily brief.</p>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 5&ndash;6</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Tuning &amp; Training</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Refined bot responses, trained staff, adjusted SLA thresholds.</p>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 7+</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Live &amp; Optimizing</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">System running, weekly check-ins, continuous improvement.</p>
+          </div>
+
+        </div>
+
+        <p class="text-center text-lg md:text-xl font-medium text-white fade-in">
+          First results visible within 30 days. Full system stable by day 45.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         CTA
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 fade-in">Similar situation?</h2>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-4 fade-in">
+          If you're running a property management company and this sounds familiar &mdash; maintenance chaos, tenant screening stress, owners who expect more than you can deliver manually &mdash; let's talk.
+        </p>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          30-minute call. No pitch deck. We'll map your situation and tell you what's possible.
+        </p>
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Schedule Your AI Audit &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="../index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Shared JS -->
+  <script src="../js/main.js"></script>
+
+</body>
+</html>

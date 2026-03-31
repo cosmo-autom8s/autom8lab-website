@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autom8Lab — AI Systems That Make You Money and Save You Time</title>
+  <meta name="description" content="We install AI systems for traditional businesses. Healthcare, construction, property management. No fluff, no theory, just systems that work.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    .results-row {
+      transition: background-color 0.2s ease;
+    }
+    .results-row:hover {
+      background-color: #1a1a1a;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary {
+      list-style: none;
+    }
+    details[open] .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-icon {
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo (inline SVG, linked to home) -->
+      <a href="index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="free-resources.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="free-resources.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         SECTION 1: HERO
+         ============================================ -->
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">
+          AI Systems for Business
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-8 leading-tight fade-in">
+          <span class="hero-gradient">Leads go cold.<br>Follow-ups slip.<br>The owner ends up holding everything together.</span>
+        </h1>
+
+        <p class="text-lg md:text-xl font-medium text-white mb-6 fade-in">
+          That's usually not a demand problem. It's a systems problem.
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] max-w-2xl mx-auto mb-6 leading-relaxed fade-in">
+          We install AI systems that help you respond faster, follow up better, and run your business with real operational leverage, on top of the tools you already use.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-[#94a3b8] mb-10 fade-in">
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> Done-for-you implementation</span>
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> Built on your current stack</span>
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> Live in about 14 days</span>
+        </div>
+
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            See what this looks like in your business &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 2: SOCIAL PROOF BAND
+         ============================================ -->
+    <section class="py-10 border-y border-[#1e293b]">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+        <div class="flex flex-wrap justify-center items-center gap-x-3 gap-y-3 text-sm text-[#64748b]">
+          <span>Systems deployed in businesses across:</span>
+          <span class="text-[#94a3b8]">Healthcare</span>
+          <span class="text-[#1e293b]">&middot;</span>
+          <span class="text-[#94a3b8]">Construction</span>
+          <span class="text-[#1e293b]">&middot;</span>
+          <span class="text-[#94a3b8]">Property Management</span>
+          <span class="text-[#1e293b]">&middot;</span>
+          <span class="text-[#94a3b8]">Professional Services</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 3: TWO OUTCOMES
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            What We Deliver
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight fade-in">
+            Two outcomes. That's it.
+          </h2>
+          <p class="text-base md:text-lg text-[#94a3b8] mt-4 fade-in">Everything we build ties back to these.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Make More Money -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 fade-in">
+            <div class="w-12 h-12 bg-[#3b82f6] rounded-xl flex items-center justify-center mb-6">
+              <span class="text-black text-xl font-bold">$</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Make more money</h3>
+            <p class="text-[#94a3b8] leading-relaxed">
+              Capture more of the demand you already have. Respond faster to inquiries. Follow up consistently. Convert more leads into real clients.
+            </p>
+          </div>
+
+          <!-- Save More Time -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 fade-in">
+            <div class="w-12 h-12 bg-[#3b82f6] rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Save more time</h3>
+            <p class="text-[#94a3b8] leading-relaxed">
+              Remove the operational drag that slows everything down. Less manual admin. Less chasing people for updates. Less reliance on memory and spreadsheets.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="text-center text-lg md:text-xl font-medium text-white mt-12 fade-in">
+          This is where most businesses quietly lose time and revenue.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 4: THE REAL PROBLEM
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-6xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            The Real Issue
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 fade-in">
+            Most businesses don't have a demand problem.
+          </h2>
+          <p class="text-lg md:text-xl font-medium text-[#94a3b8] fade-in">
+            They have a systems problem.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch fade-in">
+
+          <!-- Pain Points List -->
+          <div class="divide-y divide-[#1e293b]">
+            <div class="flex items-center gap-4 py-4">
+              <span class="text-[#3b82f6] shrink-0">&rarr;</span>
+              <p class="text-base text-[#94a3b8]">Leads come in&hellip; but follow-up happens too late.</p>
+            </div>
+            <div class="flex items-center gap-4 py-4">
+              <span class="text-[#3b82f6] shrink-0">&rarr;</span>
+              <p class="text-base text-[#94a3b8]">Tasks get assigned&hellip; but no one owns the next step.</p>
+            </div>
+            <div class="flex items-center gap-4 py-4">
+              <span class="text-[#3b82f6] shrink-0">&rarr;</span>
+              <p class="text-base text-[#94a3b8]">Clients go quiet&hellip; and nobody notices fast enough.</p>
+            </div>
+            <div class="flex items-center gap-4 py-4">
+              <span class="text-[#3b82f6] shrink-0">&rarr;</span>
+              <p class="text-base text-[#94a3b8]">Reports exist&hellip; but the insight arrives too late to act.</p>
+            </div>
+            <div class="flex items-center gap-4 py-4">
+              <span class="text-[#3b82f6] shrink-0">&rarr;</span>
+              <p class="text-base text-[#94a3b8]">The owner finds out about problems after they've already cost money.</p>
+            </div>
+          </div>
+
+          <!-- Conclusion Card -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8">
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-6">
+              Over time the owner becomes the backup system for everything.
+            </p>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-6">
+              Not because the team is bad. Because the operating layer between tools doesn't exist.
+            </p>
+            <p class="text-lg md:text-xl font-bold text-[#3b82f6]">
+              That's what we install.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 5: WHAT WE INSTALL
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+        <div class="mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            Our Work
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4 fade-in">
+            What we actually do
+          </h2>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed max-w-2xl fade-in">
+            We don't sell theory. We don't train and leave. We go in, diagnose where time and revenue are leaking, and install systems that handle the work automatically.
+          </p>
+        </div>
+
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden fade-in">
+
+          <!-- Table Header -->
+          <div class="grid grid-cols-1 md:grid-cols-2 border-b border-[#1e293b] px-6 md:px-8 py-4">
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">The Outcome</div>
+            <div class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest hidden md:block">What We Install</div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="results-row grid grid-cols-1 md:grid-cols-2 items-start border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm font-semibold text-white mb-2 md:mb-0">Respond to leads before they go cold</div>
+            <div class="text-sm text-[#94a3b8]">AI-powered lead response, routing, and follow-up that captures demand while it's still hot.</div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="results-row grid grid-cols-1 md:grid-cols-2 items-start border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm font-semibold text-white mb-2 md:mb-0">Stop losing deals to missed follow-ups</div>
+            <div class="text-sm text-[#94a3b8]">Automated sequences, reminders, and escalations that keep every opportunity moving.</div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="results-row grid grid-cols-1 md:grid-cols-2 items-start border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm font-semibold text-white mb-2 md:mb-0">Reduce owner dependency</div>
+            <div class="text-sm text-[#94a3b8]">A daily AI briefing that surfaces what matters, what's overdue, and what needs a decision.</div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="results-row grid grid-cols-1 md:grid-cols-2 items-start border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm font-semibold text-white mb-2 md:mb-0">See what actually drives revenue</div>
+            <div class="text-sm text-[#94a3b8]">Attribution tracking that shows which channels produce real clients, not just leads.</div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="results-row grid grid-cols-1 md:grid-cols-2 items-start px-6 md:px-8 py-5">
+            <div class="text-sm font-semibold text-white mb-2 md:mb-0">Get more from your current team</div>
+            <div class="text-sm text-[#94a3b8]">Workflow automation and task routing that multiply what your people can do.</div>
+          </div>
+
+        </div>
+
+        <p class="text-center text-base md:text-lg text-[#94a3b8] mt-8 fade-in">
+          Everything sits on top of your existing tools. No heavy migrations. No ripping out your stack. Just a working operating layer.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 6: HOW IT WORKS
+         ============================================ -->
+    <section id="how-it-works" class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            How It Works
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight fade-in">
+            Simple process. Clear outcomes.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
+
+          <!-- Step 1 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Step 01</span>
+            <h3 class="text-xl font-semibold text-white mt-3 mb-3">AI Audit</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed mb-4">
+              We map your operations and identify where revenue and time are leaking. You leave with a clear picture of what's breaking, what systems would fix it, and what the ROI could look like.
+            </p>
+            <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+               class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+              Book your AI Audit &rarr;
+            </a>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Step 02</span>
+            <h3 class="text-xl font-semibold text-white mt-3 mb-3">AI System Installation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">
+              We build and implement the systems for you. Lead response. Follow-ups. Operational visibility. Executive AI support. Done-for-you. Most setups go live within about two weeks.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Step 03</span>
+            <h3 class="text-xl font-semibold text-white mt-3 mb-3">Continuous Optimization</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">
+              AI evolves quickly. So does your business. We stay involved to improve performance, expand what's working, and keep the systems aligned with how your business evolves.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 7: IS THIS A FIT?
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            Honest answer up front
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight fade-in">
+            Is this a fit?
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Good Fit -->
+          <div class="bg-[#111827] border border-[#3b82f6] rounded-2xl p-8 fade-in">
+            <h3 class="text-xl font-semibold text-[#3b82f6] mb-6">&#10003; Good fit</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span>
+                <span class="text-sm text-white">You have 5&ndash;50+ employees</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span>
+                <span class="text-sm text-white">Your team spends significant time on computers</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span>
+                <span class="text-sm text-white">Work moves between people, not just machines</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span>
+                <span class="text-sm text-white">You already have demand but operations slow you down</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span>
+                <span class="text-sm text-white">You have revenue to invest in leverage</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Not a Fit -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 fade-in">
+            <h3 class="text-xl font-semibold text-[#64748b] mb-6">&times; Probably not a fit</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="text-[#64748b] shrink-0 mt-0.5">&times;</span>
+                <span class="text-sm text-[#94a3b8]">You're a solo operator</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#64748b] shrink-0 mt-0.5">&times;</span>
+                <span class="text-sm text-[#94a3b8]">Your business has no repeatable processes</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#64748b] shrink-0 mt-0.5">&times;</span>
+                <span class="text-sm text-[#94a3b8]">You're looking for a single AI tool, not systems</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#64748b] shrink-0 mt-0.5">&times;</span>
+                <span class="text-sm text-[#94a3b8]">You need demand generation first</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#64748b] shrink-0 mt-0.5">&times;</span>
+                <span class="text-sm text-[#94a3b8]">You're not ready to invest in infrastructure</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 8: REAL OUTCOMES
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            Results
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight fade-in">
+            Real businesses. Real outcomes.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Case Study 1: Specialty Clinic -->
+          <a href="case-studies/specialty-clinic.html" class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 block fade-in">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Healthcare</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-6">Specialty Clinic, Florida</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <div class="text-2xl font-bold text-white">55% &rarr; 70%</div>
+                <div class="text-xs text-[#64748b]">Treatment completion</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">&lt;2 hrs</div>
+                <div class="text-xs text-[#64748b]">Lead response time</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">&darr;12%</div>
+                <div class="text-xs text-[#64748b]">Missed appointments</div>
+              </div>
+            </div>
+            <span class="text-sm text-[#3b82f6]">Read full case study &rarr;</span>
+          </a>
+
+          <!-- Case Study 2: GC Contractor -->
+          <a href="case-studies/general-contractor.html" class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 block fade-in">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Construction</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-6">GC Contractor, Phoenix</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <div class="text-2xl font-bold text-white">$47K</div>
+                <div class="text-xs text-[#64748b]">Recovered in unbilled work</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">2.1 days</div>
+                <div class="text-xs text-[#64748b]">RFI response (from 5.2)</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">&darr;6 hrs/wk</div>
+                <div class="text-xs text-[#64748b]">Field downtime</div>
+              </div>
+            </div>
+            <span class="text-sm text-[#3b82f6]">Read full case study &rarr;</span>
+          </a>
+
+          <!-- Case Study 3: Property Management -->
+          <a href="case-studies/property-management.html" class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 block fade-in">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Property Management</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-6">PM Company, Tampa</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <div class="text-2xl font-bold text-white">1.1 days</div>
+                <div class="text-xs text-[#64748b]">Maintenance response (from 3.2)</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">11+ hrs/wk</div>
+                <div class="text-xs text-[#64748b]">Owner time saved</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-white">71% &rarr; 84%</div>
+                <div class="text-xs text-[#64748b]">Tenant renewals</div>
+              </div>
+            </div>
+            <span class="text-sm text-[#3b82f6]">Read full case study &rarr;</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 9: INDUSTRIES
+         ============================================ -->
+    <section id="industries" class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto px-6 md:px-8">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+          Case Studies
+        </span>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-12 fade-in">
+          Best fit for businesses with teams, operations, and real demand.
+        </h2>
+
+        <div class="space-y-4 fade-in">
+          <a href="case-studies/specialty-clinic.html" class="block border-l-4 border-[#3b82f6] pl-6 py-4 hover:bg-[#111827] rounded-r-xl transition-colors">
+            <h3 class="text-lg font-semibold text-white mb-1">Specialty Clinic, Florida</h3>
+          </a>
+          <a href="case-studies/general-contractor.html" class="block border-l-4 border-[#3b82f6] pl-6 py-4 hover:bg-[#111827] rounded-r-xl transition-colors">
+            <h3 class="text-lg font-semibold text-white mb-1">General Contractor, Phoenix</h3>
+          </a>
+          <a href="case-studies/property-management.html" class="block border-l-4 border-[#3b82f6] pl-6 py-4 hover:bg-[#111827] rounded-r-xl transition-colors">
+            <h3 class="text-lg font-semibold text-white mb-1">Property Management, Tampa</h3>
+          </a>
+          <a href="case-studies/diagnostics-lab.html" class="block border-l-4 border-[#3b82f6] pl-6 py-4 hover:bg-[#111827] rounded-r-xl transition-colors">
+            <h3 class="text-lg font-semibold text-white mb-1">Diagnostics Lab, South Florida</h3>
+          </a>
+        </div>
+
+        <p class="text-base md:text-lg text-[#94a3b8] mt-10 fade-in">
+          <span class="font-semibold text-white">Different industry?</span> If your business runs on communication, coordination, and follow-through,
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="text-[#3b82f6] hover:text-[#60a5fa] transition-colors">let's talk &rarr;</a>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 10: WHAT WE DON'T DO
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto px-6 md:px-8">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+          Scope Clarity
+        </span>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-12 fade-in">
+          What we don't do
+        </h2>
+
+        <div class="space-y-4 fade-in">
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">We don't sell software you have to figure out yourself.</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">We don't replace your current platforms, we work on top of them.</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">We don't automate decisions that need human judgment. People still approve.</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">We don't promise "AI magic". We install systems that create discipline and visibility.</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">We don't work with businesses that don't have repeatable operations to systematize.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 11: FAQ
+         ============================================ -->
+    <section class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            FAQ
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight fade-in">
+            Common questions
+          </h2>
+        </div>
+
+        <div class="space-y-4 fade-in">
+
+          <details class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-white font-semibold flex justify-between items-center">
+              Do we need to replace our software?
+              <span class="faq-icon text-[#64748b] text-xl leading-none ml-4 shrink-0">+</span>
+            </summary>
+            <div class="px-8 pb-6 text-[#94a3b8] leading-relaxed">
+              No. We build on top of what you already use.
+            </div>
+          </details>
+
+          <details class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-white font-semibold flex justify-between items-center">
+              Is this consulting or implementation?
+              <span class="faq-icon text-[#64748b] text-xl leading-none ml-4 shrink-0">+</span>
+            </summary>
+            <div class="px-8 pb-6 text-[#94a3b8] leading-relaxed">
+              Implementation. We build and install the systems. You get working infrastructure, not a PDF of recommendations.
+            </div>
+          </details>
+
+          <details class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-white font-semibold flex justify-between items-center">
+              How quickly can this go live?
+              <span class="faq-icon text-[#64748b] text-xl leading-none ml-4 shrink-0">+</span>
+            </summary>
+            <div class="px-8 pb-6 text-[#94a3b8] leading-relaxed">
+              Most core systems are running within about 14 days.
+            </div>
+          </details>
+
+          <details class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-white font-semibold flex justify-between items-center">
+              What does this cost?
+              <span class="faq-icon text-[#64748b] text-xl leading-none ml-4 shrink-0">+</span>
+            </summary>
+            <div class="px-8 pb-6 text-[#94a3b8] leading-relaxed">
+              Installations typically range from $5K&ndash;$10K depending on scope. Ongoing optimization is a monthly retainer. We'll give you exact numbers after the audit.
+            </div>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         SECTION 12: FINAL CTA
+         ============================================ -->
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 fade-in">
+          Curious what this would look like in your business?
+        </h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          Start with the AI Audit. We'll map your operations, show where time and revenue are leaking, and outline what systems would actually move the needle.
+        </p>
+
+        <div class="flex flex-col items-center mb-10 fade-in">
+          <div class="w-32 h-32 rounded-full bg-[#1a1a1a] border-2 border-[#1e293b] overflow-hidden">
+            <img src="assets/cosmo.jpg" alt="Cosmin Lungu" class="w-full h-full object-cover">
+          </div>
+          <p class="text-white font-semibold text-lg mt-4">Cosmo</p>
+          <p class="text-sm text-[#64748b]">Founder, Autom8Lab</p>
+        </div>
+
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Book your AI Audit &rarr;
+          </a>
+          <p class="text-sm text-[#475569] mt-4">30-minute call. Free. No obligation.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

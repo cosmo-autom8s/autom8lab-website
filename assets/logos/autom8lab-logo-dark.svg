@@ -1,0 +1,20 @@
+<svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4b896"/>
+      <stop offset="50%" stop-color="#c9a66b"/>
+      <stop offset="100%" stop-color="#b8956a"/>
+    </linearGradient>
+  </defs>
+  <!-- Logomark -->
+  <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <circle cx="28" cy="32" r="4" fill="#c9a66b"/>
+  <!-- Text -->
+  <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">
+    AUTOM<tspan fill="#c9a66b">8</tspan>LAB
+  </text>
+  <text x="62" y="50" fill="#6b7280" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">
+    YOUR AI PARTNER
+  </text>
+</svg>

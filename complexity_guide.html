@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autom8Lab — System Complexity Guide</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+        body {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .tab-quick {
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+
+        .tab-quick:hover, .tab-quick.active {
+            background: rgba(74, 222, 128, 0.2);
+            border-color: #4ade80;
+        }
+
+        .tab-medium {
+            background: rgba(250, 204, 21, 0.1);
+            color: #facc15;
+            border-color: rgba(250, 204, 21, 0.3);
+        }
+
+        .tab-medium:hover, .tab-medium.active {
+            background: rgba(250, 204, 21, 0.2);
+            border-color: #facc15;
+        }
+
+        .tab-major {
+            background: rgba(248, 113, 113, 0.1);
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.3);
+        }
+
+        .tab-major:hover, .tab-major.active {
+            background: rgba(248, 113, 113, 0.2);
+            border-color: #f87171;
+        }
+
+        .tab-count {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-left: 5px;
+        }
+
+        .complexity-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .complexity-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .section-header-quick {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.15) 0%, rgba(74, 222, 128, 0.05) 100%);
+            border-left: 4px solid #4ade80;
+        }
+
+        .section-header-medium {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.15) 0%, rgba(250, 204, 21, 0.05) 100%);
+            border-left: 4px solid #facc15;
+        }
+
+        .section-header-major {
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.15) 0%, rgba(248, 113, 113, 0.05) 100%);
+            border-left: 4px solid #f87171;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .systems-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .system-card {
+            background: #111827;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .system-card:hover {
+            background: #1a1a1a;
+        }
+
+        .system-card.open {
+            background: #111827;
+        }
+
+        .system-card-quick { border-left-color: #4ade80; }
+        .system-card-medium { border-left-color: #facc15; }
+        .system-card-major { border-left-color: #f87171; }
+
+        .system-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .system-info {
+            flex: 1;
+        }
+
+        .system-number {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .system-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .system-category {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .mega-badge {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .mega-leadership { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+        .mega-revenue { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .mega-delivery { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
+        .mega-internal { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
+        .mega-backoffice { background: rgba(156, 163, 175, 0.2); color: #94a3b8; }
+
+        .system-arrow {
+            font-size: 0.9rem;
+            color: #64748b;
+            transition: transform 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .system-card.open .system-arrow {
+            transform: rotate(180deg);
+        }
+
+        .system-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .system-card.open .system-details {
+            display: block;
+        }
+
+        .system-description {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .why-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .why-text {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .components-title {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0 8px;
+        }
+
+        .components-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .components-list li {
+            font-size: 0.85rem;
+            color: #64748b;
+            padding: 4px 10px;
+            background: #111827;
+            border-radius: 4px;
+            border: 1px solid #1e293b;
+        }
+
+        .progression-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: #111827;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+        }
+
+        .progression-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progression-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .progression-step {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+        }
+
+        .progression-step-quick {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .progression-step-medium {
+            background: rgba(250, 204, 21, 0.1);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+        }
+
+        .progression-step-major {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+        }
+
+        .progression-step-number {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .progression-step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .progression-step-quick .progression-step-title { color: #4ade80; }
+        .progression-step-medium .progression-step-title { color: #facc15; }
+        .progression-step-major .progression-step-title { color: #f87171; }
+
+        .progression-step-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .progression-arrow {
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tab {
+                text-align: center;
+            }
+
+            .progression-arrow {
+                transform: rotate(90deg);
+            }
+        }
+  </style>
+</head>
+<body>
+    <nav class="border-b border-[#1e293b] py-4 mb-0">
+      <div class="max-w-5xl mx-auto px-6 md:px-8 flex items-center justify-between">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs><circle cx="28" cy="18" r="14" fill="none" stroke="url(#g)" stroke-width="2.5"/><circle cx="28" cy="46" r="14" fill="none" stroke="url(#g)" stroke-width="2.5"/><circle cx="28" cy="32" r="4" fill="#3b82f6"/><text x="62" y="30" fill="#fff" font-size="28" font-weight="700" font-family="Inter,system-ui,sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text><text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter,system-ui,sans-serif" letter-spacing="3">YOUR AI PARTNER</text></svg>
+        <a href="services_menu.html" class="text-sm text-[#64748b] hover:text-white transition-colors">&larr; Back to Service Menu</a>
+      </div>
+    </nav>
+
+    <div class="container py-10 md:py-16 px-6 md:px-8">
+        <header>
+            <h1>System Complexity Guide</h1>
+            <p class="subtitle">Systems categorized by implementation complexity. Use this to guide pricing, set expectations, and recommend starting points.</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab tab-quick active" onclick="showSection('quick')">
+                Quick Wins <span class="tab-count">(19)</span>
+            </div>
+            <div class="tab tab-medium" onclick="showSection('medium')">
+                Medium <span class="tab-count">(25)</span>
+            </div>
+            <div class="tab tab-major" onclick="showSection('major')">
+                Major <span class="tab-count">(10)</span>
+            </div>
+        </div>
+
+        <!-- QUICK WINS SECTION -->
+        <div id="section-quick" class="complexity-section active">
+            <div class="section-header section-header-quick">
+                <h2 class="section-title">Quick Wins</h2>
+                <p class="section-description">Fast to deploy, immediate value, low complexity. Can be deployed in days, not weeks. Great for building trust early in a client relationship or as add-ons to larger projects.</p>
+            </div>
+
+            <div class="systems-grid">
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">1.2</div>
+                            <div class="system-name">Reporting & Dashboard System</div>
+                            <div class="system-category">Executive & AI Chief of Staff</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated reporting and visual dashboards for tracking business KPIs.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Connecting existing data to a dashboard is straightforward with modern tools.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>KPI dashboards</li>
+                            <li>Automated reports</li>
+                            <li>Alert automation</li>
+                            <li>Board prep materials</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">2.1</div>
+                            <div class="system-name">Market Research System</div>
+                            <div class="system-category">Research & Intelligence</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated industry monitoring and trend analysis.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Setting up monitoring feeds and alerts is fast with existing platforms.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Industry monitoring</li>
+                            <li>Trend analysis</li>
+                            <li>Report generation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">2.2</div>
+                            <div class="system-name">Competitor Intelligence System</div>
+                            <div class="system-category">Research & Intelligence</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Track competitors and surface strategic insights automatically.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Similar to market research, mostly configuration of tracking tools.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Competitor tracking</li>
+                            <li>Alert automation</li>
+                            <li>Battlecard updates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">2.3</div>
+                            <div class="system-name">Pre-Call Research System</div>
+                            <div class="system-category">Research & Intelligence</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated research briefs before sales calls and meetings.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Template plus AI prompt, can be deployed in a day.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Prospect/company research</li>
+                            <li>Contact enrichment</li>
+                            <li>Meeting prep briefs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">2.4</div>
+                            <div class="system-name">Content Research System</div>
+                            <div class="system-category">Research & Intelligence</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Research for content creation including topics, trends, and audience insights.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Research workflows are prompt based and fast to set up.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Topic research & trends</li>
+                            <li>Competitor content analysis</li>
+                            <li>SEO/keyword research</li>
+                            <li>Audience insights</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.4</div>
+                            <div class="system-name">Inbound Lead Capture System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Capture and route inbound leads from website and marketing channels.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Chatbot plus forms plus routing, standard tools with fast setup.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Website chatbot</li>
+                            <li>Landing page forms</li>
+                            <li>Lead magnet delivery</li>
+                            <li>Instant follow up triggers</li>
+                            <li>Lead routing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.2</div>
+                            <div class="system-name">Sales Call Intelligence System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Record, transcribe, and analyze sales calls for coaching insights.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Recording integration plus analysis setup, mature tools available.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Call recording & transcription</li>
+                            <li>Call analysis</li>
+                            <li>Coaching insights</li>
+                            <li>Follow up action extraction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.3</div>
+                            <div class="system-name">Sales Co-Pilot System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Real-time AI assistance during sales calls.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Prompt based system with battlecard templates, fast to configure.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Real time prompts</li>
+                            <li>Objection handling</li>
+                            <li>Competitor battlecards</li>
+                            <li>Pricing guidance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.4</div>
+                            <div class="system-name">Proposal & Quoting System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Generate proposals and quotes automatically from templates.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Template design with e-signature integration, quick deployment.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Template based generation</li>
+                            <li>Dynamic pricing insertion</li>
+                            <li>E-signature integration</li>
+                            <li>Approval workflows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.5</div>
+                            <div class="system-name">Meeting & Scheduling System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated meeting scheduling and calendar management.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Calendly or similar plus basic automation, very fast.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Calendar automation</li>
+                            <li>Booking links</li>
+                            <li>Reminders & confirmations</li>
+                            <li>No show follow ups</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.6</div>
+                            <div class="system-name">Sales Follow Up System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated follow-up sequences after calls and meetings.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Sequence templates with CRM triggers, standard workflow.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Post call sequences</li>
+                            <li>Post meeting summaries</li>
+                            <li>Nurture sequences</li>
+                            <li>Re-engagement campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">5.1</div>
+                            <div class="system-name">Content Research System</div>
+                            <div class="system-category">Social Media & Content</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Research topics, trends, and content opportunities.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Prompt templates and research workflows, minimal integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Topic research</li>
+                            <li>Competitor analysis</li>
+                            <li>Keyword research</li>
+                            <li>Audience research</li>
+                            <li>Ideation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">7.1</div>
+                            <div class="system-name">Support Chatbot System</div>
+                            <div class="system-category">Customer Service & Support</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">AI chatbot for customer support on website and apps.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Conversation design with FAQ training, mature platforms available.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Website/app chat</li>
+                            <li>FAQ automation</li>
+                            <li>Ticket creation</li>
+                            <li>Handoff to human</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">7.4</div>
+                            <div class="system-name">Knowledge Base System</div>
+                            <div class="system-category">Customer Service & Support</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Self-service knowledge base with AI-powered search.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Setting up a basic AI searchable knowledge base is quick.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Article generation</li>
+                            <li>Auto updates</li>
+                            <li>Search optimization</li>
+                            <li>Access control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">10.1</div>
+                            <div class="system-name">Meeting Intelligence System</div>
+                            <div class="system-category">Communication</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Record, transcribe, and summarize meetings automatically.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Connect a transcription tool, create summary templates.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Recording & transcription</li>
+                            <li>Summary generation</li>
+                            <li>Action item extraction</li>
+                            <li>Distribution automation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">10.2</div>
+                            <div class="system-name">Internal Bot System</div>
+                            <div class="system-category">Communication</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Slack/Teams bot for quick answers and task triggers.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Slack/Teams bot with knowledge base connection.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Slack/Teams assistant</li>
+                            <li>Quick answers from docs</li>
+                            <li>Task triggers</li>
+                            <li>Announcements & reminders</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">10.3</div>
+                            <div class="system-name">Email Management System</div>
+                            <div class="system-category">Communication</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">AI-powered email triage and drafting assistance.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Inbox rules plus AI drafting assistance.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Inbox triage</li>
+                            <li>Response drafting</li>
+                            <li>Auto categorization</li>
+                            <li>Follow up reminders</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">10.4</div>
+                            <div class="system-name">Calendar & Scheduling System</div>
+                            <div class="system-category">Communication</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Smart calendar management and scheduling automation.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Similar to sales scheduling, fast setup.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Smart scheduling</li>
+                            <li>Conflict resolution</li>
+                            <li>Prep time blocking</li>
+                            <li>Meeting prep automation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-quick" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">11.1</div>
+                            <div class="system-name">Internal Knowledge Base System</div>
+                            <div class="system-category">Knowledge</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Company wiki with AI-powered search.</p>
+                        <div class="why-label">Why it's a Quick Win</div>
+                        <p class="why-text">Wiki setup with AI search layer.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Wiki/documentation</li>
+                            <li>AI powered search</li>
+                            <li>Auto updates</li>
+                            <li>Access control</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEDIUM SECTION -->
+        <div id="section-medium" class="complexity-section">
+            <div class="section-header section-header-medium">
+                <h2 class="section-title">Medium Systems</h2>
+                <p class="section-description">Require configuration, multiple integrations, or custom workflow design. Typically take one to three weeks to implement properly and may need some iteration after launch.</p>
+            </div>
+
+            <div class="systems-grid">
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">2.5</div>
+                            <div class="system-name">Regulatory & Compliance Monitoring</div>
+                            <div class="system-category">Research & Intelligence</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Track regulatory changes and compliance requirements automatically.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Needs custom tracking rules and alert logic.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Regulation tracking</li>
+                            <li>Change alerts</li>
+                            <li>Documentation updates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.2</div>
+                            <div class="system-name">Cold Email System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated cold email outreach with personalization at scale.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Requires domain setup, warming, sequence design, CRM integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Email sequences</li>
+                            <li>Personalization</li>
+                            <li>A/B testing</li>
+                            <li>Deliverability</li>
+                            <li>Reply detection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.5</div>
+                            <div class="system-name">Referral System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate referral requests and track referral sources.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Tracking logic, automated asks, reward fulfillment.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Referral tracking</li>
+                            <li>Automated asks</li>
+                            <li>Reward fulfillment</li>
+                            <li>Attribution</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.6</div>
+                            <div class="system-name">LinkedIn Outreach System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated LinkedIn connection and messaging workflows.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Tool setup, sequence design, CRM sync, compliance considerations.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Profile optimization</li>
+                            <li>Connection automation</li>
+                            <li>DM sequences</li>
+                            <li>CRM sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">4.1</div>
+                            <div class="system-name">CRM Automation System</div>
+                            <div class="system-category">Sales</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate CRM data entry, pipeline management, and deal tracking.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Depends on CRM complexity, usually needs custom fields and workflows.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Auto data entry</li>
+                            <li>Pipeline automation</li>
+                            <li>Task reminders</li>
+                            <li>Deal alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">5.2</div>
+                            <div class="system-name">Social Media Content System</div>
+                            <div class="system-category">Social Media & Content</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Create, schedule, and manage social media content.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Content calendar, multiple content types, scheduling, engagement rules.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Content calendar</li>
+                            <li>Post generation</li>
+                            <li>Image/video creation</li>
+                            <li>Scheduling</li>
+                            <li>Engagement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">5.3</div>
+                            <div class="system-name">Long Form Content System</div>
+                            <div class="system-category">Social Media & Content</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Generate and optimize blog posts and articles.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Writing workflows, SEO optimization, publishing integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Blog generation</li>
+                            <li>SEO optimization</li>
+                            <li>AI search optimization</li>
+                            <li>Publishing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">5.4</div>
+                            <div class="system-name">Content Repurposing System</div>
+                            <div class="system-category">Social Media & Content</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Transform content across formats and platforms.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Multiple input/output formats, cross platform logic.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Podcast repurposing</li>
+                            <li>Video repurposing</li>
+                            <li>Webinar repurposing</li>
+                            <li>Cross platform formatting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">6.1</div>
+                            <div class="system-name">Email Marketing System</div>
+                            <div class="system-category">Other Marketing</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Newsletter and email campaign automation.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">List management, segmentation, sequence design, analytics.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Newsletter creation</li>
+                            <li>Drip sequences</li>
+                            <li>Segmentation</li>
+                            <li>Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">6.2</div>
+                            <div class="system-name">SMS Marketing System</div>
+                            <div class="system-category">Other Marketing</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">SMS campaign management and automation.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Compliance setup, sequence design, response handling.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Campaign creation</li>
+                            <li>Automated sequences</li>
+                            <li>Opt in/out management</li>
+                            <li>Response handling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">6.4</div>
+                            <div class="system-name">Reputation & Reviews System</div>
+                            <div class="system-category">Other Marketing</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate review requests and manage online reputation.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Multi platform monitoring, response workflows, display integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Review requests</li>
+                            <li>Review monitoring</li>
+                            <li>Response drafting</li>
+                            <li>Aggregation & display</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">7.2</div>
+                            <div class="system-name">Email Support System</div>
+                            <div class="system-category">Customer Service & Support</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate email support responses and routing.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Classification rules, routing logic, response templates.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Auto responses</li>
+                            <li>Ticket classification</li>
+                            <li>Response drafting</li>
+                            <li>Routing & escalation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">7.3</div>
+                            <div class="system-name">Voice Support System</div>
+                            <div class="system-category">Customer Service & Support</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">AI voice agent for phone support and after-hours coverage.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">AI voice agent setup, call routing, after hours logic.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Inbound call handling</li>
+                            <li>After hours coverage</li>
+                            <li>Call routing</li>
+                            <li>Voicemail transcription</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">7.5</div>
+                            <div class="system-name">Feedback & Sentiment System</div>
+                            <div class="system-category">Customer Service & Support</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Collect and analyze customer feedback and sentiment.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Survey design, sentiment analysis setup, reporting.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>NPS/survey automation</li>
+                            <li>Sentiment analysis</li>
+                            <li>Complaint flagging</li>
+                            <li>Trend reporting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">8.1</div>
+                            <div class="system-name">Customer Onboarding System</div>
+                            <div class="system-category">Customer Success & Retention</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated onboarding sequences for new customers.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Welcome sequences, task automation, content delivery.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Welcome sequences</li>
+                            <li>Task/checklist automation</li>
+                            <li>Training delivery</li>
+                            <li>Check in scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">8.4</div>
+                            <div class="system-name">Win Back System</div>
+                            <div class="system-category">Customer Success & Retention</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Re-engage churned or inactive customers.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Identification criteria, campaign design, offer logic.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Churned customer identification</li>
+                            <li>Re-engagement campaigns</li>
+                            <li>Special offer delivery</li>
+                            <li>Feedback collection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.1</div>
+                            <div class="system-name">Document Automation System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Generate and process documents automatically.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Template design, variable mapping, filing logic.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Template generation</li>
+                            <li>Document parsing</li>
+                            <li>OCR processing</li>
+                            <li>Filing & organization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.3</div>
+                            <div class="system-name">Approval Workflow System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Multi-step approval processes with notifications.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Routing rules, multi step logic, notifications.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Request routing</li>
+                            <li>Multi step approvals</li>
+                            <li>Notification automation</li>
+                            <li>Audit trail</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.4</div>
+                            <div class="system-name">Task & Project Automation System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate task creation, assignment, and tracking.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Input parsing, assignment rules, tracking integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Task creation</li>
+                            <li>Assignment & routing</li>
+                            <li>Deadline tracking</li>
+                            <li>Status automation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.5</div>
+                            <div class="system-name">Invoicing & Billing System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated invoice generation and payment tracking.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Template design, reminder sequences, payment integration.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Invoice generation</li>
+                            <li>Payment reminders</li>
+                            <li>Overdue alerts</li>
+                            <li>Payment processing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">12.1</div>
+                            <div class="system-name">Recruiting System</div>
+                            <div class="system-category">HR & People Operations</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate job posting, screening, and candidate communication.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Job distribution, screening criteria, scheduling automation.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Job posting distribution</li>
+                            <li>Resume screening</li>
+                            <li>Interview scheduling</li>
+                            <li>Candidate communication</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">12.2</div>
+                            <div class="system-name">Employee Onboarding System</div>
+                            <div class="system-category">HR & People Operations</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated onboarding workflows for new hires.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Document workflows, training delivery, task sequences.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Document collection</li>
+                            <li>Training delivery</li>
+                            <li>Task assignments</li>
+                            <li>Check in scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">13.1</div>
+                            <div class="system-name">Bookkeeping Automation System</div>
+                            <div class="system-category">Finance & Accounting</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate transaction categorization and reconciliation.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Transaction rules, reconciliation logic, report templates.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Transaction categorization</li>
+                            <li>Bank reconciliation</li>
+                            <li>Report generation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">13.2</div>
+                            <div class="system-name">Expense Management System</div>
+                            <div class="system-category">Finance & Accounting</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Capture and categorize expenses automatically.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Receipt capture, categorization, approval routing.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Receipt capture</li>
+                            <li>Categorization</li>
+                            <li>Approval routing</li>
+                            <li>Reporting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-medium" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">13.3</div>
+                            <div class="system-name">Financial Reporting System</div>
+                            <div class="system-category">Finance & Accounting</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automated financial dashboards and reports.</p>
+                        <div class="why-label">Why it's Medium</div>
+                        <p class="why-text">Data connections, dashboard design, alert rules.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Dashboard generation</li>
+                            <li>KPI tracking</li>
+                            <li>Budget vs. actual alerts</li>
+                            <li>Cash flow forecasting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAJOR SECTION -->
+        <div id="section-major" class="complexity-section">
+            <div class="section-header section-header-major">
+                <h2 class="section-title">Major Systems</h2>
+                <p class="section-description">Full infrastructure builds. Multiple tools, complex logic, significant customization. These are multi-week projects that require discovery phases and often ongoing optimization retainers.</p>
+            </div>
+
+            <div class="systems-grid">
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">1.1</div>
+                            <div class="system-name">AI Chief of Staff (GodMode)</div>
+                            <div class="system-category">Executive & AI Chief of Staff</div>
+                        </div>
+                        <span class="mega-badge mega-leadership">Leadership</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">The central nervous system for founders. Handles email, calendar, research, briefings, and task prioritization.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">The flagship system. Touches email, calendar, tasks, research, briefings. Requires deep personalization and ongoing refinement.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Daily briefings</li>
+                            <li>Email triage & drafting</li>
+                            <li>Calendar intelligence</li>
+                            <li>Research on demand</li>
+                            <li>Task prioritization</li>
+                            <li>Decision support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.1</div>
+                            <div class="system-name">Lead Generation System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Full pipeline for sourcing, enriching, scoring, and managing leads.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Full pipeline: sourcing, enrichment, scoring, follow up, CRM. Multiple tools and data flows.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Lead sourcing</li>
+                            <li>Lead enrichment</li>
+                            <li>Lead scoring</li>
+                            <li>Follow up automation</li>
+                            <li>CRM integration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">3.3</div>
+                            <div class="system-name">Cold Calling System</div>
+                            <div class="system-category">Customer Acquisition</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">AI-powered dialing and call management for outbound sales.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Dialer setup, script development, routing logic, CRM integration, possibly AI voice.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>AI dialer</li>
+                            <li>Script generation</li>
+                            <li>Call routing</li>
+                            <li>Voicemail drops</li>
+                            <li>CRM logging</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">6.3</div>
+                            <div class="system-name">Advertising System</div>
+                            <div class="system-category">Other Marketing</div>
+                        </div>
+                        <span class="mega-badge mega-revenue">Revenue</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">AI-powered ad creation and campaign management.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Multi platform, creative generation, tracking, optimization. Often requires ongoing management.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Ad copy generation</li>
+                            <li>Creative generation</li>
+                            <li>Campaign setup</li>
+                            <li>Performance tracking</li>
+                            <li>Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">8.2</div>
+                            <div class="system-name">Customer Health Monitoring System</div>
+                            <div class="system-category">Customer Success & Retention</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Track customer engagement and predict churn risk.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Usage tracking integration, scoring algorithms, alert triggers, intervention workflows.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Usage tracking</li>
+                            <li>Health scoring</li>
+                            <li>Churn risk alerts</li>
+                            <li>Intervention triggers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">8.3</div>
+                            <div class="system-name">Renewal & Upsell System</div>
+                            <div class="system-category">Customer Success & Retention</div>
+                        </div>
+                        <span class="mega-badge mega-delivery">Delivery</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate renewal reminders and upsell opportunities.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Multiple triggers, timing logic, outreach sequences, often requires CRM customization.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Renewal reminders</li>
+                            <li>Upsell triggers</li>
+                            <li>Expansion alerts</li>
+                            <li>Automated outreach</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.2</div>
+                            <div class="system-name">Data Entry & Processing System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Automate data entry and system synchronization.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Depends heavily on source systems, validation rules, sync logic. Can be simple or very complex.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Form processing</li>
+                            <li>Spreadsheet automation</li>
+                            <li>Data validation</li>
+                            <li>System sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">9.6</div>
+                            <div class="system-name">Vendor & Procurement System</div>
+                            <div class="system-category">Operations & Workflow</div>
+                        </div>
+                        <span class="mega-badge mega-internal">Internal Ops</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Manage vendors, orders, and procurement processes.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Database setup, order automation, AP processing, compliance tracking. Multiple integrations.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Vendor database</li>
+                            <li>Order automation</li>
+                            <li>Invoice processing</li>
+                            <li>Compliance tracking</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">12.3</div>
+                            <div class="system-name">Employee Management System</div>
+                            <div class="system-category">HR & People Operations</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Ongoing employee management and HR automation.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Touches multiple HR functions, policy integration, directory maintenance.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Time off requests</li>
+                            <li>Performance reviews</li>
+                            <li>Policy updates</li>
+                            <li>Directory maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="system-card system-card-major" onclick="toggleSystem(this)">
+                    <div class="system-header">
+                        <div class="system-info">
+                            <div class="system-number">12.4</div>
+                            <div class="system-name">Offboarding System</div>
+                            <div class="system-category">HR & People Operations</div>
+                        </div>
+                        <span class="mega-badge mega-backoffice">Back Office</span>
+                        <span class="system-arrow">&#9660;</span>
+                    </div>
+                    <div class="system-details">
+                        <p class="system-description">Secure and complete offboarding workflows.</p>
+                        <div class="why-label">Why it's Major</div>
+                        <p class="why-text">Security sensitive, multiple system revocations, knowledge transfer workflows.</p>
+                        <div class="components-title">Components</div>
+                        <ul class="components-list">
+                            <li>Exit workflows</li>
+                            <li>Access revocation</li>
+                            <li>Knowledge transfer</li>
+                            <li>Exit interviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CLIENT PROGRESSION -->
+        <div class="progression-section">
+            <h3 class="progression-title">Recommended Client Progression</h3>
+            <div class="progression-steps">
+                <div class="progression-step progression-step-quick">
+                    <div class="progression-step-number">Phase 1</div>
+                    <div class="progression-step-title">Quick Wins</div>
+                    <div class="progression-step-desc">Start with 1-2 quick wins to build trust and demonstrate value. Good openers: Meeting Intelligence, Pre-Call Research, Support Chatbot.</div>
+                </div>
+                <div class="progression-arrow">&rarr;</div>
+                <div class="progression-step progression-step-medium">
+                    <div class="progression-step-number">Phase 2</div>
+                    <div class="progression-step-title">Medium Systems</div>
+                    <div class="progression-step-desc">Once trust is established, address core pain. Usually Cold Email, CRM Automation, or Content Systems.</div>
+                </div>
+                <div class="progression-arrow">&rarr;</div>
+                <div class="progression-step progression-step-major">
+                    <div class="progression-step-number">Phase 3</div>
+                    <div class="progression-step-title">Major Systems</div>
+                    <div class="progression-step-desc">Full infrastructure builds after relationship is solid. GodMode often comes after other systems are running.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-[#1e293b] py-8 mt-12">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs><circle cx="28" cy="18" r="14" fill="none" stroke="url(#g)" stroke-width="2.5"/><circle cx="28" cy="46" r="14" fill="none" stroke="url(#g)" stroke-width="2.5"/><circle cx="28" cy="32" r="4" fill="#3b82f6"/><text x="62" y="30" fill="#fff" font-size="28" font-weight="700" font-family="Inter,system-ui,sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text><text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter,system-ui,sans-serif" letter-spacing="3">YOUR AI PARTNER</text></svg>
+          <div class="text-sm text-[#64748b]">&copy; 2025 Autom8Lab. All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.complexity-section').forEach(s => {
+                s.classList.remove('active');
+            });
+
+            // Remove active from all tabs
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById('section-' + section).classList.add('active');
+
+            // Activate selected tab
+            document.querySelector('.tab-' + section).classList.add('active');
+        }
+
+        function toggleSystem(system) {
+            system.classList.toggle('open');
+        }
+
+        // Check URL hash on load
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash === 'quick' || hash === 'medium' || hash === 'major') {
+                showSection(hash);
+            }
+        });
+    </script>
+</body>
+</html>

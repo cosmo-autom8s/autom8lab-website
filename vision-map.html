@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$100 to $20K — Vision Map</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+
+  h1 { text-align: center; font-size: 2rem; color: #fff; margin: 30px 0 10px; }
+  .subtitle { text-align: center; color: #888; font-size: 1rem; margin-bottom: 40px; }
+  .metric-banner { text-align: center; background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 40px; }
+  .metric-banner h2 { color: #3b82f6; font-size: 1.5rem; margin-bottom: 5px; }
+  .metric-banner p { color: #aaa; font-size: 0.9rem; }
+
+  /* Section styling */
+  .section { margin-bottom: 30px; }
+  .section-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #111118; border: 1px solid #222; border-radius: 10px; cursor: pointer; user-select: none; transition: all 0.2s; }
+  .section-header:hover { border-color: #444; background: #151520; }
+  .section-header.active { border-color: var(--accent); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .section-header .icon { font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; }
+  .section-header .title { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .section-header .desc { font-size: 0.85rem; color: #888; margin-top: 2px; }
+  .section-header .arrow { margin-left: auto; color: #555; transition: transform 0.2s; font-size: 1.2rem; }
+  .section-header.active .arrow { transform: rotate(90deg); color: var(--accent); }
+
+  .section-body { display: none; border: 1px solid #222; border-top: none; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding: 20px; background: #0d0d14; }
+  .section-body.open { display: block; }
+
+  /* Sub-project cards */
+  .sp-card { background: #111118; border: 1px solid #1a1a25; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .sp-card:last-child { margin-bottom: 0; }
+  .sp-card h4 { color: #fff; font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .sp-card .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .sp-card p { font-size: 0.85rem; color: #999; margin-bottom: 6px; }
+  .sp-card ul { font-size: 0.85rem; color: #999; padding-left: 20px; }
+  .sp-card ul li { margin-bottom: 4px; }
+  .sp-card .meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; font-size: 0.8rem; }
+  .sp-card .meta span { color: #666; }
+  .sp-card .meta strong { color: #bbb; }
+
+  /* Flow arrows */
+  .flow { text-align: center; padding: 15px 0; }
+  .flow .arrow-down { display: inline-block; width: 2px; height: 30px; background: linear-gradient(to bottom, var(--accent), transparent); position: relative; }
+  .flow .arrow-down::after { content: ''; position: absolute; bottom: -6px; left: -5px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--accent); }
+  .flow-label { color: #555; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+  /* Color coding */
+  .clr-pink { --accent: #e91e8c; }
+  .clr-blue { --accent: #4a9eff; }
+  .clr-green { --accent: #34d399; }
+  .clr-orange { --accent: #f59e0b; }
+  .clr-gold { --accent: #3b82f6; }
+  .clr-teal { --accent: #2dd4bf; }
+  .clr-coral { --accent: #f87171; }
+  .clr-purple { --accent: #a78bfa; }
+  .clr-silver { --accent: #94a3b8; }
+  .clr-red { --accent: #ef4444; }
+  .clr-yellow { --accent: #fbbf24; }
+
+  .icon-pink { background: #e91e8c22; color: #e91e8c; }
+  .icon-blue { background: #4a9eff22; color: #4a9eff; }
+  .icon-green { background: #34d39922; color: #34d399; }
+  .icon-orange { background: #f59e0b22; color: #f59e0b; }
+  .icon-gold { background: #3b82f622; color: #3b82f6; }
+  .icon-teal { background: #2dd4bf22; color: #2dd4bf; }
+  .icon-coral { background: #f8717122; color: #f87171; }
+  .icon-purple { background: #a78bfa22; color: #a78bfa; }
+  .icon-silver { background: #94a3b822; color: #94a3b8; }
+  .icon-red { background: #ef444422; color: #ef4444; }
+  .icon-yellow { background: #fbbf2422; color: #fbbf24; }
+
+  .badge-prep { background: #3b82f622; color: #3b82f6; }
+  .badge-w1 { background: #34d39922; color: #34d399; }
+  .badge-w3 { background: #a78bfa22; color: #a78bfa; }
+  .badge-m2 { background: #f59e0b22; color: #f59e0b; }
+  .badge-ready { background: #4a9eff22; color: #4a9eff; }
+  .badge-ongoing { background: #f8717122; color: #f87171; }
+
+  /* Connections diagram */
+  .connections { background: #111118; border: 1px solid #1a1a25; border-radius: 10px; padding: 24px; margin: 20px 0; }
+  .connections h3 { color: #fff; font-size: 1rem; margin-bottom: 16px; }
+  .conn-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.85rem; flex-wrap: wrap; }
+  .conn-node { padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; white-space: nowrap; }
+  .conn-arrow { color: #444; }
+
+  /* Revenue boxes */
+  .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  @media (max-width: 600px) { .revenue-grid { grid-template-columns: 1fr; } }
+  .rev-box { border-radius: 10px; padding: 20px; }
+  .rev-box h4 { margin-bottom: 8px; }
+  .rev-box ul { padding-left: 18px; }
+  .rev-box ul li { margin-bottom: 4px; font-size: 0.85rem; }
+
+  /* Timeline */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+  @media (max-width: 700px) { .timeline { grid-template-columns: 1fr 1fr; } }
+  .tl-item { background: #111118; border: 1px solid #1a1a25; border-radius: 8px; padding: 14px; text-align: center; }
+  .tl-item .tl-phase { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .tl-item .tl-label { font-size: 0.85rem; color: #fff; font-weight: 600; margin-bottom: 4px; }
+  .tl-item .tl-detail { font-size: 0.8rem; color: #888; }
+
+  /* Safety nets */
+  .safety { background: #1a0a0a; border: 1px solid #331a1a; border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+  .safety h4 { color: #f87171; font-size: 0.9rem; margin-bottom: 6px; }
+  .safety p { color: #999; font-size: 0.85rem; }
+
+  /* Roles table */
+  .roles-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .roles-table th { text-align: left; padding: 8px 12px; background: #111118; color: #888; font-weight: 600; border-bottom: 1px solid #222; }
+  .roles-table td { padding: 8px 12px; border-bottom: 1px solid #1a1a25; color: #ccc; }
+  .roles-table tr:hover td { background: #111118; }
+
+  .expand-all { text-align: center; margin-bottom: 20px; }
+  .expand-all button { background: #1a1a25; border: 1px solid #333; color: #888; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+  .expand-all button:hover { border-color: #3b82f6; color: #3b82f6; }
+</style>
+</head>
+<body>
+
+<h1>$100 to $20K — Vision Map</h1>
+<p class="subtitle">Interactive system architecture &bull; Click any section to expand</p>
+
+<div class="expand-all">
+  <button onclick="toggleAll()">Expand / Collapse All</button>
+</div>
+
+<div class="metric-banner">
+  <h2>THE ONE METRIC: Booked Calls</h2>
+  <p>Everything in this system exists to get entrepreneurs on a call with Cosmo. Revenue, relationships, case studies — all flow from calls.</p>
+</div>
+
+<!-- ============ DISTRIBUTION ============ -->
+<div class="section clr-pink">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-pink">1</div>
+    <div>
+      <div class="title">DISTRIBUTION — How People Find Us</div>
+      <div class="desc">4 channels: TikTok, LinkedIn, Warm DMs, Cold Email</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="sp-card">
+      <h4><span style="color:#e91e8c">&#9654;</span> SP2: TikTok / Short-Form Video <span class="badge badge-w1">Week 1</span></h4>
+      <p><strong>What:</strong> Cosmo on camera. Raw, authentic. Talking about AI, the journey, demos, hot takes.</p>
+      <ul>
+        <li><strong>Volume:</strong> 1/day to start → scale to 2-3/day</li>
+        <li><strong>Repurposed automatically</strong> to YouTube Shorts + Instagram Reels</li>
+        <li><strong>CTA on every video:</strong> "Comment CHIEF to get the free guide"</li>
+        <li>Keyword comments → <strong>ManyChat auto-DM</strong> (Week 3-4) → sends opt-in link</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo</strong></span>
+        <span>Assist: <strong>Content System (carousels)</strong></span>
+        <span>Depends on: <strong>SP1 (guide exists)</strong></span>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <h4><span style="color:#4a9eff">&#9632;</span> SP2: LinkedIn Posts + Carousels <span class="badge badge-w1">Week 1</span></h4>
+      <p><strong>What:</strong> Written posts and carousels created via AI content system.</p>
+      <ul>
+        <li><strong>Volume:</strong> 1/week to start → scale to 3/week</li>
+        <li><strong>Carousels:</strong> Step-by-step visual breakdowns, created by content system</li>
+        <li><strong>Engagement:</strong> 10+ genuine comments/day on entrepreneur posts (casual — gym, walks, breaks)</li>
+        <li><strong>CTA:</strong> "Link in comments" or "DM me CHIEF"</li>
+        <li>DMs handled <strong>manually</strong> (semi-automated via Claude)</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo</strong></span>
+        <span>Depends on: <strong>SP1 (guide exists)</strong></span>
+      </div>
+    </div>
+
+    <div class="sp-card" style="border-color: #34d39944;">
+      <h4><span style="color:#34d399">&#9733;</span> SP6: Warm DMs to 2,000 Connections <span class="badge badge-w1">Week 1</span> <span class="badge" style="background:#34d39922;color:#34d399;">FASTEST PATH</span></h4>
+      <p><strong>What:</strong> Manually DM existing LinkedIn connections offering the free guide. This is the #1 priority in Week 1.</p>
+      <ul>
+        <li><strong>DM template:</strong> "Hey [name], I built an AI system that handles my morning planning, email, and tasks. Put it in a free guide. Want me to send it?"</li>
+        <li>Track in <strong>Notion CRM:</strong> who contacted, who responded, who downloaded, who booked</li>
+        <li>Some skip straight to calls (warm contacts don't need nurture)</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo</strong></span>
+        <span>Depends on: <strong>SP1 + SP3 (guide + landing page)</strong></span>
+      </div>
+    </div>
+
+    <div class="sp-card" style="border-style: dashed; border-color: #f59e0b44;">
+      <h4><span style="color:#f59e0b">&#9993;</span> SP7: Cold Email Campaigns <span class="badge badge-m2">Month 2</span> <span class="badge" style="background:#f59e0b22;color:#f59e0b;">DELEGATED</span></h4>
+      <p><strong>What:</strong> Cold outreach to entrepreneurs offering the free guide. Separate from warm outreach. 30+ days to warm up domains.</p>
+      <ul>
+        <li><strong>Prep week:</strong> Buy 3-5 sending domains + start warmup (15 min setup, then autopilot)</li>
+        <li><strong>Month 2:</strong> Apollo (lead sourcing) → Instantly (sending) → sequences go live</li>
+        <li><strong>Email:</strong> "Free AI Chief of Staff guide for [their industry]. Reply YES."</li>
+        <li>Reply handling → send guide link → enter nurture</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Delegated (not Cosmo)</strong></span>
+        <span>Cost: <strong>~$50-60 domains + ~$30-97/mo tools</strong></span>
+        <span>Depends on: <strong>SP1 (guide as the offer)</strong></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#e91e8c"></div><div class="flow-label">All channels point down</div></div>
+
+<!-- ============ CAPTURE ============ -->
+<div class="section clr-teal">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-teal">2</div>
+    <div>
+      <div class="title">CAPTURE — How We Get Their Email</div>
+      <div class="desc">Landing page + email opt-in + auto-delivery</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="sp-card">
+      <h4><span style="color:#2dd4bf">&#9635;</span> SP3: Landing Page + Email Capture <span class="badge badge-prep">Prep Week</span></h4>
+      <p><strong>What:</strong> A landing page where people opt in with their email to receive the free guide.</p>
+      <ul>
+        <li><strong>Carrd landing page</strong> (opt-in page, not sales page — it's free)</li>
+        <li><strong>ConvertKit form</strong> — captures email</li>
+        <li><strong>Automatic guide delivery</strong> on signup</li>
+        <li><strong>"How did you hear about this?"</strong> field (tracking)</li>
+        <li>Tags subscriber by source: organic / warm DM / cold email</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo + Maria (copy)</strong></span>
+        <span>Cost: <strong>$19 (Carrd) + $12 (domain) + $0 (ConvertKit free)</strong></span>
+        <span>Depends on: <strong>SP1 (guide must exist to deliver)</strong></span>
+      </div>
+    </div>
+
+    <div class="sp-card">
+      <h4><span style="color:#a78bfa">&#9881;</span> SP5: ManyChat / Comment Automation <span class="badge badge-w3">Week 3-4</span></h4>
+      <p><strong>What:</strong> Auto-respond to keyword comments on TikTok/IG. Not needed until content volume justifies it.</p>
+      <ul>
+        <li>Someone comments "CHIEF" → gets auto-DM with opt-in link</li>
+        <li><strong>TikTok + Instagram only</strong> — LinkedIn is manual</li>
+        <li>Free alternative exists (research during Week 2)</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo (one-time setup)</strong></span>
+        <span>Cost: <strong>$0-15/mo</strong></span>
+        <span>Depends on: <strong>SP3 (landing page live)</strong></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#2dd4bf"></div><div class="flow-label">Email captured → guide delivered</div></div>
+
+<!-- ============ TROJAN HORSE ============ -->
+<div class="section clr-gold">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-gold">3</div>
+    <div>
+      <div class="title">TROJAN HORSE — The Free AI Chief of Staff Guide</div>
+      <div class="desc">They install it. They experience AI. They see you as the expert.</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="sp-card" style="border-color: #3b82f644;">
+      <h4><span style="color:#3b82f6">&#9733;</span> SP1: The Guide <span class="badge badge-prep">Prep Week</span> <span class="badge" style="background:#3b82f622;color:#3b82f6;">FOUNDATION</span></h4>
+      <p><strong>Everything depends on this.</strong> A free, comprehensive guide that teaches entrepreneurs how to set up their own AI Chief of Staff.</p>
+      <p style="color:#3b82f6; font-weight: 600; margin-top: 8px;">Guide Contents:</p>
+      <ul>
+        <li><strong>Ch 1:</strong> Why you need an AI Chief of Staff (the problem)</li>
+        <li><strong>Ch 2:</strong> What it does (morning brief, weekly planning, email drafting, task management)</li>
+        <li><strong>Ch 3:</strong> Prerequisites (Claude account + their existing tools)</li>
+        <li><strong>Ch 4:</strong> Step-by-step setup with exact prompts</li>
+        <li><strong>Ch 5:</strong> Full prompt library (copy-paste ready)</li>
+        <li><strong>Ch 6:</strong> Customization for different tools and workflows</li>
+        <li><strong>Ch 7:</strong> Troubleshooting + FAQ</li>
+        <li><strong>Bonus:</strong> Video walkthrough (raw screen recording)</li>
+      </ul>
+      <p style="color:#3b82f6; font-weight: 600; margin-top: 12px;">Built-in CTAs (inside the guide):</p>
+      <ul>
+        <li><strong>CTA 1:</strong> "Want this customized for your business? Book a call." → Calendly ($500 DFY)</li>
+        <li><strong>CTA 2:</strong> "Want to see what else AI can do for you? Book a free strategy call." → Calendly</li>
+        <li><strong>CTA 3:</strong> "Know a founder who needs this? Share this link." → referral loop back to landing page</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo + Claude</strong></span>
+        <span>Status: <strong>System exists, needs extraction into generic format</strong></span>
+        <span>Depends on: <strong>Nothing. This is the foundation.</strong></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#3b82f6"></div><div class="flow-label">Guide installed → they want more</div></div>
+
+<!-- ============ NURTURE ============ -->
+<div class="section clr-coral">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-coral">4</div>
+    <div>
+      <div class="title">NURTURE — Email Sequence Warms Them Up</div>
+      <div class="desc">Automated emails over 14 days → drives calls</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="sp-card">
+      <h4><span style="color:#f87171">&#9993;</span> SP4: Email Nurture System <span class="badge badge-w1">Week 1-2</span></h4>
+      <p><strong>What:</strong> Automated ConvertKit sequence that warms up guide downloaders toward booking a call.</p>
+      <ul>
+        <li><strong>Day 0:</strong> "Here's your guide. Start with the morning brief. Quick-start tip."</li>
+        <li><strong>Day 3:</strong> "Did you get it running? Common troubleshooting tip. Reply if stuck."</li>
+        <li><strong>Day 7:</strong> "Here's what other entrepreneurs are doing with this. [Case study/example]"</li>
+        <li><strong>Day 14:</strong> "Ready to go deeper? 3 things AI could do for your business beyond the Chief of Staff. Book a free strategy call."</li>
+        <li><strong>Ongoing weekly:</strong> Value emails — tips, journey updates, new prompts, soft CTA to book a call</li>
+      </ul>
+      <p style="margin-top: 10px; color: #f87171;"><strong>Every single email has a call CTA.</strong></p>
+      <div class="meta">
+        <span>Owner: <strong>Claude writes → Cosmo reviews</strong></span>
+        <span>Tool: <strong>ConvertKit (free tier)</strong></span>
+        <span>Depends on: <strong>SP3 (email capture live)</strong></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#f87171"></div><div class="flow-label">Nurtured → ready to talk</div></div>
+
+<!-- ============ BOOKED CALLS ============ -->
+<div class="section clr-yellow">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-yellow" style="font-size:1.5rem;">&#9733;</div>
+    <div>
+      <div class="title">BOOKED CALLS — The One Metric</div>
+      <div class="desc">Calendly &bull; 30-min strategy calls &bull; 5 sources feed this</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="sp-card" style="border-color: #fbbf2444;">
+      <h4 style="color:#fbbf24;">5 Sources That Feed Calls</h4>
+      <ul>
+        <li><strong style="color:#3b82f6;">From guide CTA</strong> — they read the guide, want customization or more</li>
+        <li><strong style="color:#f87171;">From email nurture</strong> — Day 14 email or ongoing weekly emails</li>
+        <li><strong style="color:#34d399;">From warm DMs</strong> — direct conversation → "let's jump on a call"</li>
+        <li><strong style="color:#e91e8c;">From content</strong> — someone sees a post, goes straight to Calendly</li>
+        <li><strong style="color:#f59e0b;">From cold email</strong> — reply → conversation → call (Month 2)</li>
+      </ul>
+    </div>
+
+    <div class="sp-card">
+      <h4><span style="color:#4a9eff">&#9745;</span> SP10: Call System <span class="badge badge-ready">READY NOW</span></h4>
+      <p><strong>Already exists.</strong> No build needed. Cosmo runs every call using:</p>
+      <ul>
+        <li>Autom8Lab Discovery Call Guide</li>
+        <li>AI Audit SOP + Template</li>
+        <li>Full Service Menu</li>
+      </ul>
+      <p style="margin-top: 8px;"><strong>Calendly booking form:</strong> name, business type, tools they use, "How did you hear about me?"</p>
+      <p><strong>All calls tracked in Notion CRM.</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#fbbf24"></div><div class="flow-label">Call → Revenue</div></div>
+
+<!-- ============ REVENUE ============ -->
+<div class="section clr-green">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-green">$</div>
+    <div>
+      <div class="title">REVENUE — Two Paths From Every Call</div>
+      <div class="desc">$500 quick win OR $5,000+ bigger engagement → Autom8Lab core</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+
+    <div class="revenue-grid">
+      <div class="rev-box" style="background: #0a1a0a; border: 1px solid #1a331a;">
+        <h4 style="color:#34d399;">$500 — DFY Chief of Staff Installation</h4>
+        <ul style="color: #9fccb0;">
+          <li>Cosmo diagnoses on the call</li>
+          <li>Claudiu installs, customized for their business + tools</li>
+          <li>Max 3 tool integrations</li>
+          <li>30-min onboarding call</li>
+          <li>30 days async support</li>
+          <li>Delivery: 1-3 days</li>
+        </ul>
+        <p style="color:#34d399; margin-top: 12px; font-weight: 600;">This is the foot in the door.<br>Happy $500 client → $5K client next month.</p>
+      </div>
+      <div class="rev-box" style="background: #0a0a1a; border: 1px solid #1a1a33;">
+        <h4 style="color:#4a9eff;">$5,000+ — Full AI Implementation</h4>
+        <ul style="color: #9fb0cc;">
+          <li>Discovered on the call based on THEIR needs</li>
+          <li>AI audit + implementation of top 3 opportunities</li>
+          <li>Custom AI agents for their business</li>
+          <li>Workflow transformation</li>
+          <li>Team AI training</li>
+          <li>Ongoing: $1,000+/mo retainer</li>
+        </ul>
+        <p style="color:#4a9eff; margin-top: 12px; font-weight: 600;">This IS the Autom8Lab core business.<br>Claudiu + AI engineers deliver.</p>
+      </div>
+    </div>
+
+    <div class="sp-card" style="margin-top: 16px;">
+      <h4>Path to $20K (example scenarios)</h4>
+      <ul>
+        <li><strong>Volume:</strong> 20 x $500 DFY + 2 x $5K projects = $20,000</li>
+        <li><strong>Balanced:</strong> 10 x $500 + 2 x $5K + 1 retainer x 3 months = $18,000</li>
+        <li><strong>High-ticket:</strong> 5 x $500 + 3 x $5K + 1 retainer = $20,500</li>
+      </ul>
+      <p style="margin-top: 8px; color: #888;">The exact mix depends on what the market asks for. Calls reveal what people need.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="flow"><div class="arrow-down" style="--accent:#34d399"></div><div class="flow-label">Results feed back into content</div></div>
+
+<!-- ============ FLYWHEEL ============ -->
+<div class="section clr-gold">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-gold">&#8635;</div>
+    <div>
+      <div class="title">FLYWHEEL — Each Client Makes the Next One Easier</div>
+      <div class="desc">Results → case studies → content → more calls → more clients</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <div class="connections">
+      <div class="conn-row">
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">Client Result</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">Case Study Content</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">More Views</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">More Downloads</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#fbbf2422;color:#fbbf24;">More Calls</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">Testimonial</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">Landing Page + Content</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">Higher Trust</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">Higher Conversion</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">Raise Prices</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">Referral</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">New Leads</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#fbbf2422;color:#fbbf24;">More Calls</span>
+        <span class="conn-arrow">→ cycle repeats</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXACT CONNECTIONS ============ -->
+<div class="section clr-silver">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-silver">&#8644;</div>
+    <div>
+      <div class="title">EXACT CONNECTIONS — What Feeds What</div>
+      <div class="desc">Every dependency mapped</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <div class="connections">
+      <h3>Build Order (Dependencies)</h3>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">SP1: Guide</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">SP3: Landing Page</span>
+        <span style="color:#555;">(can't deliver without guide)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">SP3: Landing Page</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#f8717122;color:#f87171;">SP4: Email Nurture</span>
+        <span style="color:#555;">(no subscribers without capture)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">SP3: Landing Page</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">SP6: Warm DMs</span>
+        <span style="color:#555;">(need somewhere to send people)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">SP1: Guide</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">SP2: Content</span>
+        <span style="color:#555;">(content points to guide as CTA)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">SP2: Content</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#a78bfa22;color:#a78bfa;">SP5: ManyChat</span>
+        <span style="color:#555;">(no comments to automate without content)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">SP2: Content</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#94a3b822;color:#94a3b8;">SP8: Tracking</span>
+        <span style="color:#555;">(no data without content posting)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">SP1: Guide</span>
+        <span class="conn-arrow">→ required by →</span>
+        <span class="conn-node" style="background:#f59e0b22;color:#f59e0b;">SP7: Cold Email</span>
+        <span style="color:#555;">(guide is the cold email offer)</span>
+      </div>
+    </div>
+
+    <div class="connections" style="margin-top: 16px;">
+      <h3>Data Flow (What Goes Where)</h3>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#e91e8c22;color:#e91e8c;">TikTok comment</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#a78bfa22;color:#a78bfa;">ManyChat DM</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">Opt-in page</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#f8717122;color:#f87171;">ConvertKit</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">Guide</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#f8717122;color:#f87171;">Nurture</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#fbbf2422;color:#fbbf24;">Call</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#4a9eff22;color:#4a9eff;">LinkedIn post</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#4a9eff22;color:#4a9eff;">Link in comments</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">Opt-in page</span>
+        <span class="conn-arrow">→ (same path)</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#34d39922;color:#34d399;">Warm DM</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#2dd4bf22;color:#2dd4bf;">Opt-in page</span>
+        <span class="conn-arrow">→ (same path) OR →</span>
+        <span class="conn-node" style="background:#fbbf2422;color:#fbbf24;">Direct to call</span>
+      </div>
+      <div class="conn-row">
+        <span class="conn-node" style="background:#f59e0b22;color:#f59e0b;">Cold email</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#f59e0b22;color:#f59e0b;">Reply YES</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#3b82f622;color:#3b82f6;">Guide sent</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#f8717122;color:#f87171;">Added to nurture</span>
+        <span class="conn-arrow">→</span>
+        <span class="conn-node" style="background:#fbbf2422;color:#fbbf24;">Call</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TIMELINE ============ -->
+<div class="section clr-purple">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-purple">&#9203;</div>
+    <div>
+      <div class="title">TIMELINE — When Each Piece Goes Live</div>
+      <div class="desc">Prep week → Week 1-2 → Week 3-4 → Month 2</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <div class="timeline">
+      <div class="tl-item" style="border-color: #3b82f644;">
+        <div class="tl-phase" style="color:#3b82f6;">Prep Week</div>
+        <div class="tl-label">Mar 24-29</div>
+        <div class="tl-detail">SP1: Guide extraction<br>SP3: Landing page<br>SP7: Buy domains (warmup)<br>Notion CRM<br>Team alignment<br>Safety nets</div>
+      </div>
+      <div class="tl-item" style="border-color: #34d39944;">
+        <div class="tl-phase" style="color:#34d399;">Week 1-2</div>
+        <div class="tl-label">Apr 1-13</div>
+        <div class="tl-detail">SP2: Content starts<br>SP6: Warm DMs (priority!)<br>SP4: Email nurture live<br>SP9: Journey docs start<br>SP8: Begin tracking</div>
+      </div>
+      <div class="tl-item" style="border-color: #a78bfa44;">
+        <div class="tl-phase" style="color:#a78bfa;">Week 3-4</div>
+        <div class="tl-label">Apr 14-30</div>
+        <div class="tl-detail">SP5: ManyChat added<br>SP8: Full tracking live<br>SP2: Scale LinkedIn to 2-3/wk<br>Content system improved<br>Guide V2 based on feedback</div>
+      </div>
+      <div class="tl-item" style="border-color: #f59e0b44;">
+        <div class="tl-phase" style="color:#f59e0b;">Month 2</div>
+        <div class="tl-label">May</div>
+        <div class="tl-detail">SP7: Cold email launches<br>SP2: Scale TikTok volume<br>Optimize based on data<br>Raise prices if demand</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TRACKING ============ -->
+<div class="section clr-silver">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-silver">&#9635;</div>
+    <div>
+      <div class="title">TRACKING & ANALYTICS — SP8</div>
+      <div class="desc">AI agent scrapes daily, Notion CRM dashboard, weekly reports</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <div class="sp-card">
+      <h4>What Gets Tracked <span class="badge badge-w1">Week 2-3</span></h4>
+      <ul>
+        <li><strong>Content:</strong> AI agent scrapes TikTok, Instagram, LinkedIn daily — views, engagement, comments, shares</li>
+        <li><strong>Capture:</strong> ConvertKit — subscriber count by source, open rates, click rates</li>
+        <li><strong>Calls:</strong> Calendly — calls booked by source (via "how did you hear?" field)</li>
+        <li><strong>Pipeline:</strong> Notion CRM — leads by status (lead → downloaded → nurturing → call booked → client → churned)</li>
+        <li><strong>Revenue:</strong> Manual tracking by source and service tier</li>
+        <li><strong>Weekly report:</strong> Generated automatically — content metrics → downloads → calls → revenue</li>
+      </ul>
+      <div class="meta">
+        <span>Owner: <strong>Cosmo builds with Claude</strong></span>
+        <span>Tool: <strong>Notion + AI agent</strong></span>
+        <span>Future: <strong>This system could become its own product/template</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ROLES ============ -->
+<div class="section clr-blue">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-blue">&#9823;</div>
+    <div>
+      <div class="title">WHO DOES WHAT</div>
+      <div class="desc">Cosmo &bull; Claudiu &bull; Maria &bull; Claude &bull; Delegated</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <table class="roles-table">
+      <tr><th>Activity</th><th>Owner</th></tr>
+      <tr><td>Content creation (video, LinkedIn, carousels)</td><td>Cosmo + content system</td></tr>
+      <tr><td>Guide creation and updates</td><td>Cosmo + Claude</td></tr>
+      <tr><td>Warm DMs to connections</td><td>Cosmo (Claude semi-automation)</td></tr>
+      <tr><td>LinkedIn engagement</td><td>Cosmo (casual — breaks, gym)</td></tr>
+      <tr><td>Discovery calls + sales</td><td>Cosmo</td></tr>
+      <tr><td>Client onboarding calls</td><td>Cosmo</td></tr>
+      <tr><td>DFY Chief of Staff installation</td><td>Claudiu</td></tr>
+      <tr><td>Bigger AI implementations</td><td>Claudiu + engineers</td></tr>
+      <tr><td>Cold email infrastructure + campaigns</td><td>Delegated</td></tr>
+      <tr><td>ManyChat setup</td><td>Cosmo (one-time)</td></tr>
+      <tr><td>Email nurture sequence</td><td>Claude writes → Cosmo reviews</td></tr>
+      <tr><td>Tracking/analytics system</td><td>Cosmo + Claude (one-time build)</td></tr>
+      <tr><td>Content system improvements</td><td>Cosmo + Claude</td></tr>
+      <tr><td>Accountability check-ins</td><td>AI Chief of Staff (daily) + Maria (2x/week)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ SAFETY NETS ============ -->
+<div class="section clr-red">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon icon-red">&#9888;</div>
+    <div>
+      <div class="title">SAFETY NETS</div>
+      <div class="desc">Bad day protocol &bull; No sales playbook &bull; Anti-shiny-object rule</div>
+    </div>
+    <div class="arrow">&#9654;</div>
+  </div>
+  <div class="section-body">
+    <div class="safety">
+      <h4>Bad Day Protocol</h4>
+      <p><strong>Level 1 (15 min):</strong> Post a one-liner. Reply to 3 DMs. Done.<br>
+      <strong>Level 2 (45 min):</strong> Repost old content. 5 engagement comments. Check DMs.<br>
+      <strong>Level 3 (2 hrs):</strong> Rough content + engagement. Skip outreach.<br>
+      <strong>The rule:</strong> You never go to zero. Even Level 1 counts.</p>
+    </div>
+    <div class="safety">
+      <h4>No Calls Booked by Day 14?</h4>
+      <p>Diagnose in order: <strong>Distribution</strong> (are people seeing content?) → <strong>Capture</strong> (are they downloading?) → <strong>Nurture</strong> (are emails being opened?) → <strong>Guide quality</strong> (is the CTA clear?). Fix in that order. Don't change the core strategy.</p>
+    </div>
+    <div class="safety">
+      <h4>Anti-Shiny-Object Rule</h4>
+      <p>No new sub-projects until Month 2. The 10 sub-projects above ARE the system. New ideas go in <code>ideas/</code> folder. Capture without committing.</p>
+    </div>
+    <div class="safety">
+      <h4>Accountability</h4>
+      <p><strong>Daily:</strong> AI Chief of Staff morning check-in — "Did you post? Did you engage? Did you DM?"<br>
+      <strong>2x Weekly:</strong> Maria calls (Tue + Fri, 15-20 min) — "What's working? What's blocking you?"</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('active');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+let allOpen = false;
+function toggleAll() {
+  allOpen = !allOpen;
+  document.querySelectorAll('.section-header').forEach(h => {
+    if (allOpen) { h.classList.add('active'); h.nextElementSibling.classList.add('open'); }
+    else { h.classList.remove('active'); h.nextElementSibling.classList.remove('open'); }
+  });
+}
+</script>
+
+</body>
+</html>

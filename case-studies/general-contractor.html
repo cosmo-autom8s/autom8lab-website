@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Contractor Case Study — Autom8Lab</title>
+  <meta name="description" content="How a mid-size GC recovered $47K in unbilled work and got the owner out of the field with AI systems from Autom8Lab.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Decorative quote mark font */
+    .quote-decoration {
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    /* Before/After table row hover */
+    .results-row {
+      transition: background-color 0.2s ease;
+    }
+    .results-row:hover {
+      background-color: #1a1a1a;
+    }
+
+    /* Core system badge background */
+    .core-badge {
+      background-color: rgba(201, 166, 107, 0.1);
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="../index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="../index.html#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="../index.html#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="../about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="../free-resources.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="../index.html#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="../index.html#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="../about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="../free-resources.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Eyebrow -->
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">
+          Case Study: General Contractor
+        </span>
+
+        <!-- Headline -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-tight fade-in">
+          <span class="hero-gradient">How a Mid-Size GC Recovered $47K in Unbilled Work and Got the Owner Out of the Field</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg md:text-xl text-[#94a3b8] max-w-2xl mx-auto mb-16 leading-relaxed fade-in">
+          A general contractor running commercial tenant improvements and light industrial projects. $8M annual revenue, 23 employees. They knew money was slipping through the cracks. Here's what changed.
+        </p>
+
+        <!-- Metrics Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 fade-in">
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">$47K</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Recovered Unbilled<br>Change Orders</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">9+<span class="text-2xl md:text-3xl"> hrs</span></div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Owner Time Saved<br>Per Week</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">6+<span class="text-2xl md:text-3xl"> hrs</span></div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Field Downtime<br>Reduced Per Week</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">18<span class="text-2xl md:text-3xl"> days</span></div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Faster Payment<br>Cycle</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         THE CLIENT
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Client</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">The Snapshot</h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          A general contractor in Phoenix, Arizona, running commercial tenant improvements and light industrial projects. $8M annual revenue, 23 employees, a mix of project managers, superintendents, field crews, and one office admin who handles "everything else."
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          The owner, Marcus, started as a carpenter 19 years ago. Built his reputation on quality work and showing up when he said he would. Now he runs a company where he's the bottleneck for every decision, and he hasn't touched a tool in 3 years.
+        </p>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          Software: Procore for project management (half-adopted), QuickBooks for accounting, Excel for everything that falls between, and a group text thread per project that never stops buzzing.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WAS ACTUALLY HAPPENING
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Situation</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-16 fade-in">What Was Actually Happening</h2>
+
+        <!-- Block 1: The Change Order Black Hole -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Change Order Black Hole</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "We had a $2.1M tenant improvement job last year. Finished it, felt good. Then I sat down with my accountant and realized we'd eaten $180K in scope changes we never billed for. Not because the client refused. Because we never sent the change orders. They were sitting in email threads and text messages. Nobody tracked them."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            Marcus wasn't losing money on bad work. He was losing it on good work that never got invoiced.
+          </p>
+        </div>
+
+        <!-- Block 2: The RFI Bottleneck -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The RFI Bottleneck</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "An RFI comes in from the field. It goes to the PM. The PM emails the architect. The architect takes 5 days. Meanwhile, the crew is either waiting or guessing. Last month we had a framing crew standing around for two days because nobody knew which spec was current. That's $6,400 in labor we'll never get back."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            It's not just proposals that kill schedules. It's the daily back-and-forth. RFIs without owners, without deadlines, without tracking.
+          </p>
+        </div>
+
+        <!-- Block 3: The Payment Float Trap -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Payment Float Trap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I've got $340K out right now in invoices over 30 days. One GC I sub for takes 67 days average to pay. So I'm floating payroll, floating materials, floating everything. Last month I pulled from my personal line of credit to make Friday's checks. That's not a business. That's a stress machine."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            The average contractor is financing their client's project out of their own pocket, and the margins are already razor-thin at 2&ndash;6%.
+          </p>
+        </div>
+
+        <!-- Block 4: The Owner Trap -->
+        <div class="fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Owner Trap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I started this company because I'm good at building. Somewhere along the way I became the guy who approves every PO, answers every question, and puts out every fire. I've got two PMs but they still call me for everything. I don't run the business anymore. It runs me."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            Marcus was working 60+ hours a week, and half of it was admin he shouldn't be touching.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #1
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            Every scope change used to disappear into a text thread. Now it's tracked from the moment someone mentions it in the field. That's not a process improvement. That's money we were already owed finally making it to the invoice.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Marcus, Owner, GC Firm
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE INSTALLED
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">What We Installed</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">The Systems</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Card 1: Change Order Capture System -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">01</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Change Order Capture System</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every scope change, whether from the field, client, or architect, enters one queue. Auto-generates CO draft with cost estimate. Nothing gets built until it's approved and tracked.</p>
+          </div>
+
+          <!-- Card 2: RFI Tracker with SLA -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">02</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">RFI Tracker with SLA</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every RFI has an owner, a deadline, and a status. Architects get automatic reminders. PMs see what's pending without digging through email. Escalates to Marcus only when something's overdue.</p>
+          </div>
+
+          <!-- Card 3: Document Version Control -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">03</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Document Version Control</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">One source of truth for specs, drawings, and submittals. Field crews see current version on their phone. No more "I was working off the old drawing."</p>
+          </div>
+
+          <!-- Card 4: Payment Tracking Dashboard -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">04</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Payment Tracking Dashboard</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every invoice tracked from sent to paid. Aging alerts at 30/60/90 days. Marcus sees cash position weekly without asking the accountant. Flags clients who consistently pay slow.</p>
+          </div>
+
+          <!-- Card 5: Daily Field Log Automation -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">05</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Daily Field Log Automation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Supers submit daily logs from their phone. Auto-tagged to project, auto-filed, searchable. Documentation that used to take 45 minutes takes 10.</p>
+          </div>
+
+          <!-- Card 6: Subcontractor Coordination Queue -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">06</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Subcontractor Coordination Queue</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">All sub-related tasks in one place. Who's scheduled, who confirmed, who didn't show. No more chasing subs via text at 6am.</p>
+          </div>
+
+          <!-- Card 7: Weekly Project Status Report -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">07</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Weekly Project Status Report</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Auto-generated from project data. Sent every Monday to stakeholders. Clients see progress without calling Marcus. He stopped being the status update hotline.</p>
+          </div>
+
+          <!-- Card 8: Owner's Daily Brief — CORE SYSTEM (permanent gold border) -->
+          <div class="bg-[#111827] border-2 border-[#3b82f6] rounded-2xl px-8 py-6 hover:bg-[#1a1a1a] transition-all duration-300 relative fade-in">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">08</span>
+              <span class="core-badge text-[10px] font-semibold text-[#3b82f6] uppercase tracking-widest px-2.5 py-1 rounded-full">Core System</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Owner's Daily Brief</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Morning summary: what needs approval, what's overdue, what's coming this week. Decision queue, not information flood. Marcus makes decisions in 30 minutes instead of discovering them throughout the day.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT CHANGED — RESULTS
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Results</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">What Changed</h2>
+        </div>
+
+        <!-- Before / After Table -->
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden mb-20 fade-in">
+
+          <!-- Table Header -->
+          <div class="grid grid-cols-3 border-b border-[#1e293b] px-6 md:px-8 py-4">
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Metric</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest text-center">Before</div>
+            <div class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest text-center">After</div>
+          </div>
+
+          <!-- Row 1 (star metric — gold) -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Change orders captured and billed</div>
+            <div class="text-sm text-[#64748b] text-center">~60%</div>
+            <div class="text-lg md:text-xl font-bold text-[#3b82f6] text-center">94%</div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Average RFI response time</div>
+            <div class="text-sm text-[#64748b] text-center">5.2 days</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">2.1 days</div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Field crew downtime (waiting for answers)</div>
+            <div class="text-sm text-[#64748b] text-center">8+ hrs/week</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">2 hrs/week</div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Owner admin time</div>
+            <div class="text-sm text-[#64748b] text-center">28+ hrs/week</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">19 hrs/week</div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Average payment cycle</div>
+            <div class="text-sm text-[#64748b] text-center">52 days</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">34 days</div>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Cash visibility</div>
+            <div class="text-sm text-[#64748b] text-center">Monthly (reactive)</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">Weekly (proactive)</div>
+          </div>
+
+          <!-- Row 7 -->
+          <div class="results-row grid grid-cols-3 items-center px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Project documentation compliance</div>
+            <div class="text-sm text-[#64748b] text-center">~70%</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">98%</div>
+          </div>
+
+        </div>
+
+        <!-- The Stories -->
+        <div class="max-w-3xl mx-auto">
+          <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-12 fade-in">The Stories Behind the Numbers</h3>
+
+          <!-- Story 1 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The $47K Recovery</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              First 60 days, the change order system captured 11 scope changes that would have gone unbilled under the old process. Total value: $47,200. That's not new revenue. It's revenue they were already earning but not collecting.
+            </p>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The RFI That Didn't Kill the Schedule</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Week 3, an electrical spec conflict came in from the field. Old system: PM emails architect, waits, follows up, waits more, crew guesses. New system: RFI logged, architect auto-notified with 48-hour SLA, response came in 31 hours, crew never stopped. Estimated savings: $4,800 in avoided downtime.
+            </p>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Sub Who Finally Showed Up</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Marcus had a drywall sub who no-showed twice in one month. Nobody tracked it until the super complained. With the coordination queue, the pattern was visible in week 1. They had a conversation, set expectations, sub's been reliable since. Before: problem discovered after damage. After: problem visible before it compounds.
+            </p>
+          </div>
+
+          <!-- Story 4 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Payment That Actually Came</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              One client was averaging 67 days to pay. Payment dashboard flagged them at day 35 with automatic follow-up. Accounting sent a reminder. Payment came day 41. Over 3 invoices, that's roughly $23K that came 3&ndash;4 weeks faster than it would have.
+            </p>
+          </div>
+
+          <!-- Story 5 -->
+          <div class="fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Saturday Morning Test</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Marcus tracked his time for a month. Before: checking texts by 6am, including weekends. Approving POs on Saturday, answering "quick questions" on Sunday. After: Saturday check-in is 15 minutes. Real emergencies still come through. Everything else has an owner and a system.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #2
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            I started this company because I know how to build. For the last five years, all I've done is answer emails and approve POs. Now the system handles the noise and I'm back to doing what actually grows the business.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Marcus, Owner, GC Firm
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE DIDN'T TOUCH
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Scope Clarity</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">What We Didn't Touch</h2>
+
+        <div class="space-y-4 mb-10 fade-in">
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Procore stayed as the project management backbone. We integrated alongside it</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">QuickBooks handled accounting exactly as before</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Estimating and bidding process unchanged</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Field crew workflows and tools stayed familiar</p>
+          </div>
+        </div>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          We added a layer on top of what they already had. We didn't ask them to learn a new platform or change how they build.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         TIMELINE
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Timeline</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">How Long This Took</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 fade-in">
+
+          <!-- Phase 1 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 1&ndash;2</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Discovery &amp; Mapping</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Documented project flow, identified change order leakage points, interviewed PMs and supers.</p>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 3&ndash;4</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Core Installation</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Change order queue, RFI tracker, payment dashboard, owner daily brief.</p>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 5&ndash;6</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Tuning &amp; Training</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Refined workflows, trained PMs on new process, adjusted alert thresholds.</p>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 7+</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Live &amp; Optimizing</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">System running, weekly check-ins, continuous improvement.</p>
+          </div>
+
+        </div>
+
+        <p class="text-center text-lg md:text-xl font-medium text-white fade-in">
+          First results visible within 30 days. Full system stable by day 45.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         CTA
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 fade-in">Similar situation?</h2>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-4 fade-in">
+          If you're running a GC or specialty contractor and this sounds familiar, like change orders slipping through, RFIs killing your schedule, or payments that take forever, let's talk.
+        </p>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          30-minute call. No pitch deck. We'll map your situation and tell you what's possible.
+        </p>
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Schedule Your AI Audit &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="../index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Shared JS -->
+  <script src="../js/main.js"></script>
+
+</body>
+</html>

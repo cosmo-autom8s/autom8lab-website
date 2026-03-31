@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Resources — Autom8Lab</title>
+  <meta name="description" content="Free AI tools, guides, and templates to help your business automate operations. No fluff, just systems that work.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="index.html#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="free-resources.html" class="text-sm text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="index.html#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="index.html#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="free-resources.html" class="block text-sm text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="pt-20 md:pt-28 pb-16 md:pb-20">
+      <div class="max-w-4xl mx-auto px-6 md:px-8 text-center">
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 fade-in">
+          Free <span class="hero-gradient">AI Resources</span>
+        </h1>
+
+        <p class="text-base md:text-lg text-[#94a3b8] max-w-2xl mx-auto leading-relaxed fade-in">
+          Guides, templates, and tools to help you start using AI in your business today. No signup walls, no fluff — just things that work.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         FEATURED RESOURCE
+         ============================================ -->
+    <section class="pb-16 md:pb-20">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden fade-in">
+          <div class="flex flex-col md:flex-row">
+
+            <!-- Left: Content -->
+            <div class="flex-1 p-8 md:p-10">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block text-xs font-semibold text-[#3b82f6] bg-[#3b82f6]/10 px-3 py-1 rounded-full uppercase tracking-wide">
+                  New
+                </span>
+                <span class="inline-block text-xs font-medium text-[#64748b] bg-[#1e293b] px-3 py-1 rounded-full">
+                  Video Tutorial + Code
+                </span>
+              </div>
+
+              <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3">
+                Build Your Own AI Executive Assistant
+              </h2>
+
+              <p class="text-[#94a3b8] leading-relaxed mb-6">
+                Step-by-step video tutorial showing you how to build a free AI Executive Assistant that handles email triage, meeting prep, and follow-ups. Includes the full source code on GitHub.
+              </p>
+
+              <ul class="space-y-2 mb-8">
+                <li class="flex items-center gap-3 text-sm text-[#94a3b8]">
+                  <svg class="w-4 h-4 text-[#3b82f6] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  Full video walkthrough
+                </li>
+                <li class="flex items-center gap-3 text-sm text-[#94a3b8]">
+                  <svg class="w-4 h-4 text-[#3b82f6] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  Open-source code on GitHub
+                </li>
+                <li class="flex items-center gap-3 text-sm text-[#94a3b8]">
+                  <svg class="w-4 h-4 text-[#3b82f6] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  Works with Gmail, Google Calendar, and more
+                </li>
+              </ul>
+
+              <a href="ai-ea-signup.html"
+                 class="inline-block bg-[#3b82f6] text-white font-semibold text-base px-8 py-4 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+                Get the Free Guide &rarr;
+              </a>
+            </div>
+
+            <!-- Right: Visual -->
+            <div class="md:w-[320px] bg-[#0b0f1a] border-t md:border-t-0 md:border-l border-[#1e293b] flex items-center justify-center p-8 md:p-10">
+              <div class="text-center">
+                <!-- Robot/Assistant icon -->
+                <svg class="w-24 h-24 mx-auto mb-4 text-[#3b82f6]" fill="none" viewBox="0 0 96 96" stroke="currentColor" stroke-width="1.5">
+                  <rect x="24" y="20" width="48" height="40" rx="8" stroke-width="2"/>
+                  <circle cx="38" cy="40" r="4" fill="currentColor"/>
+                  <circle cx="58" cy="40" r="4" fill="currentColor"/>
+                  <path d="M38 50 h20" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="48" y1="12" x2="48" y2="20" stroke-width="2"/>
+                  <circle cx="48" cy="10" r="3" stroke-width="2"/>
+                  <path d="M28 60 v12 h40 v-12" stroke-width="2"/>
+                  <line x1="20" y1="36" x2="24" y2="36" stroke-width="2"/>
+                  <line x1="72" y1="36" x2="76" y2="36" stroke-width="2"/>
+                </svg>
+                <p class="text-sm font-medium text-[#64748b]">AI Executive Assistant</p>
+                <p class="text-xs text-[#475569] mt-1">Tutorial + Source Code</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         ALL RESOURCES GRID
+         ============================================ -->
+    <section class="pb-24 md:pb-32">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight fade-in">
+            All Free Resources
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
+
+          <!-- Resource Card 1: AI EA Guide -->
+          <a href="ai-ea-signup.html" class="group bg-[#111827] border border-[#1e293b] rounded-2xl p-6 hover:border-[#3b82f6]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-block text-xs font-medium text-[#3b82f6] bg-[#3b82f6]/10 px-2.5 py-1 rounded-full">
+                Guide
+              </span>
+              <span class="inline-block text-xs font-medium text-[#64748b] bg-[#1e293b] px-2.5 py-1 rounded-full">
+                Video + Code
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-[#60a5fa] transition-colors">
+              Build Your Own AI Executive Assistant
+            </h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed mb-4">
+              Free video tutorial and open-source code to build an AI assistant that handles email, calendar, and follow-ups.
+            </p>
+            <span class="text-sm font-medium text-[#3b82f6] group-hover:text-[#60a5fa] transition-colors">
+              Get the Guide &rarr;
+            </span>
+          </a>
+
+          <!-- Resource Card 2: AI Audit -->
+          <a href="ai-audit.html" class="group bg-[#111827] border border-[#1e293b] rounded-2xl p-6 hover:border-[#3b82f6]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-block text-xs font-medium text-[#3b82f6] bg-[#3b82f6]/10 px-2.5 py-1 rounded-full">
+                Free Audit
+              </span>
+              <span class="inline-block text-xs font-medium text-[#64748b] bg-[#1e293b] px-2.5 py-1 rounded-full">
+                30-min Call
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-[#60a5fa] transition-colors">
+              Free AI Audit for Your Business
+            </h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed mb-4">
+              We'll map your operations and show you exactly where AI can save you time and money. 30 minutes, free, no obligation.
+            </p>
+            <span class="text-sm font-medium text-[#3b82f6] group-hover:text-[#60a5fa] transition-colors">
+              Book Your Audit &rarr;
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         CTA — BOOK A CALL
+         ============================================ -->
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 fade-in">
+          Want a custom AI system?
+        </h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          If you'd rather have us build something tailored to your business, let's talk.
+        </p>
+
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Book a Call &rarr;
+          </a>
+          <p class="text-sm text-[#475569] mt-4">30-minute call. Free. No obligation.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

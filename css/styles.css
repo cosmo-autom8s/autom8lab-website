@@ -1,0 +1,131 @@
+/* ============================================
+   Autom8Lab — Custom Styles
+   Shared across all pages. Tailwind handles
+   utility classes via CDN; this file owns
+   design-system tokens, gradients, and
+   component-level overrides.
+   ============================================ */
+
+/* ----- Design Tokens ----- */
+/* ACTIVE: Dark + Blue theme */
+:root {
+  --bg-page: #0b0f1a;
+  --bg-card: #111827;
+  --border-subtle: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-teal: #2dd4bf;
+  --accent-purple: #a78bfa;
+}
+
+/*
+   PREVIOUS THEME: Dark + Gold
+   To restore, swap the :root block above with these values:
+
+   :root {
+     --bg-page: #0a0a0b;
+     --bg-card: #141414;
+     --border-subtle: #262626;
+     --text-primary: #ffffff;
+     --text-secondary: #9ca3af;
+     --text-muted: #6b7280;
+     --accent: #c9a66b;
+     --accent-hover: #d4b07a;
+     --accent-teal: #2dd4bf;
+     --accent-purple: #a78bfa;
+   }
+
+   Also restore in HTML files:
+     Accent:       #c9a66b / #d4b07a
+     Card bg:      #141414
+     Borders:      #262626 / #1f1f1f
+     Text colors:  #9ca3af / #6b7280 / #4b5563
+     Logo gradient: #d4b896 / #c9a66b / #b8956a
+     Button text:  text-black (on gold CTAs)
+     Hero gradient: linear-gradient(135deg, #f5e6d3 0%, #e8c4a0 30%, #d4a574 60%, #c4b5d4 100%)
+     BG glow:      rgba(201, 166, 107, 0.08) + rgba(167, 139, 250, 0.05)
+     CTA glow:     rgba(201, 166, 107, 0.4) / rgba(201, 166, 107, 0.15)
+*/
+
+/* ----- Base ----- */
+body {
+  background-color: var(--bg-page);
+}
+
+/* ----- Gradient Text ----- */
+.hero-gradient {
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 30%, #3b82f6 60%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* Previous gold gradient: linear-gradient(135deg, #f5e6d3 0%, #e8c4a0 30%, #d4a574 60%, #c4b5d4 100%) */
+
+/* ----- Smooth Scroll ----- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ----- Fade-in on Scroll Animation ----- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- Rotating Headline ----- */
+.headline-rotator {
+  display: block;
+}
+
+.headline-rotator .headline-item {
+  display: none;
+}
+
+.headline-rotator .headline-item.active {
+  display: block;
+  animation: headline-enter 0.7s ease-out both;
+}
+
+@keyframes headline-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- Background Glow ----- */
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+}
+/* Previous gold glow: rgba(201, 166, 107, 0.08) + rgba(167, 139, 250, 0.05) */
+
+/* ----- CTA Pulse Glow ----- */
+.cta-glow {
+  box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  animation: cta-pulse 3s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50% { box-shadow: 0 0 24px 4px rgba(59, 130, 246, 0.15); }
+}
+/* Previous gold CTA glow: rgba(201, 166, 107, 0.4) / rgba(201, 166, 107, 0.15) */

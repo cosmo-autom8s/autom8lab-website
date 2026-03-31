@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specialty Clinic Case Study — Autom8Lab</title>
+  <meta name="description" content="How a specialty podiatry clinic stopped patient drop-off and increased treatment completion to 70% with AI systems from Autom8Lab.">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Decorative quote mark font */
+    .quote-decoration {
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    /* Before/After table row hover */
+    .results-row {
+      transition: background-color 0.2s ease;
+    }
+    .results-row:hover {
+      background-color: #1a1a1a;
+    }
+
+    /* Core system badge background */
+    .core-badge {
+      background-color: rgba(201, 166, 107, 0.1);
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="../index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="../index.html#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="../index.html#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="../about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="../free-resources.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="../index.html#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="../index.html#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="../about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="../free-resources.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Eyebrow -->
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">
+          Case Study: Specialty Clinic
+        </span>
+
+        <!-- Headline -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-tight fade-in">
+          <span class="hero-gradient">How a Specialty Clinic Stopped Patient Drop-Off and Increased Treatment Completion to 70%</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg md:text-xl text-[#94a3b8] max-w-2xl mx-auto mb-16 leading-relaxed fade-in">
+          A specialty podiatry clinic with three locations and around 50 staff. They had demand, clinical expertise, and a functioning intake path. What they lacked was a system that could hold patient intent long enough for treatment to finish.
+        </p>
+
+        <!-- Metrics Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 fade-in">
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">+15%</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Treatment Completion</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">&lt;2<span class="text-2xl md:text-3xl"> hrs</span></div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Lead Response<br>Time</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">-12%</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Missed Appointments</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">31</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Patients Reactivated</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         THE CLIENT
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Client</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">The Snapshot</h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          A specialty podiatry and medical foot care clinic in Central Florida with three clinic locations across the region. Around 50 employees &mdash; physicians, podology technicians, call center staff, clinic coordinators, admin, and support.
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          The clinic operated 12 treatment rooms, with 6&ndash;7 active on a typical day, generating 35&ndash;50 appointments daily. Marketing campaigns brought in 50&ndash;100 new patient consultations monthly.
+        </p>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-8 fade-in">
+          Paul built the clinic into a respected medical practice over the years. The clinical work was excellent &mdash; diabetic ulcers, fungal infections, biomechanical issues, custom orthotics. Real medical podology, not cosmetic foot care.
+        </p>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          Software: a CRM for lead management, scheduling software, and spreadsheets for everything that fell between. The tools existed. The system didn't.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WAS ACTUALLY HAPPENING
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Situation</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-16 fade-in">What Was Actually Happening</h2>
+
+        <!-- Block 1: The Patient Drop-Off Problem -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Patient Drop-Off Problem</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "We'd see a patient three or four times. The condition would start improving. Then they'd disappear. No cancellation, no call &mdash; just gone. Three months later, same patient, same problem, worse than before. We were treating the same conditions twice because patients didn't finish the first time."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            The clinic estimated that only 55% of patients completed their full treatment protocol. Nearly half stopped prematurely &mdash; not because the treatment wasn't working, but because it was. Once the pain decreased, so did the urgency.
+          </p>
+        </div>
+
+        <!-- Block 2: The Lead Response Decay -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Lead Response Decay</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "Leads came in from ads, from the website, from referrals. They went into the CRM. But if the call team was busy, those leads might sit for a day or two. By then, the patient had either booked somewhere else or decided they could live with the problem a little longer."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            In specialty care, patient urgency is perishable. A patient inquiring while in pain is not the same person 48 hours later. Speed wasn't a convenience metric. It was a conversion multiplier. The clinic was responding to cooled-down leads and wondering why conversion rates were inconsistent.
+          </p>
+        </div>
+
+        <!-- Block 3: The Education Gap -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Education Gap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "Patients would ask 'how much does it cost?' before they understood what they actually needed. They thought this was like a pedicure &mdash; one visit, problem solved. When we explained it might take four to six sessions, some were surprised. Others were skeptical. A few walked out."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            Many patients didn't understand the difference between medical podology and cosmetic foot care. They expected instant results. When the clinic explained that real healing requires time and compliance, some patients questioned whether multiple sessions were really necessary &mdash; even though the protocol was medically necessary.
+          </p>
+        </div>
+
+        <!-- Block 4: The Visibility Lag -->
+        <div class="mb-16 fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Visibility Lag</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "We reviewed numbers monthly, sometimes quarterly. By the time we noticed a problem &mdash; a drop in retention, a bad campaign &mdash; it had already cost us weeks of patients. We were always reacting, never anticipating."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            The clinic had data, but it arrived too late to act on. Problems were discovered in retrospective reports, not in real-time dashboards. By the time leadership saw the pattern, the window to intervene had closed.
+          </p>
+        </div>
+
+        <!-- Block 5: The Owner Trap -->
+        <div class="fade-in">
+          <h3 class="text-xl font-semibold text-white mb-6">The Owner Trap</h3>
+          <blockquote class="border-l-4 border-[#3b82f6] pl-6 mb-6">
+            <p class="text-xl md:text-2xl text-[#94a3b8] italic leading-relaxed">
+              "I built this clinic. I know every corner of it. But somewhere along the way, I became the person who has to touch every decision. If I'm not there, things slow down. If I am there, I'm overwhelmed. I don't run the business anymore &mdash; I just hold it together."
+            </p>
+          </blockquote>
+          <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+            Paul had become the integrator of everything &mdash; operations, marketing, staffing, patient issues, vendor decisions. Not because his team was incapable, but because the systems didn't exist to let them operate independently. Trust was low because visibility was low. When the system can't show what's happening, the owner becomes the system.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #1
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            We used to lose patients after the third session. They'd feel better and disappear. Now the system flags it automatically the moment they miss. My team makes one call, the patient comes back, they actually finish treatment. Better outcomes for them, more revenue for us. Everybody wins.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Paul, Owner, Specialty Clinic
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE INSTALLED
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-6">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">What We Installed</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">The Systems</h2>
+        </div>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed text-center max-w-3xl mx-auto mb-16 fade-in">
+          Instead of replacing the clinic's existing tools, we built an operational layer that connected lead intake, patient education, treatment adherence, and executive visibility into a single system.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Card 1: Lead Response Automation -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">01</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Lead Response Automation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every inquiry &mdash; web form, ad response, referral &mdash; triggers immediate follow-up. No lead sits waiting for a free call agent. Response time dropped from 24&ndash;72 hours to under 2 hours.</p>
+          </div>
+
+          <!-- Card 2: Patient Education Sequence -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">02</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Patient Education Sequence</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Before the first consultation, patients receive clear information about what medical podology actually is, why treatment takes multiple sessions, and what happens if they stop early. Expectations are set before they walk in the door.</p>
+          </div>
+
+          <!-- Card 3: Treatment Plan Commitment Flow -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">03</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Treatment Plan Commitment Flow</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">At the initial consultation, patients are walked through their specific protocol &mdash; number of sessions, timeline, what improvement looks like vs. what completion looks like. They leave with a clear treatment plan, not just a next appointment.</p>
+          </div>
+
+          <!-- Card 4: Treatment Adherence Tracker -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">04</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Treatment Adherence Tracker</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every patient's protocol status is visible. If someone misses a session or is overdue, the system flags it immediately. Staff can intervene in days, not months.</p>
+          </div>
+
+          <!-- Card 5: Reactivation System -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">05</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Reactivation System</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Patients who dropped off 60+ days ago are identified and contacted. Not a generic reminder &mdash; a personalized re-engagement acknowledging where they left off and what's recommended next.</p>
+          </div>
+
+          <!-- Card 6: Live Ops Dashboard -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">06</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Live Ops Dashboard</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Real-time visibility into daily operations: leads in queue, consultations booked, appointments completed, patients at risk of dropping. No more waiting for monthly reports to see what's happening.</p>
+          </div>
+
+          <!-- Card 7: Marketing & Revenue Attribution -->
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl px-8 py-6 hover:border-[#3b82f6] hover:bg-[#1a1a1a] transition-all duration-300 fade-in">
+            <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">07</span>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Marketing &amp; Revenue Attribution</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Every booked patient tied back to their source. For the first time, the clinic could see which campaigns produced patients who actually completed treatment &mdash; not just leads, but real revenue.</p>
+          </div>
+
+          <!-- Card 8: Executive Daily Brief — CORE SYSTEM (permanent gold border) -->
+          <div class="bg-[#111827] border-2 border-[#3b82f6] rounded-2xl px-8 py-6 hover:bg-[#1a1a1a] transition-all duration-300 relative fade-in">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-medium text-[#64748b] uppercase tracking-widest">08</span>
+              <span class="core-badge text-[10px] font-semibold text-[#3b82f6] uppercase tracking-widest px-2.5 py-1 rounded-full">Core System</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mt-3 mb-3">Executive Daily Brief</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Paul's morning summary: what needs attention, what's overdue, what's coming this week. A decision queue, not an information flood. Thirty minutes of structured review replaced hours of reactive firefighting.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT CHANGED — RESULTS
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">The Results</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">What Changed</h2>
+        </div>
+
+        <!-- Before / After Table -->
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl overflow-hidden mb-20 fade-in">
+
+          <!-- Table Header -->
+          <div class="grid grid-cols-3 border-b border-[#1e293b] px-6 md:px-8 py-4">
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest">Metric</div>
+            <div class="text-xs font-medium text-[#64748b] uppercase tracking-widest text-center">Before</div>
+            <div class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest text-center">After</div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Treatment completion rate</div>
+            <div class="text-sm text-[#64748b] text-center">55%</div>
+            <div class="text-lg md:text-xl font-bold text-[#3b82f6] text-center">70%</div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Average lead response time</div>
+            <div class="text-sm text-[#64748b] text-center">24&ndash;72 hours</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">Under 2 hours</div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Missed appointments</div>
+            <div class="text-sm text-[#64748b] text-center">&mdash;</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">Reduced by 12%</div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Patients with source attribution</div>
+            <div class="text-sm text-[#64748b] text-center">~20%</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">85%+</div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="results-row grid grid-cols-3 items-center border-b border-[#1e293b] px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Dormant patients reactivated</div>
+            <div class="text-sm text-[#64748b] text-center">Not tracked</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">31 patients</div>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="results-row grid grid-cols-3 items-center px-6 md:px-8 py-5">
+            <div class="text-sm text-[#94a3b8]">Owner operational review</div>
+            <div class="text-sm text-[#64748b] text-center">Reactive, fragmented</div>
+            <div class="text-lg md:text-xl font-bold text-white text-center">30 min daily brief</div>
+          </div>
+
+        </div>
+
+        <!-- The Stories -->
+        <div class="max-w-3xl mx-auto">
+          <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-12 fade-in">The Stories Behind the Numbers</h3>
+
+          <!-- Story 1 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Protocol That Finally Got Finished</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              A diabetic patient with recurring ulcers had visited the clinic three separate times over two years &mdash; each time starting treatment, improving, then disappearing. With the adherence tracker, staff noticed when he missed his third session. A follow-up call brought him back. He completed the protocol for the first time. No recurrence since.
+            </p>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Lead That Didn't Go Cold</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              A patient submitted an inquiry on a Saturday afternoon. Old system: it would sit until Monday, maybe Tuesday. New system: automated response within minutes, call scheduled for Monday morning. She booked the consultation. Later said she'd almost gone to a competitor over the weekend.
+            </p>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Education That Prevented the Walkout</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              A new patient came in expecting a one-time treatment. When the doctor explained a four-session protocol, she hesitated &mdash; "That sounds like a lot." But she'd already received the education sequence. She understood why. She completed all four sessions and left a five-star review mentioning "they explained everything upfront."
+            </p>
+          </div>
+
+          <!-- Story 4 -->
+          <div class="mb-12 fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Campaign That Wasn't Working</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Attribution tracking revealed that one ad campaign was generating leads but almost no completed treatments. The patients it attracted had wrong expectations. The clinic paused that campaign and reallocated budget. Cost per completed patient dropped significantly once the clinic stopped paying for the wrong expectations.
+            </p>
+          </div>
+
+          <!-- Story 5 -->
+          <div class="fade-in">
+            <h4 class="text-lg font-semibold text-white mb-3">The Sunday Morning Test</h4>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">
+              Paul tracked his time for a month. Before: checking messages constantly, piecing together updates from three different sources, answering questions that shouldn't need him. After: one structured morning briefing. Sundays are quiet. Emergencies still come through. Everything else has an owner.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         BREAKOUT QUOTE #2
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="quote-decoration text-8xl text-[#3b82f6] opacity-20 leading-none mb-4 select-none" aria-hidden="true">&ldquo;</div>
+        <blockquote>
+          <p class="text-2xl md:text-3xl lg:text-4xl text-white font-medium italic leading-relaxed">
+            My favorite part? I stopped being the person who holds everything in his head. The systems hold it now. I just make decisions.
+          </p>
+          <cite class="block mt-8 text-sm text-[#64748b] not-italic uppercase tracking-widest">
+            &mdash; Paul, Owner, Specialty Clinic
+          </cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         WHAT WE DIDN'T TOUCH
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto">
+
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Scope Clarity</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-10 fade-in">What We Didn't Touch</h2>
+
+        <div class="space-y-4 mb-10 fade-in">
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Clinical protocols and treatment standards stayed exactly as they were</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Existing scheduling software remained in place &mdash; we integrated alongside it</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Patient records and medical documentation unchanged</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="text-[#64748b] mt-1 shrink-0">&mdash;</span>
+            <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed">Billing and insurance processes handled by existing systems</p>
+          </div>
+        </div>
+
+        <p class="text-lg md:text-xl font-medium text-white fade-in">
+          We added a layer on top of what they already had. We didn't ask them to change how they practice medicine.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         TIMELINE
+         ============================================ -->
+    <section class="py-20 md:py-28 px-6 md:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Timeline</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight fade-in">How Long This Took</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 fade-in">
+
+          <!-- Phase 1 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 1&ndash;2</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Discovery &amp; Mapping</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Documented patient journey, identified drop-off points, interviewed staff and physicians.</p>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 3&ndash;4</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Core Installation</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Lead automation, education sequence, adherence tracker, executive daily brief.</p>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 5&ndash;6</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Tuning &amp; Training</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Refined messaging, trained call center and coordinators, adjusted alert thresholds.</p>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="border-l-4 md:border-l-0 md:border-t-4 border-[#3b82f6] pl-6 md:pl-0 md:pt-6">
+            <span class="text-xs font-medium text-[#3b82f6] uppercase tracking-widest">Week 7+</span>
+            <h4 class="text-lg font-semibold text-white mt-3 mb-2">Live &amp; Optimizing</h4>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">System running, weekly check-ins, continuous improvement.</p>
+          </div>
+
+        </div>
+
+        <p class="text-center text-lg md:text-xl font-medium text-white fade-in">
+          First results visible within 30 days. Full operational stability within ~60 days. Retention improvements continued to compound over 6 months.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         CTA
+         ============================================ -->
+    <section class="py-20 md:py-32 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 fade-in">Similar situation?</h2>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-4 fade-in">
+          If you're running a specialty clinic and this sounds familiar &mdash; patients who don't complete treatment, leads that go cold, operations you can't see clearly &mdash; let's talk.
+        </p>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          30-minute call. No pitch deck. We'll map your situation and tell you what's possible.
+        </p>
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Schedule Your AI Audit &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="../index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Shared JS -->
+  <script src="../js/main.js"></script>
+
+</body>
+</html>

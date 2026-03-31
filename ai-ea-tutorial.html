@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Executive Assistant Tutorial — Autom8Lab</title>
+  <meta name="description" content="Step-by-step video tutorial to install and use your own AI Executive Assistant.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+  <!-- Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ============================================
+       NAV
+       ============================================ -->
+  <nav class="relative z-10 border-b border-[#1e293b] py-4">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html" aria-label="Autom8Lab Home">
+        <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+          <defs><linearGradient id="gold-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+          <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-nav)" stroke-width="2.5"/>
+          <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+          <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+          <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html#how-it-works" class="text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+        <a href="index.html#industries" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+        <a href="about.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <a href="free-resources.html" class="text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#1e293b] mt-4 pt-4 px-6 pb-4 space-y-4">
+      <a href="index.html#how-it-works" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">How It Works</a>
+      <a href="index.html#industries" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Case Studies</a>
+      <a href="about.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">About</a>
+      <a href="free-resources.html" class="block text-sm text-[#94a3b8] hover:text-white transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-[#3b82f6] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#60a5fa] transition-colors">
+        Book a Call
+      </a>
+    </div>
+  </nav>
+
+
+  <main class="relative z-10">
+
+    <!-- ============================================
+         HERO — VIDEO
+         ============================================ -->
+    <section class="pt-16 md:pt-24 pb-8">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-10">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">
+            You're in — check your email for the full guide
+          </span>
+          <p class="text-base text-[#94a3b8] max-w-2xl mx-auto leading-relaxed fade-in">
+            In the meantime, here's the complete walkthrough to get your AI Executive Assistant up and running.
+          </p>
+        </div>
+
+        <!-- YouTube Embed -->
+        <div class="fade-in rounded-2xl overflow-hidden border border-[#1e293b]" style="aspect-ratio: 16/9;">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/Jn4PLeoltoE?feature=oembed"
+            title="How I Built a Free AI Executive Assistant with Claude Code"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         GET THE CODE
+         ============================================ -->
+    <section class="py-16 md:py-20">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 md:p-10 fade-in">
+          <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+            <div class="flex-1">
+              <h2 class="text-xl md:text-2xl font-bold text-white mb-2">Get the code</h2>
+              <p class="text-[#94a3b8] leading-relaxed">
+                Everything you need is on GitHub — clone the repo, follow the setup instructions, and you'll have your AI Executive Assistant running in minutes.
+              </p>
+            </div>
+            <a href="https://github.com/cosmo-autom8s/ai-executive-assistant" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-3 bg-[#111827] border border-[#3b82f6] text-[#3b82f6] font-semibold text-base px-6 py-4 rounded-xl hover:bg-[#3b82f6] hover:text-white transition-colors whitespace-nowrap shrink-0">
+              <!-- GitHub icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         WHAT YOU'LL LEARN
+         ============================================ -->
+    <section class="pb-24 md:pb-32">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight fade-in">
+            What the tutorial covers
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
+
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4">
+              <span class="text-white text-sm font-bold">1</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Installation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">
+              How to clone the repo, set up your environment, and get everything running on your machine.
+            </p>
+          </div>
+
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4">
+              <span class="text-white text-sm font-bold">2</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Configuration</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">
+              How to connect your tools and customize the assistant to match the way you actually work.
+            </p>
+          </div>
+
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4">
+              <span class="text-white text-sm font-bold">3</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Using it daily</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">
+              How to hand off real tasks — email triage, meeting prep, follow-ups — and make it part of your routine.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+
+    <!-- ============================================
+         CTA — BOOK A CALL
+         ============================================ -->
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 fade-in">
+          Want us to build it for you?
+        </h2>
+
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">
+          If you'd rather have a done-for-you AI Executive Assistant tailored to your business, let's talk.
+        </p>
+
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">
+            Book a Call &rarr;
+          </a>
+          <p class="text-sm text-[#475569] mt-4">30-minute call. Free. No obligation.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="relative z-10 py-12 border-t border-[#1e293b]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+
+      <div class="mb-8">
+        <a href="index.html" aria-label="Autom8Lab Home">
+          <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+            <defs><linearGradient id="gold-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+            <circle cx="28" cy="18" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="46" r="14" fill="none" stroke="url(#gold-footer)" stroke-width="2.5"/>
+            <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+            <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Inter, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+            <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Inter, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+          </svg>
+        </a>
+        <p class="text-sm text-[#64748b] mt-4">AI systems for businesses that want results, not theory.</p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-[#1e293b] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-[#64748b]">&copy; 2026 Autom8Lab. All rights reserved.</p>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+           class="text-sm text-[#3b82f6] hover:text-[#60a5fa] transition-colors">
+          Book Your AI Audit &rarr;
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Shared JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>
