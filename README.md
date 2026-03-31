@@ -1,6 +1,6 @@
 # Autom8Lab Website
 
-AI systems agency website for **Autom8Lab** — we install AI systems for traditional businesses. Healthcare, construction, property management. No fluff, no theory, just systems that work.
+Official website for **Autom8Lab** — an AI consulting agency that helps businesses understand, adopt, and implement AI. From free resources and guides to full AI audits and custom system builds, we make AI practical and accessible. This repo is synced to production via cPanel Git deployment.
 
 ---
 
