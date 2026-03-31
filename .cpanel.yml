@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/cloudlin/public_html/
+    - /bin/cp -R *.html "$DEPLOYPATH"
+    - /bin/cp -R css/ "$DEPLOYPATH"
+    - /bin/cp -R js/ "$DEPLOYPATH"
+    - /bin/cp -R assets/ "$DEPLOYPATH"
+    - /bin/cp -R case-studies/ "$DEPLOYPATH"
+    - /bin/cp -R favicon.ico "$DEPLOYPATH"
+    - /bin/cp -R favicon.png "$DEPLOYPATH"
+    - /bin/cp -R apple-touch-icon.png "$DEPLOYPATH"
