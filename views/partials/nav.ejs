@@ -1,0 +1,39 @@
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-20" id="nav-inner">
+    <a href="/" aria-label="Autom8Lab Home">
+      <svg width="340" height="64" viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" role="img" aria-label="Autom8Lab">
+        <defs><linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+        <circle cx="28" cy="18" r="14" fill="none" stroke="url(#logo-grad)" stroke-width="2.5"/>
+        <circle cx="28" cy="46" r="14" fill="none" stroke="url(#logo-grad)" stroke-width="2.5"/>
+        <circle cx="28" cy="32" r="4" fill="#3b82f6"/>
+        <text x="62" y="30" fill="#ffffff" font-size="28" font-weight="700" font-family="Satoshi, system-ui, sans-serif" letter-spacing="-0.5">AUTOM<tspan fill="#3b82f6">8</tspan>LAB</text>
+        <text x="62" y="50" fill="#64748b" font-size="13" font-weight="500" font-family="Cabinet Grotesk, system-ui, sans-serif" letter-spacing="3">YOUR AI PARTNER</text>
+      </svg>
+    </a>
+    <div class="hidden lg:flex items-center gap-8">
+      <a href="#services" class="text-sm font-body text-text-secondary hover:text-text-primary transition-colors">Services</a>
+      <a href="#process" class="text-sm font-body text-text-secondary hover:text-text-primary transition-colors">Approach</a>
+      <a href="/about" class="text-sm font-body text-text-secondary hover:text-text-primary transition-colors">About</a>
+      <a href="/free-resources" class="text-sm font-body text-text-secondary hover:text-text-primary transition-colors">Free Resources</a>
+      <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-lg transition-colors" data-magnetic>Book a Call</a>
+    </div>
+    <button id="mobile-menu-btn" class="lg:hidden text-text-secondary hover:text-text-primary" aria-label="Open menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" id="mobile-menu-overlay"></div>
+    <div class="absolute right-0 top-0 h-full w-72 bg-page border-l border-border-subtle p-8 transform translate-x-full transition-transform duration-300" id="mobile-menu-panel">
+      <button id="mobile-menu-close" class="absolute top-6 right-6 text-text-secondary hover:text-text-primary" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="flex flex-col gap-6 mt-12">
+        <a href="#services" class="text-lg font-body text-text-secondary hover:text-text-primary transition-colors">Services</a>
+        <a href="#process" class="text-lg font-body text-text-secondary hover:text-text-primary transition-colors">Approach</a>
+        <a href="/about" class="text-lg font-body text-text-secondary hover:text-text-primary transition-colors">About</a>
+        <a href="/free-resources" class="text-lg font-body text-text-secondary hover:text-text-primary transition-colors">Free Resources</a>
+        <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="px-5 py-3 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-lg transition-colors text-center mt-4">Book a Call</a>
+      </div>
+    </div>
+  </div>
+</nav>
