@@ -22,4 +22,8 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+// Local dev: proxy /api/contact to the serverless function
+const contactHandler = require('./api/contact');
+app.post('/api/contact', (req, res) => contactHandler(req, res));
+
 module.exports = app;
