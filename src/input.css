@@ -1,0 +1,103 @@
+/* Satoshi — Display/Headline font */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Cabinet Grotesk — Body font */
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page: #0b0f1a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-border: rgba(255, 255, 255, 0.06);
+  --border-subtle: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-warm: #f59e0b;
+}
+
+body {
+  background-color: var(--bg-page);
+  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+  color: var(--text-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 1rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-subtle);
+    transform: translateX(-50%);
+  }
+
+  .timeline-line-fill {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transform: translateX(-50%);
+    transition: height 0.1s linear;
+  }
+
+  @media (max-width: 767px) {
+    .timeline-line,
+    .timeline-line-fill {
+      left: 1rem;
+    }
+  }
+
+  details.faq-item summary {
+    list-style: none;
+  }
+  details.faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  details.faq-item summary .faq-icon {
+    transition: transform 0.3s ease;
+  }
+  details.faq-item[open] summary .faq-icon {
+    transform: rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
