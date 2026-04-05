@@ -25,6 +25,14 @@ The existing static site files remain untouched. The new app lives alongside the
 | Interactive BG | Canvas API | Dot grid with cursor proximity glow effect |
 | Fonts | Satoshi (display) + Cabinet Grotesk (body) | Distinctive free fonts from Fontshare, replace Inter |
 | Deployment | Vercel | Native Node.js and serverless function support |
+| Icons | Lucide Icons (via CDN or npm) | Clean, consistent line icons for service cards and UI elements |
+
+### Version Constraints
+
+- **Node.js**: >= 18 (Vercel default runtime)
+- **Tailwind CSS**: v3.x (v4 has breaking config changes — stick with stable v3)
+- **GSAP**: 3.x (free license — this is a standard marketing website, not a SaaS product behind a paywall, so the standard GSAP license applies)
+- **Express**: 4.x
 
 ---
 
@@ -64,6 +72,27 @@ Fonts self-hosted in `public/fonts/` for performance and reliability.
 
 Generous padding between sections: 120-160px vertical. Each section has one clear focal point. The site should feel open and breathable, not dense.
 
+### 3.4 Responsive Breakpoints
+
+Use Tailwind defaults:
+- **sm**: 640px (mobile landscape)
+- **md**: 768px (tablet)
+- **lg**: 1024px (desktop)
+- **xl**: 1280px (wide desktop)
+
+**Collapse rules:**
+- Services: 3-card row stacks to single column below `md`. Hero card always full width.
+- Process timeline: Alternating left/right becomes single-column vertical below `md`. Centerline moves to left edge.
+- Results cards: 3-column grid becomes single column below `md`.
+- Contact form: Two-column (sidebar + form) stacks vertically below `lg`. Sidebar on top.
+- Footer: 4 columns become 2x2 grid at `md`, single column below `sm`.
+- Nav: Desktop links hidden below `lg`, hamburger menu shown.
+
+### 3.5 Accessibility
+
+- All animations respect `prefers-reduced-motion`: when enabled, disable GSAP animations, dot grid cursor interaction, and magnetic button effects. Content renders in final position without motion.
+- Canvas dot grid: on mobile (no cursor), dots display as a static subtle grid with no interaction effect.
+
 ---
 
 ## 4. Page Sections
@@ -87,7 +116,7 @@ The homepage has 7 sections plus a sticky nav.
 - Headline: Approachable, benefit-focused (e.g. "AI Systems That Actually Work For Your Business")
 - Sub-copy: 1-2 sentences. Who Cosmo is, what you get, the result.
 - "Certified Claude Architect" badge — small, uses `--accent-warm` amber color
-- Primary CTA: "Book a Free Consultation" (links to Calendly)
+- Primary CTA: "Book a Free Consultation" (external link to `https://calendly.com/cosminlungu/30min`, opens in new tab)
 - Secondary CTA: "See Services" (smooth scroll to services section)
 
 **Right column:**
@@ -156,10 +185,18 @@ The homepage has 7 sections plus a sticky nav.
 - Construction (General Contractor)
 - Property Management
 
-**Each card:** Industry tag label, headline metric (large number), brief 1-sentence description, "Read Case Study" link.
+**Card content (from existing site):**
+
+| Card | Industry | Headline Metric | Label | Secondary metrics |
+|------|----------|----------------|-------|-------------------|
+| 1 | Healthcare | 55% → 70% | Treatment completion | <2 hrs lead response, ↓12% missed appointments |
+| 2 | Construction | $47K | Recovered in unbilled work | 2.1 day RFI response, ↓6 hrs/wk field downtime |
+| 3 | Property Management | 11+ hrs/wk | Owner time saved | 1.1 day maintenance response, 71% → 84% tenant renewals |
+
+Each card shows the headline metric large (animated count-up), with 1-2 secondary metrics smaller below. Links to existing case study pages.
 
 **Animations:**
-- Metrics count up from zero when scrolled into view (GSAP number counter)
+- Headline metrics count up from zero when scrolled into view (GSAP number counter)
 - Cards stagger in from bottom with 150ms delay between each
 
 ### 4.5 Contact Form
@@ -180,11 +217,17 @@ The homepage has 7 sections plus a sticky nav.
 - Email (email input)
 - Website (text input, optional)
 - Industry (chip/pill selector: Healthcare, Construction, Property Mgmt, Professional Services, Other)
-- Budget range (chip selector: ranges TBD)
+- Budget range (chip selector: Under $5K, $5K–$10K, $10K–$25K, $25K+)
 - Biggest challenge (textarea)
 - Submit button: "Book Your Free AI Audit"
 
-**Backend:** Form POSTs to `/api/contact`. Placeholder handler returns JSON success response. Structured to later plug in MailerLite (mailing list), Notion (lead database), and calendar booking.
+**Form validation:**
+- Required fields: Name, Email, Industry, Biggest challenge
+- Optional fields: Website, Budget range
+- Client-side: inline validation on blur, red border + error message below field
+- Server-side: validate required fields, return 400 with field-level errors if missing
+
+**Backend:** Form POSTs to `/api/contact`. Placeholder handler validates fields and returns JSON success response. Structured with clear TODO comments to later plug in MailerLite (mailing list), Notion (lead database), and calendar booking.
 
 **Animations:**
 - Form slides in from right on scroll
@@ -194,11 +237,11 @@ The homepage has 7 sections plus a sticky nav.
 
 **Implementation:** `<details>/<summary>` elements with custom styling.
 
-**Questions:**
-1. "Do we need to replace our software?"
-2. "Is this consulting or implementation?"
-3. "How quickly can this go live?"
-4. "What does this cost?"
+**Questions and draft answers (to be refined in consultant voice):**
+1. "Do we need to replace our software?" — No. Everything builds on top of what you already use.
+2. "Is this consulting or implementation?" — Both. I build and install working systems — not slide decks.
+3. "How quickly can this go live?" — Most core systems are running within about 14 days.
+4. "What does this cost?" — Implementations typically range from $5K–$10K depending on scope. Ongoing optimization is a monthly retainer. You'll get exact numbers after the audit.
 
 **Animations:** Accordion items dealt in with stagger effect on scroll.
 
@@ -206,7 +249,7 @@ The homepage has 7 sections plus a sticky nav.
 
 | Column | Contents |
 |--------|----------|
-| Brand | Logo, tagline, email, social icons |
+| Brand | Logo, tagline, email, social icons (LinkedIn, YouTube, Twitter/X — Lucide icons) |
 | Services | AI Agents, Workflow Automations, AI Trainings, AI Strategy |
 | Company | Our Approach, Case Studies, About, Contact |
 | Resources | Free Resources, AI Audit, Vision Map, AI Mastermind |
@@ -267,7 +310,7 @@ autom8-website/
 │   │   └── footer.ejs          # 4-column footer
 │   └── index.ejs               # Homepage template
 ├── server.js                   # Express app entry point (local dev + Vercel)
-├── vercel.json                 # Vercel routing: serves Express app + serverless functions
+├── vercel.json                 # Vercel config (see routing rules below)
 ├── tailwind.config.js          # Custom theme: colors, fonts, spacing scale
 ├── postcss.config.js           # Tailwind PostCSS pipeline
 ├── package.json                # Dependencies: express, ejs, tailwindcss, gsap, etc.
@@ -287,6 +330,23 @@ autom8-website/
 - **public/js/tilt.js**: Attaches to elements with `[data-tilt]` attribute. Calculates mouse position relative to card center, applies CSS transform.
 - **public/js/magnetic.js**: Attaches to elements with `[data-magnetic]` attribute. Applies subtle translate transform toward cursor on proximity.
 - **public/js/nav.js**: Listens for scroll events, toggles classes on nav element for shrink/blur state transition.
+
+### Vercel Routing (`vercel.json`)
+
+```json
+{
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
+}
+```
+
+- `/api/contact` routes to the serverless function in `api/contact.js`
+- All other routes go through Express (`server.js`) which serves EJS views and static files
 
 ---
 
