@@ -5,21 +5,191 @@
 </head>
 <body class="bg-page text-text-primary font-body antialiased">
 
+  <!-- Dot Grid Background -->
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+
+  <!-- Cursor Glow -->
+  <div id="cursor-glow" class="fixed w-[600px] h-[600px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300"
+       style="background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%); transform: translate(-50%, -50%);"
+       aria-hidden="true"></div>
+
   <%- include('partials/nav') %>
 
   <main class="relative z-10">
-    <section class="pt-32 pb-section min-h-screen flex items-center">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <h1 class="text-5xl lg:text-7xl font-display font-black tracking-tight">
-          AI Systems That Actually Work<br>For Your Business
-        </h1>
-        <p class="text-text-secondary text-lg mt-6 max-w-2xl font-body">Placeholder — sections will be built in subsequent tasks.</p>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="relative pt-32 pb-section-sm lg:pb-section min-h-screen flex items-center">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-black tracking-tight leading-[1.1]"
+                data-hero-anim="headline">
+              AI Systems That Actually Work
+              <span class="text-accent">For Your Business</span>
+            </h1>
+            <p class="text-text-secondary text-lg lg:text-xl mt-6 max-w-xl font-body leading-relaxed"
+               data-hero-anim="sub">
+              I help businesses implement AI that saves time, recovers revenue, and scales operations — without replacing the tools you already use.
+            </p>
+            <div class="inline-flex items-center gap-2 mt-4 px-3 py-1.5 rounded-full border border-accent-warm/30 bg-accent-warm/5"
+                 data-hero-anim="sub">
+              <span class="w-2 h-2 rounded-full bg-accent-warm"></span>
+              <span class="text-accent-warm text-xs font-body font-medium tracking-wide uppercase">Certified Claude Architect</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 mt-10" data-hero-anim="cta">
+              <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+                 class="px-8 py-4 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-all text-center"
+                 data-magnetic>
+                Book a Free Consultation
+              </a>
+              <a href="#services"
+                 class="px-8 py-4 border border-border-subtle hover:border-text-muted text-text-secondary hover:text-text-primary font-semibold rounded-xl transition-all text-center">
+                See Services
+              </a>
+            </div>
+          </div>
+          <div class="relative h-[400px] lg:h-[500px] hidden lg:block">
+            <canvas id="hero-nodes" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services" class="relative py-section-sm lg:py-section z-10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-body font-medium text-accent uppercase tracking-[0.2em] mb-4">What I Build</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Services</h2>
+        </div>
+        <div class="glass-card p-8 lg:p-12 mb-6" data-tilt data-service-card>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="m2 14 6-6 6 6 6-6"/></svg>
+                <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.2em]">Primary Service</span>
+              </div>
+              <h3 class="text-2xl lg:text-3xl font-display font-bold mb-4">AI Agents</h3>
+              <p class="text-text-secondary font-body leading-relaxed text-lg">
+                Custom AI agents that handle leads, support, scheduling, and operations autonomously. They work 24/7, respond in seconds, and plug into your existing tools.
+              </p>
+              <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium mt-6 transition-colors">
+                Learn more <span>&rarr;</span>
+              </a>
+            </div>
+            <div class="h-48 lg:h-64 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/10 flex items-center justify-center">
+              <span class="text-text-muted text-sm font-body">Agent Workflow Visual</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-card p-8" data-tilt data-service-card>
+            <svg class="w-8 h-8 text-accent mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44H2.17A2.18 2.18 0 0 1 0 17.76V6.24A2.18 2.18 0 0 1 2.17 4.06h4.87A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44h4.87A2.18 2.18 0 0 0 24 17.76V6.24a2.18 2.18 0 0 0-2.17-2.18h-4.87A2.5 2.5 0 0 0 14.5 2z"/></svg>
+            <h3 class="text-xl font-display font-bold mb-3">Workflow Automations</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              Connect your existing tools, eliminate manual data entry, and automate task routing between people and systems.
+            </p>
+          </div>
+          <div class="glass-card p-8" data-tilt data-service-card>
+            <svg class="w-8 h-8 text-accent mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg>
+            <h3 class="text-xl font-display font-bold mb-3">AI Trainings</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              Staff training on AI tools and workflows. Led by a Certified Claude Architect. Get your team fluent in the AI tools that matter.
+            </p>
+            <div class="inline-flex items-center gap-1.5 mt-3 px-2 py-1 rounded-md border border-accent-warm/30 bg-accent-warm/5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-warm"></span>
+              <span class="text-accent-warm text-[10px] font-body font-medium tracking-wide uppercase">Certified Claude Architect</span>
+            </div>
+          </div>
+          <div class="glass-card p-8" data-tilt data-service-card>
+            <svg class="w-8 h-8 text-accent mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <h3 class="text-xl font-display font-bold mb-3">AI Strategy</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              Consulting and roadmapping to identify where AI fits in your operations. Get clarity before you spend a dollar on implementation.
+            </p>
+          </div>
+        </div>
+        <p class="text-text-muted text-sm text-center mt-8 font-body">Everything builds on top of your existing tools. No heavy migrations.</p>
+      </div>
+    </section>
+
+    <!-- ========== PROCESS ========== -->
+    <section id="process" class="relative py-section-sm lg:py-section z-10">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-20">
+          <span class="inline-block text-xs font-body font-medium text-accent uppercase tracking-[0.2em] mb-4">How It Works</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">The Process</h2>
+        </div>
+        <div class="relative" id="timeline">
+          <div class="timeline-line"></div>
+          <div class="timeline-line-fill" id="timeline-fill"></div>
+          <div class="space-y-24">
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="md:text-right md:pr-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Free 30-Min Call</span>
+                  <h3 class="text-xl font-display font-bold mb-3">AI Audit</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">We map your operations, identify where time and revenue are leaking, and project the ROI of automation.</p>
+                </div>
+              </div>
+              <div class="hidden md:block"></div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">01</span>
+              </div>
+            </div>
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="hidden md:block"></div>
+              <div class="md:pl-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Deliverable: Technical Spec</span>
+                  <h3 class="text-xl font-display font-bold mb-3">System Design</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">I build the roadmap, define scope, and set a clear timeline. You get a technical spec — not a vague proposal.</p>
+                </div>
+              </div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">02</span>
+              </div>
+            </div>
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="md:text-right md:pr-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Live in ~14 Days</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Implementation</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">I build and integrate the systems on your current stack. No heavy migrations, no disruption to your team.</p>
+                </div>
+              </div>
+              <div class="hidden md:block"></div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">03</span>
+              </div>
+            </div>
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="hidden md:block"></div>
+              <div class="md:pl-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Monthly Reviews</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Optimization</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">AI evolves fast. I stay involved to improve performance, expand what's working, and keep systems aligned with how your business grows.</p>
+                </div>
+              </div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">04</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <%- include('partials/footer') %>
 
+  <script src="/js/dot-grid.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+  <script src="/js/hero-nodes.js"></script>
 </body>
 </html>
