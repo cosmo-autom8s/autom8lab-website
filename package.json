@@ -1,0 +1,39 @@
+{
+  "name": "autom8-website",
+  "version": "1.0.0",
+  "description": "Official website for **Autom8Lab** — an AI consulting agency that helps businesses understand, adopt, and implement AI. From free resources and guides to full AI audits and custom system builds, we make AI practical and accessible. This repo is synced to production via cPanel Git deployment.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "concurrently \"nodemon server.js\" \"npm run css:watch\"",
+    "css:build": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --minify",
+    "css:watch": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch",
+    "build": "npm run css:build",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmo-autom8s/autom8lab-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cosmo-autom8s/autom8lab-website/issues"
+  },
+  "homepage": "https://github.com/cosmo-autom8s/autom8lab-website#readme",
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.14",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
+  }
+}
