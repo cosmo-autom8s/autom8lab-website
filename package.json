@@ -27,7 +27,8 @@
   "homepage": "https://github.com/cosmo-autom8s/autom8lab-website#readme",
   "dependencies": {
     "ejs": "^5.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "gsap": "^3.14.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.27",
