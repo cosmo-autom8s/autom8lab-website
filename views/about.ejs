@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm lg:py-section">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-start">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">About Autom8Lab</span>
+          <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]">
+            AI consulting for operators who need systems, not more theory.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
+            I help businesses adopt AI in a way that fits how they already work: practical systems, clear ROI, and implementation that does not turn into an internal science project.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Book a Call</a>
+            <a href="/ai-audit" class="rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary">See the AI Audit</a>
+          </div>
+        </div>
+
+        <div class="glass-card p-8 lg:p-10">
+          <div class="aspect-[4/5] overflow-hidden rounded-2xl border border-card-border bg-page">
+            <img src="/assets/cosmo.jpg" alt="Cosmo" class="h-full w-full object-cover">
+          </div>
+          <div class="mt-6">
+            <p class="text-xl font-display font-bold">Cosmo</p>
+            <p class="mt-1 text-sm uppercase tracking-[0.18em] text-accent">Founder, Autom8Lab</p>
+            <div class="mt-5 inline-flex items-center gap-2 rounded-full border border-accent-warm/30 bg-accent-warm/5 px-3 py-1.5">
+              <span class="h-2 w-2 rounded-full bg-accent-warm"></span>
+              <span class="text-[11px] font-medium uppercase tracking-[0.18em] text-accent-warm">Certified Claude Architect</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-section-sm">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 grid gap-6 lg:grid-cols-3">
+        <div class="glass-card p-8" data-tilt>
+          <p class="text-xs uppercase tracking-[0.18em] text-accent">Background</p>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            My path runs through programming, marketing, and years of translating technical systems into something business owners can actually use.
+          </p>
+        </div>
+        <div class="glass-card p-8" data-tilt>
+          <p class="text-xs uppercase tracking-[0.18em] text-accent">Philosophy</p>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            AI should reduce coordination, save time, and recover revenue. If it does not change operations, it is not implemented yet.
+          </p>
+        </div>
+        <div class="glass-card p-8" data-tilt>
+          <p class="text-xs uppercase tracking-[0.18em] text-accent">Role</p>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            I work like a partner, not a vendor. That means mapping the problem clearly, building what matters, and staying involved long enough for it to stick.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-section-sm">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Story</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Why this business exists</h2>
+        </div>
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          <div class="space-y-6 text-text-secondary leading-relaxed">
+            <p>
+              I kept having the same conversation with business owners: long hours, too much owner dependency, teams buried in admin, and no clear path from “we should use AI” to something real.
+            </p>
+            <p>
+              The gap was never curiosity. It was translation. Most businesses do not need more AI news, more vague consulting, or another list of tools. They need someone to map the operation, find the leaks, and design the system that fixes them.
+            </p>
+          </div>
+          <div class="space-y-6 text-text-secondary leading-relaxed">
+            <p>
+              That is what Autom8Lab is built around: helping operators understand where AI fits, implementing it on top of the tools they already use, and keeping the work tied to business outcomes.
+            </p>
+            <p>
+              The standard is simple. Every engagement should either make the business more money, save the team meaningful time, or ideally both.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-section-sm">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">How I Work</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Principles behind every engagement</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div class="glass-card p-8" data-tilt>
+            <h3 class="text-xl font-display font-bold">Practical first</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">I design around the business you have now, not the imaginary future stack someone wants to sell you.</p>
+          </div>
+          <div class="glass-card p-8" data-tilt>
+            <h3 class="text-xl font-display font-bold">Results over novelty</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">The point is not to chase shiny AI demos. The point is to remove bottlenecks and improve throughput.</p>
+          </div>
+          <div class="glass-card p-8" data-tilt>
+            <h3 class="text-xl font-display font-bold">Clear scope</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">Every project starts with a map, a recommendation, and a defined path to implementation rather than open-ended “strategy.”</p>
+          </div>
+          <div class="glass-card p-8" data-tilt>
+            <h3 class="text-xl font-display font-bold">Long-term partner</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">Good systems need optimization. I stay close enough to improve what works and fix what does not.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-section-sm lg:pb-section">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14 text-center">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Next Step</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Want to see where AI can move the needle in your business?</h2>
+          <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-text-secondary">
+            Start with the AI Audit. We will map the leaks, identify the highest-leverage opportunities, and define what implementation should look like.
+          </p>
+          <div class="mt-10">
+            <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Book Your AI Audit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+</body>
+</html>

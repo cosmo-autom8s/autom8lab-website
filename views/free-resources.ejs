@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">Free Resources</span>
+        <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight">Useful AI resources without the fluff.</h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg leading-relaxed text-text-secondary">
+          Guides, frameworks, and offers that help business owners understand what to do next with AI. This page is the content hub for resources you can use immediately.
+        </p>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="glass-card overflow-hidden">
+          <div class="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
+            <div class="p-8 lg:p-12">
+              <div class="flex flex-wrap gap-3">
+                <span class="rounded-full bg-accent/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-accent">Featured</span>
+                <span class="rounded-full border border-border-subtle px-3 py-1 text-xs uppercase tracking-[0.18em] text-text-secondary">Guide + Walkthrough</span>
+              </div>
+              <h2 class="mt-6 text-3xl lg:text-4xl font-display font-bold tracking-tight">Build Your Own AI Executive Assistant</h2>
+              <p class="mt-5 max-w-2xl text-text-secondary leading-relaxed">
+                A practical resource for founders and operators who want a hands-on example of what a useful AI assistant can look like across inbox, calendar, and follow-up workflows.
+              </p>
+              <ul class="mt-8 space-y-3 text-sm text-text-secondary">
+                <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>Step-by-step build walkthrough</span></li>
+                <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>Reusable implementation ideas for service businesses</span></li>
+                <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>A strong entry point for understanding what “good AI ops” looks like</span></li>
+              </ul>
+              <div class="mt-8">
+                <a href="/#contact" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Ask About This Build</a>
+              </div>
+            </div>
+            <div class="border-t border-border-subtle lg:border-l lg:border-t-0 p-8 lg:p-12 flex items-center justify-center bg-gradient-to-br from-accent/10 to-transparent">
+              <div class="text-center">
+                <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl border border-accent/20 bg-page/60 text-accent">
+                  <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-7 4h8M7 4h6l4 4v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg>
+                </div>
+                <p class="mt-4 text-sm font-medium text-text-primary">AI Executive Assistant</p>
+                <p class="mt-1 text-xs uppercase tracking-[0.18em] text-text-muted">Practical resource</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Resource Library</span>
+          <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">Current offers and entry points</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <a href="/ai-audit" class="glass-card p-8 transition-all duration-300 hover:border-accent/30" data-tilt>
+            <p class="text-xs uppercase tracking-[0.18em] text-accent">Free Audit</p>
+            <h3 class="mt-4 text-2xl font-display font-bold">AI Audit</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">A 30-minute working session to map operational leaks and identify where AI can save time or recover revenue.</p>
+            <p class="mt-6 text-sm font-medium text-accent">See details</p>
+          </a>
+          <a href="/vision-map" class="glass-card p-8 transition-all duration-300 hover:border-accent/30" data-tilt>
+            <p class="text-xs uppercase tracking-[0.18em] text-accent">Strategy Offer</p>
+            <h3 class="mt-4 text-2xl font-display font-bold">Vision Map</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">A structured blueprint for teams that know AI matters but need sequencing, scope, and clear implementation priorities.</p>
+            <p class="mt-6 text-sm font-medium text-accent">Explore the offer</p>
+          </a>
+          <a href="/ai-mastermind" class="glass-card p-8 transition-all duration-300 hover:border-accent/30" data-tilt>
+            <p class="text-xs uppercase tracking-[0.18em] text-accent">Community</p>
+            <h3 class="mt-4 text-2xl font-display font-bold">AI Mastermind</h3>
+            <p class="mt-4 text-sm leading-relaxed text-text-secondary">A recurring conversation for builders and operators sharing what they are testing, learning, and implementing with AI.</p>
+            <p class="mt-6 text-sm font-medium text-accent">Join the conversation</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm lg:pb-section">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14 text-center">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Need Something Specific?</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Want a resource tailored to your business?</h2>
+          <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-text-secondary">
+            If you are past the research phase and want help designing the right system for your operation, the fastest next step is a direct call.
+          </p>
+          <div class="mt-10">
+            <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Book a Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+</body>
+</html>
