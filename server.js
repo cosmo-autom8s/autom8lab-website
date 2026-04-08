@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const caseStudies = require('./data/case-studies');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,21 +52,15 @@ app.get('/ai-mastermind', (req, res) => {
   });
 });
 
-// Keep V2 result-card links working while case studies remain static HTML pages.
-app.get('/case-studies/specialty-clinic', (req, res) => {
-  res.redirect('/case-studies/specialty-clinic.html');
-});
+app.get('/case-studies/:slug', (req, res, next) => {
+  const study = caseStudies[req.params.slug];
+  if (!study) return next();
 
-app.get('/case-studies/general-contractor', (req, res) => {
-  res.redirect('/case-studies/general-contractor.html');
-});
-
-app.get('/case-studies/property-management', (req, res) => {
-  res.redirect('/case-studies/property-management.html');
-});
-
-app.get('/case-studies/diagnostics-lab', (req, res) => {
-  res.redirect('/case-studies/diagnostics-lab.html');
+  res.render('case-study', {
+    title: study.metaTitle,
+    description: study.metaDescription,
+    study,
+  });
 });
 
 if (require.main === module && process.env.NODE_ENV !== 'production') {

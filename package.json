@@ -11,7 +11,8 @@
     "css:build": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --minify",
     "css:watch": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch",
     "build": "npm run css:build",
-    "start": "node server.js"
+    "start": "node server.js",
+    "qa:smoke": "node scripts/smoke-check.js"
   },
   "repository": {
     "type": "git",

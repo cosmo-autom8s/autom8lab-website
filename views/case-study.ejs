@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent"><%= study.eyebrow %></span>
+        <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]"><%= study.title %></h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg leading-relaxed text-text-secondary"><%= study.subtitle %></p>
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-left">
+          <% study.metrics.forEach(function (metric) { %>
+            <div class="glass-card p-6">
+              <p class="text-3xl font-display font-black text-text-primary"><%= metric.value %></p>
+              <p class="mt-3 text-xs uppercase tracking-[0.18em] text-text-muted"><%= metric.label %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Snapshot</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight"><%= study.industry %> operations, viewed as a system.</h2>
+        </div>
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          <% study.snapshot.forEach(function (paragraph) { %>
+            <p class="text-lg leading-relaxed text-text-secondary"><%= paragraph %></p>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="mb-14 text-center">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Situation</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">What was actually happening</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <% study.challenges.forEach(function (challenge) { %>
+            <div class="glass-card p-8" data-tilt>
+              <h3 class="text-2xl font-display font-bold"><%= challenge.title %></h3>
+              <blockquote class="mt-6 border-l-2 border-accent pl-4 text-text-secondary italic leading-relaxed">
+                “<%= challenge.quote %>”
+              </blockquote>
+              <p class="mt-6 text-sm leading-relaxed text-text-secondary"><%= challenge.body %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14">
+          <div class="max-w-3xl">
+            <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Systems</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">What we built around the bottleneck</h2>
+            <p class="mt-6 text-lg leading-relaxed text-text-secondary">
+              The solution was not a single tool. It was an operating layer that made the right information move at the right time with less owner intervention.
+            </p>
+          </div>
+          <div class="mt-10 grid gap-4 md:grid-cols-2">
+            <% study.systems.forEach(function (system) { %>
+              <div class="rounded-2xl border border-border-subtle bg-page/40 px-5 py-4 text-sm text-text-secondary"><%= system %></div>
+            <% }) %>
+          </div>
+          <div class="mt-8 rounded-2xl border border-accent/30 bg-accent/5 px-6 py-5">
+            <p class="text-xs uppercase tracking-[0.18em] text-accent">Core system</p>
+            <p class="mt-2 text-lg font-display font-bold text-text-primary"><%= study.coreSystem %></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="mb-14 text-center">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">What Changed</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Outcomes after implementation</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          <% study.results.forEach(function (result) { %>
+            <div class="glass-card p-8" data-tilt>
+              <p class="text-sm uppercase tracking-[0.18em] text-text-muted"><%= result.label %></p>
+              <p class="mt-4 text-4xl font-display font-black text-accent"><%= result.value %></p>
+              <p class="mt-4 text-sm leading-relaxed text-text-secondary"><%= result.detail %></p>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm lg:pb-section">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <div class="glass-card p-10 lg:p-14">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Implementation Window</span>
+          <p class="text-lg leading-relaxed text-text-secondary"><%= study.duration %></p>
+          <h2 class="mt-8 text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Similar situation?</h2>
+          <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-text-secondary">
+            If your business has the same pattern of operational leaks, the next step is to map the system and identify where the highest-leverage fix lives.
+          </p>
+          <div class="mt-10 flex flex-wrap justify-center gap-4">
+            <a href="/ai-audit" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Book an AI Audit</a>
+            <a href="/#results" class="inline-flex rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary">Back to Results</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+</body>
+</html>

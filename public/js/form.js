@@ -66,14 +66,23 @@
     };
     try {
       const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+      const data = await res.json().catch(function () { return {}; });
       if (res.ok) {
+        if (data.redirect_url) {
+          window.location.href = data.redirect_url;
+          return;
+        }
         form.querySelector('#form-success').classList.remove('hidden');
+        if (data.message) {
+          var successMessage = form.querySelector('#form-success p');
+          if (successMessage) successMessage.textContent = data.message;
+        }
         form.querySelectorAll('.space-y-6 > *:not(#form-success)').forEach((el) => { el.style.display = 'none'; });
       } else {
-        const data = await res.json();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Book Your Free AI Audit';
         if (data.errors) { Object.entries(data.errors).forEach(([field, msg]) => showError(field, msg)); }
+        else if (data.error) { alert(data.error); }
       }
     } catch (err) {
       submitBtn.disabled = false;
