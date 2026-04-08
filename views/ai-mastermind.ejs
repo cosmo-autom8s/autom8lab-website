@@ -62,7 +62,7 @@
     </section>
 
     <section class="pb-section-sm">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8 grid gap-6 md:grid-cols-2">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 grid gap-6 md:grid-cols-2">
         <div class="glass-card p-8 lg:p-10" data-tilt>
           <span class="text-xs uppercase tracking-[0.18em] text-accent">Who It Is For</span>
           <ul class="mt-6 space-y-4 text-sm leading-relaxed text-text-secondary">
@@ -82,30 +82,14 @@
       </div>
     </section>
 
-    <section class="pb-section-sm lg:pb-section">
-      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-        <div class="glass-card p-10 lg:p-14">
-          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Interested?</span>
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Want in on the next session?</h2>
-          <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-text-secondary">
-            If this feels relevant, fill out the signup form below. Once the backend is wired, this will route to a thank-you page and the calendar flow.
-          </p>
-          <div class="mt-10 flex flex-wrap justify-center gap-4">
-            <a href="#signup-form" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Go to Signup Form</a>
-            <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary">Book a Call</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="signup-form" class="pb-section-sm lg:pb-section">
       <div class="max-w-4xl mx-auto px-6 lg:px-8">
         <div class="glass-card p-8 lg:p-10">
           <div class="max-w-2xl mb-10">
-            <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Signup</span>
+            <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Interested?</span>
             <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">Join the AI Mastermind</h2>
             <p class="mt-4 text-lg leading-relaxed text-text-secondary">
-              Fill this out to join the list for upcoming sessions. Your details are stored for mastermind signup and session communication.
+              Fill this out to join the list for upcoming sessions.
             </p>
           </div>
 
@@ -162,29 +146,29 @@
 
             <div>
               <label class="block text-sm font-body font-medium text-text-secondary mb-3">Goals <span class="text-red-400">*</span></label>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Learn" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-selectable-group-multi="goals">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Learn" class="hidden">
                   <span>Learn</span>
                 </label>
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Share" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Share" class="hidden">
                   <span>Share</span>
                 </label>
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Network" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Network" class="hidden">
                   <span>Network</span>
                 </label>
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Get feedback" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Get feedback" class="hidden">
                   <span>Get feedback</span>
                 </label>
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Explore tools" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Explore tools" class="hidden">
                   <span>Explore tools</span>
                 </label>
-                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="goals" value="Other" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <label class="selectable-card chip-multi flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                  <input type="checkbox" name="goals" value="Other" class="hidden">
                   <span>Other</span>
                 </label>
               </div>
@@ -259,10 +243,16 @@
             <div class="space-y-4">
               <div>
                 <p class="block text-sm font-body font-medium text-text-secondary mb-3">Would you like to share what you've built in a future session?</p>
-                <label class="inline-flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
-                  <input type="checkbox" name="wants_to_share" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
-                  <span>Yes, I’d be open to sharing in a future session</span>
-                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" data-selectable-group="wants_to_share">
+                  <label class="selectable-card chip flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                    <input type="radio" name="wants_to_share" value="true" class="hidden">
+                    <span>Yes, I’d be open to sharing in a future session</span>
+                  </label>
+                  <label class="selectable-card chip flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+                    <input type="radio" name="wants_to_share" value="false" class="hidden">
+                    <span>Not right now</span>
+                  </label>
+                </div>
               </div>
 
               <label class="flex items-start gap-3 rounded-xl border border-border-subtle bg-page px-4 py-4 text-sm text-text-secondary">
@@ -272,11 +262,8 @@
               <p class="text-red-400 text-xs mt-1 hidden" data-error="consent"></p>
             </div>
 
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
-              <p class="text-sm text-text-muted">
-                You will be added to the signup list now. The thank-you page and calendar flow are next.
-              </p>
-              <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>
+            <div class="pt-2">
+              <button type="submit" class="inline-flex w-full items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>
                 Join the AI Mastermind
               </button>
             </div>

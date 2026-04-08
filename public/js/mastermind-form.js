@@ -87,6 +87,58 @@
     success.classList.add('hidden');
   }
 
+  function setSelectableCardState(card, isActive) {
+    card.classList.toggle('bg-accent/20', isActive);
+    card.classList.toggle('border-accent', isActive);
+    card.classList.toggle('text-accent', isActive);
+    card.classList.toggle('border-border-subtle', !isActive);
+    card.classList.toggle('text-text-secondary', !isActive);
+  }
+
+  function syncSelectableCards() {
+    form.querySelectorAll('[data-selectable-group-multi] .selectable-card').forEach(function (card) {
+      var input = card.querySelector('input');
+      setSelectableCardState(card, Boolean(input && input.checked));
+    });
+
+    form.querySelectorAll('[data-selectable-group] .selectable-card').forEach(function (card) {
+      var input = card.querySelector('input');
+      setSelectableCardState(card, Boolean(input && input.checked));
+    });
+  }
+
+  form.querySelectorAll('[data-selectable-group-multi]').forEach(function (group) {
+    group.querySelectorAll('.selectable-card').forEach(function (card) {
+      var input = card.querySelector('input');
+      if (!input) return;
+
+      setSelectableCardState(card, input.checked);
+      card.addEventListener('click', function () {
+        window.setTimeout(function () {
+          setSelectableCardState(card, input.checked);
+        }, 0);
+      });
+    });
+  });
+
+  form.querySelectorAll('[data-selectable-group]').forEach(function (group) {
+    var cards = Array.from(group.querySelectorAll('.selectable-card'));
+
+    function syncGroupState() {
+      cards.forEach(function (card) {
+        var input = card.querySelector('input');
+        setSelectableCardState(card, Boolean(input && input.checked));
+      });
+    }
+
+    syncGroupState();
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        window.setTimeout(syncGroupState, 0);
+      });
+    });
+  });
+
   function showFieldError(field, message) {
     var errorEl = form.querySelector('[data-error="' + field + '"]');
     if (errorEl) {
@@ -116,7 +168,7 @@
       goals: Array.from(form.querySelectorAll('input[name="goals"]:checked')).map(function (el) { return el.value; }),
       timezone: form.timezone.value,
       current_project: form.current_project.value.trim(),
-      wants_to_share: form.wants_to_share.checked,
+      wants_to_share: form.querySelector('input[name="wants_to_share"]:checked') ? form.querySelector('input[name="wants_to_share"]:checked').value : '',
       consent: form.consent.checked,
     };
 
@@ -143,9 +195,15 @@
         return;
       }
 
+      if (data.redirect_url) {
+        window.location.href = data.redirect_url;
+        return;
+      }
+
       success.textContent = data.message || 'You are on the list.';
       success.classList.remove('hidden');
       form.reset();
+      syncSelectableCards();
       success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } catch (error) {
       submitBtn.disabled = false;

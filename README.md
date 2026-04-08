@@ -2,7 +2,7 @@
 
 Official website for **Autom8Lab** — Cosmo's AI consulting practice.
 
-> **V1** is the current live site (static HTML, cPanel, gold accent). **V2** is the redesign in progress (Express + EJS, Vercel, blue accent). See `NEXT-STEPS.md` for the full V2 implementation plan.
+> **V1** is the legacy static site. **V2** is the active Express + EJS redesign in this repo. See `NEXT-STEPS.md`, `docs/site-copy-inventory.md`, and `docs/todo.md` for the current implementation state.
 
 ---
 
@@ -179,9 +179,9 @@ Complete redesign repositioning from "AI agency" to "Cosmo as trusted AI consult
 | Server      | Express.js 4.x + EJS templates                         |
 | CSS         | Tailwind CSS 3.x via PostCSS (custom config)            |
 | Fonts       | Self-hosted Satoshi (display) + Cabinet Grotesk (body)  |
-| Animations  | GSAP 3.x + ScrollTrigger (currently disabled — see Known Issues) |
+| Animations  | Vanilla JS + Canvas effects |
 | Interactive | Canvas API (dot grid, node graph), magnetic/tilt effects |
-| Forms       | Vercel serverless functions (`/api/contact`)            |
+| Forms       | Express/Vercel-style handlers (`/api/contact`, `/api/mastermind-signup`) |
 | Hosting     | Vercel (not yet deployed)                               |
 
 ## V2 Project Structure
@@ -194,28 +194,47 @@ autom8-website/
   tailwind.config.js         # Custom colors, fonts, spacing tokens
   src/input.css              # Font-face, Tailwind directives, CSS components (glass-card, etc.)
   views/
-    index.ejs                # Homepage (DONE)
+    index.ejs                # Homepage
+    about.ejs                # About page
+    free-resources.ejs       # Free resources page
+    ai-audit.ejs             # AI Audit page
+    vision-map.ejs           # Vision Map page
+    ai-mastermind.ejs        # AI Mastermind page
+    ai-mastermind-thank-you.ejs # AI Mastermind post-submit page
+    case-study.ejs           # Dynamic case study template
     partials/
       head.ejs               # <head> — dynamic title/description
       nav.ejs                # Fixed nav — desktop links + mobile hamburger
       footer.ejs             # 4-column footer
+  data/
+    case-studies.js          # Case study content for /case-studies/:slug
   public/
     css/output.css           # Compiled Tailwind output
+    calendar/
+      ai-mastermind.ics      # Recurring AI Mastermind calendar invite
     js/
-      animations.js          # GSAP ScrollTrigger (COMMENTED OUT — timing bug)
+      animations.js          # Scroll reveals / counters / timeline animations
       dot-grid.js            # Canvas dot grid + cursor glow
       hero-nodes.js          # Animated node graph in hero section
       nav.js                 # Sticky nav blur on scroll + mobile menu
       magnetic.js            # Magnetic hover on [data-magnetic] elements
       tilt.js                # 3D tilt on [data-tilt] elements
-      form.js                # Contact form: chip selectors, validation, async POST
+      form.js                # Homepage lead form
+      mastermind-form.js     # AI Mastermind signup form
     fonts/                   # Satoshi + Cabinet Grotesk .woff2 variable fonts
   api/
-    contact.js               # Vercel serverless function (placeholder — logs only)
+    contact.js               # Homepage lead handler
+    mastermind-signup.js     # AI Mastermind signup handler
+  lib/
+    contact-integrations.js      # Homepage integrations: Notion / MailerLite / webhook / Resend
+    mastermind-integrations.js   # Mastermind integrations: Notion / MailerLite
+    load-env.js                  # Local .env loader for dev
   docs/superpowers/
     specs/                   # Approved design spec
     plans/                   # Homepage implementation plan
   NEXT-STEPS.md              # Detailed handoff doc for building remaining pages
+  docs/site-copy-inventory.md # Current copy inventory
+  docs/todo.md               # Active implementation backlog
 ```
 
 ### Legacy / Iteration Files
@@ -229,17 +248,17 @@ autom8-website/
 
 ## V2 Pages
 
-### Done
-- **Homepage** (`/`) — 7 sections: Hero, Services (4 glass cards), Process Timeline, Results (3 case studies with metrics), Contact Form (chip selectors + validation), FAQ (accordion), Footer (4-column)
+### Current Status
+- **Homepage** (`/`) — live in EJS with updated copy, animations, case study links, and the new lead form structure
+- **About** (`/about`) — route and page implemented
+- **Free Resources** (`/free-resources`) — route and page implemented
+- **AI Audit** (`/ai-audit`) — route and page implemented
+- **Vision Map** (`/vision-map`) — route and page implemented
+- **AI Mastermind** (`/ai-mastermind`) — route, page, Notion integration, and MailerLite integration implemented
+- **AI Mastermind Thank You** (`/ai-mastermind/thank-you`) — post-submit page with calendar actions and follow-up CTA
+- **Case Studies** (`/case-studies/:slug`) — dynamic V2 case study pages implemented
 
-### To Build
-- **About** (`/about`) — Cosmo's personal page, certifications, philosophy
-- **Free Resources** (`/free-resources`) — Content hub / lead magnets
-- **AI Audit** (`/ai-audit`) — Landing page for free audit offer
-- **Vision Map** (`/vision-map`) — Service landing page
-- **AI Mastermind** (`/ai-mastermind`) — Service landing page
-
-See `NEXT-STEPS.md` for detailed specs, EJS page template, and the exact pattern for adding new pages.
+See `docs/todo.md` for the active backlog and the remaining integration work.
 
 ## V2 Design System
 
@@ -277,18 +296,28 @@ npm run build        # Production Tailwind build (minified)
 npm start            # Production Express start
 ```
 
-Local dev server runs on http://localhost:3000
+Local dev server runs on `http://localhost:3000` by default. In local work we often run it on `http://localhost:4321` to avoid conflicts.
 
 ## V2 Known Issues
 
-1. **GSAP ScrollTrigger animations disabled** — `animations.js` is commented out. `gsap.from()` immediately sets `opacity: 0` on elements, and ScrollTrigger fails to play them back when sections are already in viewport on load. Fix: switch to `gsap.fromTo()` with `immediateRender: false`, or use Intersection Observer.
+1. **Homepage lead backend is only partially live** — code exists for Notion, MailerLite, webhook, and Resend, but:
+   - the `Website Leads` Notion database still needs to be shared with the site integration
+   - homepage webhook / Resend / MailerLite still need production env values
 
-2. **Contact form backend is a placeholder** — `api/contact.js` logs submissions but doesn't send emails or integrate with anything. Planned: MailerLite (mailing list), Notion (lead tracking), email notifications.
+2. **Content refinement is still pending** — several V2 pages are structurally in place but still need a dedicated copy/content pass.
+
+3. **Additional funnel work is still pending** — homepage thank-you states, webhook automation wiring, and any expanded lead routing still need to be finalized.
 
 ## V2 Nav Links
 
 - Services → `#services` (homepage anchor)
 - Approach → `#process` (homepage anchor)
-- About → `/about` (page needed)
-- Free Resources → `/free-resources` (page needed)
+- About → `/about`
+- Free Resources → `/free-resources`
 - Book a Call → `https://calendly.com/cosminlungu/30min` (external)
+
+## Secrets
+
+- Real API keys must never be committed
+- `.env` and `.env.local` are gitignored
+- `.env.example` is the committed template and should contain placeholders only

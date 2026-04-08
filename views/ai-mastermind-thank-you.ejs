@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">You Are In</span>
+        <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]">You are on the list for the AI Mastermind.</h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg leading-relaxed text-text-secondary">
+          Your signup is confirmed. Add the session to your calendar now and watch your inbox for updates, reminders, and the session link.
+        </p>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14">
+          <div class="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-center">
+            <div>
+              <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Next Step</span>
+              <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">Add it to your calendar.</h2>
+              <p class="mt-5 text-lg leading-relaxed text-text-secondary">
+                The mastermind runs weekly on Wednesdays at 3pm Bucharest, 8pm Bali, and 8am New York. Save it now so you do not miss the next session.
+              </p>
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Autom8Lab%20AI%20Mastermind&dates=20260408T120000Z%2F20260408T130000Z&details=A%20weekly%20conversation%20about%20what%20is%20actually%20working%20with%20AI.%20Bring%20what%20you%E2%80%99re%20building%2C%20testing%2C%20or%20trying%20to%20understand.&location=Online&recur=RRULE%3AFREQ%3DWEEKLY%3BBYDAY%3DWE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover"
+                  data-magnetic
+                >
+                  Add to Google Calendar
+                </a>
+                <a
+                  href="/calendar/ai-mastermind.ics"
+                  class="inline-flex items-center justify-center rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary"
+                >
+                  Download Calendar Invite
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-border-subtle bg-card p-6">
+              <p class="text-xs font-medium uppercase tracking-[0.18em] text-accent">Weekly Schedule</p>
+              <div class="mt-5 space-y-4 text-sm">
+                <div class="flex items-center justify-between gap-4 border-b border-border-subtle pb-3">
+                  <span class="text-text-secondary">New York</span>
+                  <span class="font-semibold text-text-primary">8:00 AM</span>
+                </div>
+                <div class="flex items-center justify-between gap-4 border-b border-border-subtle pb-3">
+                  <span class="text-text-secondary">Bucharest</span>
+                  <span class="font-semibold text-text-primary">3:00 PM</span>
+                </div>
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-text-secondary">Bali</span>
+                  <span class="font-semibold text-text-primary">8:00 PM</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm leading-relaxed text-text-muted">
+                The downloadable invite includes a recurring weekly event so it stays on your calendar automatically.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 grid gap-6 md:grid-cols-2">
+        <div class="glass-card p-8 lg:p-10" data-tilt>
+          <span class="text-xs uppercase tracking-[0.18em] text-accent">What Happens Next</span>
+          <ul class="mt-6 space-y-4 text-sm leading-relaxed text-text-secondary">
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>You will receive follow-up emails with session updates and reminders.</span></li>
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>If you said you are open to sharing, that gives us context for future sessions. It does not lock you into anything.</span></li>
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>The room stays practical: builders, operators, and business owners sharing what is actually working.</span></li>
+          </ul>
+        </div>
+        <div class="glass-card p-8 lg:p-10" data-tilt>
+          <span class="text-xs uppercase tracking-[0.18em] text-accent">Need Something Sooner?</span>
+          <p class="mt-6 text-sm leading-relaxed text-text-secondary">
+            If you already know you want help with AI agents, workflow automations, training, or strategy, you do not need to wait for the mastermind.
+          </p>
+          <div class="mt-8">
+            <a
+              href="https://calendly.com/cosminlungu/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex rounded-xl border border-border-subtle px-6 py-3 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary"
+            >
+              Book a Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+</body>
+</html>

@@ -22,28 +22,28 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About',
-    description: 'Meet Cosmo and learn how Autom8Lab approaches AI consulting, implementation, and long-term optimization.',
+    description: "I don't sell AI strategies. I build the system that fixes the actual problem.",
   });
 });
 
 app.get('/free-resources', (req, res) => {
   res.render('free-resources', {
     title: 'Free Resources',
-    description: 'Free AI guides, templates, and practical resources for business owners exploring automation and AI systems.',
+    description: 'Practical AI resources. No fluff, no gating everything behind a sales call.',
   });
 });
 
 app.get('/ai-audit', (req, res) => {
   res.render('ai-audit', {
     title: 'AI Audit',
-    description: 'Book a free AI audit to map where time and revenue are leaking and see which systems will move the needle.',
+    description: "We'll show you exactly where your business is leaking time and money, and what's worth fixing first.",
   });
 });
 
 app.get('/vision-map', (req, res) => {
   res.render('vision-map', {
     title: 'Vision Map',
-    description: 'A strategic blueprint that turns vague AI ambitions into a concrete, prioritized implementation roadmap.',
+    description: `"We should be using AI" isn't a plan. The Vision Map makes it one.`,
   });
 });
 
@@ -51,6 +51,13 @@ app.get('/ai-mastermind', (req, res) => {
   res.render('ai-mastermind', {
     title: 'AI Mastermind',
     description: 'Join the weekly Autom8Lab AI Mastermind for practical conversations about what is actually working with AI.',
+  });
+});
+
+app.get('/ai-mastermind/thank-you', (req, res) => {
+  res.render('ai-mastermind-thank-you', {
+    title: 'AI Mastermind Thank You',
+    description: 'You are on the list for the Autom8Lab AI Mastermind. Add the session to your calendar and watch your inbox for updates.',
   });
 });
 

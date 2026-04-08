@@ -109,6 +109,7 @@ module.exports = async (req, res) => {
       message: mailerLiteResult && mailerLiteResult.status === 'success'
         ? 'You are on the list and the email flow has been triggered.'
         : 'You are on the list. Next we will route this to the thank-you page and calendar flow.',
+      redirect_url: '/ai-mastermind/thank-you',
       notion_page_url: notionResult.pageUrl,
       mailerlite_subscriber_id: mailerLiteResult && mailerLiteResult.status === 'success' ? mailerLiteResult.subscriberId : null,
     });

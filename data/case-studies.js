@@ -4,8 +4,8 @@ module.exports = {
     metaDescription: 'How a specialty clinic improved treatment completion, sped up lead response, and reduced missed appointments with Autom8Lab systems.',
     eyebrow: 'Case Study: Specialty Clinic',
     industry: 'Healthcare',
-    title: 'How a specialty clinic improved treatment completion and reduced patient drop-off.',
-    subtitle: 'A multi-location podiatry clinic had demand, strong clinical work, and enough inbound interest. What it lacked was a system that carried patient intent from first inquiry through completed treatment.',
+    title: 'How a specialty clinic stopped losing patients between the first call and completed treatment.',
+    subtitle: "A multi-location podiatry clinic had demand and strong clinical outcomes. What it didn't have was a system that kept patients moving from first inquiry through completed treatment. Most drop-off wasn't clinical. It was operational.",
     metrics: [
       { value: '+15%', label: 'Treatment completion increase' },
       { value: '<2 hrs', label: 'Lead response time' },
@@ -54,8 +54,8 @@ module.exports = {
     metaDescription: 'How a mid-size contractor recovered unbilled work, tightened project communication, and reduced owner dependence with Autom8Lab systems.',
     eyebrow: 'Case Study: General Contractor',
     industry: 'Construction',
-    title: 'How a general contractor recovered unbilled work and got the owner out of the field.',
-    subtitle: 'This GC did not have a demand problem. It had a coordination problem: change orders, RFIs, payment follow-up, and field updates were all slipping across disconnected systems.',
+    title: 'How a general contractor recovered $47K in unbilled work and got the owner off the job site.',
+    subtitle: "This GC didn't have a demand problem. It had a coordination problem. Change orders were falling through. RFIs sat unanswered. Payment follow-up depended on who remembered. Work was getting done. It just wasn't getting captured or billed.",
     metrics: [
       { value: '$47K', label: 'Recovered unbilled work' },
       { value: '9+ hrs', label: 'Owner time saved per week' },
@@ -104,8 +104,8 @@ module.exports = {
     metaDescription: 'How a property management firm reduced maintenance chaos, retained tenants, and gave the owner significant time back with Autom8Lab systems.',
     eyebrow: 'Case Study: Property Management',
     industry: 'Property Management',
-    title: 'How a property management firm reduced maintenance chaos and gave the owner time back.',
-    subtitle: 'Maintenance requests, tenant communication, screening, and owner reporting were all running across fragmented channels. The business was operating, but only because the owner kept catching dropped balls.',
+    title: 'How a property management firm stopped losing maintenance requests and saved the owner 11 hours a week.',
+    subtitle: 'Maintenance requests were coming in through four different channels. Tenant screening was inconsistent. Owner reporting took hours to piece together manually. The business was running. But only because the owner kept catching everything that fell through.',
     metrics: [
       { value: '64%', label: 'Requests resolved without owner' },
       { value: '11+ hrs', label: 'Owner time saved weekly' },
@@ -154,8 +154,8 @@ module.exports = {
     metaDescription: 'How a diagnostics lab increased visibility, improved support efficiency, and surfaced new revenue opportunities with Autom8Lab systems.',
     eyebrow: 'Case Study: Diagnostics Lab',
     industry: 'Diagnostics',
-    title: 'How a diagnostics lab increased revenue visibility and reduced support load.',
-    subtitle: 'This lab served both direct-to-consumer customers and practitioner partners, but the founder had limited clarity on which channels were actually producing revenue and where support volume was consuming team capacity.',
+    title: 'How a diagnostics lab uncovered $38K/month in hidden revenue and cut support volume in half.',
+    subtitle: "The lab had two revenue streams. Direct consumers and practitioner partners. But no clear picture of which was actually performing or where support volume was eating the team's time. Revenue was there. Visibility wasn't.",
     metrics: [
       { value: '$38K/mo', label: 'Additional monthly revenue' },
       { value: '73%', label: 'Support handled by AI' },
