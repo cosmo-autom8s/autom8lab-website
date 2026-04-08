@@ -237,14 +237,18 @@ autom8-website/
   docs/todo.md               # Active implementation backlog
 ```
 
-### Legacy / Iteration Files
+### Archived Legacy Root Files
 ```
-  index-redesign-v1.html     # Early redesign iteration
-  index-v2.html              # Second redesign iteration
-  REDESIGN-PLAN.md           # Original redesign planning notes
-  free-resources.html        # Old static free resources page
-  ai-mastermind.html         # Old static AI mastermind page
+  archive/root-legacy/
+    index-redesign-v1.html   # Early redesign iteration
+    index-v2.html            # Second redesign iteration
+    REDESIGN-PLAN.md         # Original redesign planning notes
+    free-resources.html      # Old static free resources page
+    ai-mastermind.html       # Old static AI mastermind page
+    ...                      # Other legacy root-level static files and artifacts
 ```
+
+The repo root is now kept focused on the active V2 app and current project configuration. Legacy standalone HTML pages, prototypes, and old planning artifacts were moved into `archive/root-legacy/`.
 
 ## V2 Pages
 
