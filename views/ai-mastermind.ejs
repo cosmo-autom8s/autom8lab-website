@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="mt-10">
-          <a href="/#contact" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Join the Mastermind</a>
+          <a href="#signup-form" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Join the Mastermind</a>
         </div>
       </div>
     </section>
@@ -88,12 +88,210 @@
           <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Interested?</span>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">Want in on the next session?</h2>
           <p class="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-text-secondary">
-            The signup workflow is still being finalized. For now, use the contact form or book a call and mention the mastermind.
+            If this feels relevant, fill out the signup form below. Once the backend is wired, this will route to a thank-you page and the calendar flow.
           </p>
           <div class="mt-10 flex flex-wrap justify-center gap-4">
-            <a href="/#contact" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Contact Autom8Lab</a>
+            <a href="#signup-form" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Go to Signup Form</a>
             <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary">Book a Call</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup-form" class="pb-section-sm lg:pb-section">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-8 lg:p-10">
+          <div class="max-w-2xl mb-10">
+            <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Signup</span>
+            <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">Join the AI Mastermind</h2>
+            <p class="mt-4 text-lg leading-relaxed text-text-secondary">
+              Fill this out to join the list for upcoming sessions. Your details are stored for mastermind signup and session communication.
+            </p>
+          </div>
+
+          <form id="mastermind-signup-form" class="space-y-6" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="first-name" class="block text-sm font-body font-medium text-text-secondary mb-2">First Name <span class="text-red-400">*</span></label>
+                <input type="text" id="first-name" name="first_name" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="Alex">
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="first_name"></p>
+              </div>
+              <div>
+                <label for="last-name" class="block text-sm font-body font-medium text-text-secondary mb-2">Last Name <span class="text-red-400">*</span></label>
+                <input type="text" id="last-name" name="last_name" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="Morgan">
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="last_name"></p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="mastermind-email" class="block text-sm font-body font-medium text-text-secondary mb-2">Email <span class="text-red-400">*</span></label>
+                <input type="email" id="mastermind-email" name="email" autocomplete="email" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="alex@company.com" required>
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="email"></p>
+              </div>
+              <div>
+                <label for="mastermind-website" class="block text-sm font-body font-medium text-text-secondary mb-2">Website <span class="text-text-muted">(optional)</span></label>
+                <input type="url" id="mastermind-website" name="website" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="https://yourcompany.com">
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="website"></p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="mastermind-role" class="block text-sm font-body font-medium text-text-secondary mb-2">Role <span class="text-red-400">*</span></label>
+                <select id="mastermind-role" name="role" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                  <option value="">Select your role</option>
+                  <option>Builder</option>
+                  <option>Business Owner</option>
+                  <option>Operator</option>
+                  <option>Both</option>
+                </select>
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="role"></p>
+              </div>
+              <div>
+                <label for="mastermind-experience" class="block text-sm font-body font-medium text-text-secondary mb-2">AI Experience <span class="text-red-400">*</span></label>
+                <select id="mastermind-experience" name="ai_experience" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                  <option value="">Select your level</option>
+                  <option>Beginner</option>
+                  <option>Intermediate</option>
+                  <option>Advanced</option>
+                </select>
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="ai_experience"></p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-body font-medium text-text-secondary mb-3">Goals <span class="text-red-400">*</span></label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Learn" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Learn</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Share" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Share</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Network" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Network</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Get feedback" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Get feedback</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Explore tools" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Explore tools</span>
+                </label>
+                <label class="flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="goals" value="Other" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Other</span>
+                </label>
+              </div>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="goals"></p>
+            </div>
+
+            <div>
+              <label for="mastermind-timezone" class="block text-sm font-body font-medium text-text-secondary mb-2">Timezone <span class="text-red-400">*</span></label>
+              <select id="mastermind-timezone" name="timezone" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                <option value="">Select your timezone</option>
+                <optgroup label="North America">
+                  <option value="America/New_York">Eastern Time - New York (GMT-4)</option>
+                  <option value="America/Chicago">Central Time - Chicago (GMT-5)</option>
+                  <option value="America/Denver">Mountain Time - Denver (GMT-6)</option>
+                  <option value="America/Los_Angeles">Pacific Time - Los Angeles (GMT-7)</option>
+                  <option value="America/Toronto">Toronto (GMT-4)</option>
+                  <option value="America/Vancouver">Vancouver (GMT-7)</option>
+                  <option value="Pacific/Honolulu">Honolulu (GMT-10)</option>
+                </optgroup>
+                <optgroup label="Europe">
+                  <option value="Europe/London">London (GMT+1)</option>
+                  <option value="Europe/Berlin">Berlin (GMT+2)</option>
+                  <option value="Europe/Paris">Paris (GMT+2)</option>
+                  <option value="Europe/Bucharest">Bucharest (GMT+3)</option>
+                  <option value="Europe/Madrid">Madrid (GMT+2)</option>
+                  <option value="Europe/Rome">Rome (GMT+2)</option>
+                  <option value="Europe/Moscow">Moscow (GMT+3)</option>
+                </optgroup>
+                <optgroup label="Asia">
+                  <option value="Asia/Dubai">Dubai (GMT+4)</option>
+                  <option value="Asia/Kolkata">Mumbai (GMT+5:30)</option>
+                  <option value="Asia/Bangkok">Bangkok (GMT+7)</option>
+                  <option value="Asia/Shanghai">Beijing (GMT+8)</option>
+                  <option value="Asia/Singapore">Singapore (GMT+8)</option>
+                  <option value="Asia/Makassar">Bali (GMT+8)</option>
+                  <option value="Asia/Tokyo">Tokyo (GMT+9)</option>
+                  <option value="Asia/Seoul">Seoul (GMT+9)</option>
+                </optgroup>
+                <optgroup label="Oceania">
+                  <option value="Australia/Sydney">Sydney (GMT+10)</option>
+                  <option value="Australia/Melbourne">Melbourne (GMT+10)</option>
+                  <option value="Australia/Perth">Perth (GMT+8)</option>
+                  <option value="Pacific/Auckland">Auckland (GMT+12)</option>
+                </optgroup>
+                <optgroup label="Latin America & Central America">
+                  <option value="America/Mexico_City">Mexico City (GMT-6)</option>
+                  <option value="America/Guatemala">Guatemala City (GMT-6)</option>
+                  <option value="America/Panama">Panama City (GMT-5)</option>
+                  <option value="America/Bogota">Bogota (GMT-5)</option>
+                  <option value="America/Lima">Lima (GMT-5)</option>
+                  <option value="America/Santiago">Santiago (GMT-4)</option>
+                  <option value="America/Sao_Paulo">Sao Paulo (GMT-3)</option>
+                  <option value="America/Argentina/Buenos_Aires">Buenos Aires (GMT-3)</option>
+                </optgroup>
+                <optgroup label="Africa">
+                  <option value="Africa/Cairo">Cairo (GMT+3)</option>
+                  <option value="Africa/Johannesburg">Johannesburg (GMT+2)</option>
+                  <option value="Africa/Nairobi">Nairobi (GMT+3)</option>
+                  <option value="Africa/Lagos">Lagos (GMT+1)</option>
+                  <option value="Africa/Accra">Accra (GMT+0)</option>
+                </optgroup>
+              </select>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="timezone"></p>
+            </div>
+
+            <div>
+              <label for="mastermind-project" class="block text-sm font-body font-medium text-text-secondary mb-2">What are you currently building or exploring?</label>
+              <textarea id="mastermind-project" name="current_project" rows="5" maxlength="2000" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none" placeholder="Share what you're building, testing, or hoping to learn from the mastermind."></textarea>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="current_project"></p>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <p class="block text-sm font-body font-medium text-text-secondary mb-3">Would you like to share what you've built in a future session?</p>
+                <label class="inline-flex items-center gap-3 rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary">
+                  <input type="checkbox" name="wants_to_share" class="h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                  <span>Yes, I’d be open to sharing in a future session</span>
+                </label>
+              </div>
+
+              <label class="flex items-start gap-3 rounded-xl border border-border-subtle bg-page px-4 py-4 text-sm text-text-secondary">
+                <input type="checkbox" name="consent" required class="mt-0.5 h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <span>I agree to be contacted about the AI Mastermind and understand that my information will be stored for signup and session communication purposes.</span>
+              </label>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="consent"></p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
+              <p class="text-sm text-text-muted">
+                You will be added to the signup list now. The thank-you page and calendar flow are next.
+              </p>
+              <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>
+                Join the AI Mastermind
+              </button>
+            </div>
+
+            <div id="mastermind-signup-error" class="hidden rounded-2xl border border-red-400/20 bg-red-400/10 px-5 py-4 text-sm text-red-200"></div>
+            <div id="mastermind-signup-success" class="hidden rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm text-text-secondary">
+              You are on the list.
+            </div>
+          </form>
+
+          <!--
+          <div class="sr-only" aria-hidden="true">
+            <div id="mailerlite-mastermind-form" class="ml-embedded" data-form="dYSKh0"></div>
+          </div>
+          -->
         </div>
       </div>
     </section>
@@ -105,5 +303,6 @@
   <script src="/js/nav.js"></script>
   <script src="/js/magnetic.js"></script>
   <script src="/js/tilt.js"></script>
+  <script src="/js/mastermind-form.js"></script>
 </body>
 </html>

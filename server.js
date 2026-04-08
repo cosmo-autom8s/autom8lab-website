@@ -1,3 +1,5 @@
+require('./lib/load-env');
+
 const express = require('express');
 const path = require('path');
 const caseStudies = require('./data/case-studies');
@@ -72,5 +74,7 @@ if (require.main === module && process.env.NODE_ENV !== 'production') {
 // Local dev: proxy /api/contact to the serverless function
 const contactHandler = require('./api/contact');
 app.post('/api/contact', (req, res) => contactHandler(req, res));
+const mastermindSignupHandler = require('./api/mastermind-signup');
+app.post('/api/mastermind-signup', (req, res) => mastermindSignupHandler(req, res));
 
 module.exports = app;
