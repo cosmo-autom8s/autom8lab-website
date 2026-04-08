@@ -3,4 +3,3 @@
 .env
 .env.local
 node_modules/
-public/css/styles.css
