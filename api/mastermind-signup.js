@@ -98,9 +98,6 @@ module.exports = async (req, res) => {
 
   if (failedIntegrations.length > 0) {
     console.error('Mastermind integration failure:', failedIntegrations);
-    return res.status(502).json({
-      error: 'Signup could not be delivered right now. Please try again shortly.',
-    });
   }
 
   if (notionResult && notionResult.status === 'success') {
@@ -108,10 +105,25 @@ module.exports = async (req, res) => {
       success: true,
       message: mailerLiteResult && mailerLiteResult.status === 'success'
         ? 'You are on the list and the email flow has been triggered.'
-        : 'You are on the list. Next we will route this to the thank-you page and calendar flow.',
+        : 'You are on the list. If the email flow is delayed, your spot is still saved.',
       redirect_url: '/ai-mastermind/thank-you',
       notion_page_url: notionResult.pageUrl,
       mailerlite_subscriber_id: mailerLiteResult && mailerLiteResult.status === 'success' ? mailerLiteResult.subscriberId : null,
+    });
+  }
+
+  if (notionResult && notionResult.status === 'failed') {
+    return res.status(502).json({
+      error: 'Okay, what went wrong? The signup did not go through on our side. Please try again in a minute.',
+    });
+  }
+
+  if (mailerLiteResult && mailerLiteResult.status === 'success') {
+    return res.status(200).json({
+      success: true,
+      message: 'You are on the list and the email flow has been triggered.',
+      redirect_url: '/ai-mastermind/thank-you',
+      mailerlite_subscriber_id: mailerLiteResult.subscriberId,
     });
   }
 

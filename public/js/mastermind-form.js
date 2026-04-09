@@ -189,7 +189,7 @@
             showFieldError(entry[0], entry[1]);
           });
         } else {
-          generalError.textContent = data.error || 'Something went wrong. Please try again.';
+          generalError.textContent = data.error || 'Okay, what went wrong? Please check the form and try again.';
           generalError.classList.remove('hidden');
         }
         return;
@@ -209,7 +209,7 @@
     } catch (error) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Join the AI Mastermind';
-      generalError.textContent = 'Something went wrong. Please try again.';
+      generalError.textContent = 'Okay, what went wrong? Please try again in a minute.';
       generalError.classList.remove('hidden');
       return;
     }
