@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/legacy/css/styles.css">
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-8 fade-in">Free Guide</span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black tracking-tight mb-8 leading-tight fade-in">
+          <span>Build Your Own AI Executive Assistant</span>
+        </h1>
+        <p class="text-base md:text-lg text-[#94a3b8] max-w-2xl mx-auto mb-6 leading-relaxed fade-in">
+          The exact system we use to handle scheduling, email triage, meeting prep, and follow-ups — without hiring another person.
+        </p>
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-[#94a3b8] mb-10 fade-in">
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> Free</span>
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> Instant delivery</span>
+          <span class="flex items-center gap-2"><span class="text-[#3b82f6]">&#10003;</span> No fluff</span>
+        </div>
+        <div class="fade-in">
+          <form id="signup-form" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+            <input type="email" aria-label="email" aria-required="true" name="email" required placeholder="Enter your email" autocomplete="email" class="flex-1 bg-[#111827] border border-[#1e293b] rounded-xl px-6 py-4 text-white placeholder-[#64748b] text-base focus:outline-none focus:border-[#3b82f6] transition-colors">
+            <button type="submit" class="primary bg-[#3b82f6] text-white font-semibold text-base px-8 py-4 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow whitespace-nowrap">Get the Guide &rarr;</button>
+          </form>
+          <div id="signup-success" class="hidden">
+            <p class="text-[#3b82f6] text-lg font-semibold py-4">Check your inbox — the guide is on its way.</p>
+          </div>
+          <p id="signup-subtext" class="text-sm text-[#475569] mt-4">No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">What's Inside</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight fade-in">What you'll get</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#3b82f6] rounded-xl flex items-center justify-center mb-6"><span class="text-black text-xl font-bold">1</span></div>
+            <h3 class="text-xl font-display font-semibold text-white mb-3">The system blueprint</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">How to set up an AI assistant that actually handles real executive tasks — not just answers questions.</p>
+          </div>
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#3b82f6] rounded-xl flex items-center justify-center mb-6"><span class="text-black text-xl font-bold">2</span></div>
+            <h3 class="text-xl font-display font-semibold text-white mb-3">The prompt templates</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Copy-paste prompts for email triage, meeting prep, task prioritization, and daily briefings.</p>
+          </div>
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8">
+            <div class="w-12 h-12 bg-[#3b82f6] rounded-xl flex items-center justify-center mb-6"><span class="text-black text-xl font-bold">3</span></div>
+            <h3 class="text-xl font-display font-semibold text-white mb-3">The tool stack</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">Which tools to use, how to connect them, and what the workflow looks like end to end.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+    <section class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto px-6 md:px-8">
+        <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">Who This Is For</span>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight mb-8 fade-in">Built for business owners who are drowning in admin.</h2>
+        <ul class="space-y-4 fade-in">
+          <li class="flex items-start gap-3"><span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span><span class="text-base text-[#94a3b8]">You spend hours on email, scheduling, and follow-ups every week</span></li>
+          <li class="flex items-start gap-3"><span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span><span class="text-base text-[#94a3b8]">You've thought about hiring an assistant but can't justify the cost yet</span></li>
+          <li class="flex items-start gap-3"><span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span><span class="text-base text-[#94a3b8]">You want to use AI but don't know where to start</span></li>
+          <li class="flex items-start gap-3"><span class="text-[#3b82f6] shrink-0 mt-0.5">&#10003;</span><span class="text-base text-[#94a3b8]">You'd rather get a proven system than figure it out from scratch</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight mb-6 fade-in">Stop doing work your AI should be doing.</h2>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">Get the guide and build your AI Executive Assistant today.</p>
+        <div class="fade-in">
+          <form id="signup-form-bottom" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+            <input type="email" aria-label="email" aria-required="true" name="email" required placeholder="Enter your email" autocomplete="email" class="flex-1 bg-[#111827] border border-[#1e293b] rounded-xl px-6 py-4 text-white placeholder-[#64748b] text-base focus:outline-none focus:border-[#3b82f6] transition-colors">
+            <button type="submit" class="primary bg-[#3b82f6] text-white font-semibold text-base px-8 py-4 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow whitespace-nowrap">Get the Guide &rarr;</button>
+          </form>
+          <div id="signup-success-bottom" class="hidden">
+            <p class="text-[#3b82f6] text-lg font-semibold py-4">Check your inbox — the guide is on its way.</p>
+          </div>
+          <p id="signup-subtext-bottom" class="text-sm text-[#475569] mt-4">No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <div class="ml-embedded" data-form="Lpnq9V" style="display:none"></div>
+
+  <script src="/legacy/js/main.js"></script>
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2224418');
+
+    function handleSignup(e) {
+      e.preventDefault();
+      var form = e.target;
+      var btn = form.querySelector('button[type="submit"]');
+      var email = form.querySelector('input[name="email"]').value;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      var checkML = setInterval(function() {
+        var mlForm = document.querySelector('.ml-embedded form');
+        if (mlForm) {
+          clearInterval(checkML);
+          var mlInput = mlForm.querySelector('input[type="email"]');
+          if (mlInput) {
+            mlInput.value = email;
+            mlInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          var mlBtn = mlForm.querySelector('button[type="submit"]');
+          if (mlBtn) mlBtn.click();
+          setTimeout(function() {
+            window.location.href = '/ai-ea-tutorial';
+          }, 1500);
+        }
+      }, 200);
+
+      setTimeout(function() {
+        clearInterval(checkML);
+        window.location.href = '/ai-ea-tutorial';
+      }, 5000);
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', handleSignup);
+    document.getElementById('signup-form-bottom').addEventListener('submit', handleSignup);
+  </script>
+</body>
+</html>

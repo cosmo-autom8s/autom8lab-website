@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/legacy/css/styles.css">
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="pt-16 md:pt-24 pb-8">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-10">
+          <span class="inline-block text-xs font-medium text-[#3b82f6] uppercase tracking-widest mb-4 fade-in">You're in — check your email for the full guide</span>
+          <p class="text-base text-[#94a3b8] max-w-2xl mx-auto leading-relaxed fade-in">In the meantime, here's the complete walkthrough to get your AI Executive Assistant up and running.</p>
+        </div>
+        <div class="fade-in rounded-2xl overflow-hidden border border-[#1e293b]" style="aspect-ratio: 16/9;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Jn4PLeoltoE?feature=oembed" title="How I Built a Free AI Executive Assistant with Claude Code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+        <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-8 md:p-10 fade-in">
+          <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+            <div class="flex-1">
+              <h2 class="text-xl md:text-2xl font-display font-bold text-white mb-2">Get the code</h2>
+              <p class="text-[#94a3b8] leading-relaxed">Everything you need is on GitHub — clone the repo, follow the setup instructions, and you'll have your AI Executive Assistant running in minutes.</p>
+            </div>
+            <a href="https://github.com/cosmo-autom8s/ai-executive-assistant" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-[#111827] border border-[#3b82f6] text-[#3b82f6] font-semibold text-base px-6 py-4 rounded-xl hover:bg-[#3b82f6] hover:text-white transition-colors whitespace-nowrap shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-24 md:pb-32">
+      <div class="max-w-4xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-white tracking-tight fade-in">What the tutorial covers</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4"><span class="text-white text-sm font-bold">1</span></div>
+            <h3 class="text-lg font-display font-semibold text-white mb-2">Installation</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">How to clone the repo, set up your environment, and get everything running on your machine.</p>
+          </div>
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4"><span class="text-white text-sm font-bold">2</span></div>
+            <h3 class="text-lg font-display font-semibold text-white mb-2">Configuration</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">How to connect your tools and customize the assistant to match the way you actually work.</p>
+          </div>
+          <div class="bg-[#111827] border border-[#1e293b] rounded-2xl p-6">
+            <div class="w-10 h-10 bg-[#3b82f6] rounded-lg flex items-center justify-center mb-4"><span class="text-white text-sm font-bold">3</span></div>
+            <h3 class="text-lg font-display font-semibold text-white mb-2">Using it daily</h3>
+            <p class="text-sm text-[#94a3b8] leading-relaxed">How to hand off real tasks — email triage, meeting prep, follow-ups — and make it part of your routine.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="w-16 h-px bg-[#1e293b] mx-auto"></div>
+
+    <section class="py-28 md:py-40">
+      <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight mb-6 fade-in">Want us to build it for you?</h2>
+        <p class="text-base md:text-lg text-[#94a3b8] leading-relaxed mb-10 fade-in">If you'd rather have a done-for-you AI Executive Assistant tailored to your business, let's talk.</p>
+        <div class="fade-in">
+          <a href="https://calendly.com/cosminlungu/30min" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#3b82f6] text-white font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#60a5fa] transition-colors cta-glow">Book a Call &rarr;</a>
+          <p class="text-sm text-[#475569] mt-4">30-minute call. Free. No obligation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/legacy/js/main.js"></script>
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+</body>
+</html>

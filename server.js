@@ -11,6 +11,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/legacy/css', express.static(path.join(__dirname, 'css')));
+app.use('/legacy/js', express.static(path.join(__dirname, 'js')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -60,6 +62,27 @@ app.get('/ai-mastermind/thank-you', (req, res) => {
     description: 'You are on the list for the Autom8Lab AI Mastermind. Add the session to your calendar and watch your inbox for updates.',
   });
 });
+
+app.get(['/ai-ea-signup', '/ai-ea-signup.html'], (req, res) => {
+  res.render('ai-ea-signup', {
+    title: 'Free AI Executive Assistant Guide',
+    description: 'Get our free guide to building your own AI Executive Assistant. Drop your email and we will send it straight to your inbox.',
+  });
+});
+
+app.get(['/ai-ea-tutorial', '/ai-ea-tutorial.html'], (req, res) => {
+  res.render('ai-ea-tutorial', {
+    title: 'AI Executive Assistant Tutorial',
+    description: 'Step-by-step video tutorial to install and use your own AI Executive Assistant.',
+  });
+});
+
+app.get('/index.html', (req, res) => res.redirect(302, '/'));
+app.get('/about.html', (req, res) => res.redirect(302, '/about'));
+app.get('/free-resources.html', (req, res) => res.redirect(302, '/free-resources'));
+app.get('/ai-audit.html', (req, res) => res.redirect(302, '/ai-audit'));
+app.get('/vision-map.html', (req, res) => res.redirect(302, '/vision-map'));
+app.get('/ai-mastermind.html', (req, res) => res.redirect(302, '/ai-mastermind'));
 
 app.get('/case-studies/:slug', (req, res, next) => {
   const study = caseStudies[req.params.slug];
