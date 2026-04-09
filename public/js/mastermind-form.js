@@ -195,8 +195,9 @@
         return;
       }
 
-      if (data.redirect_url) {
-        window.location.href = data.redirect_url;
+      var successRedirect = form.dataset.successRedirect || data.redirect_url;
+      if (successRedirect) {
+        window.location.href = successRedirect;
         return;
       }
 

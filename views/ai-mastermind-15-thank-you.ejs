@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">LET'S GOOOOO</span>
+        <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]">You're in!</h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg leading-relaxed text-text-secondary">
+          Thanks for joining. This first mastermind session is happening on Wednesday, April 15, 2026. Add it to your calendar now so it is locked in.
+        </p>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14">
+          <div class="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-center">
+            <div>
+              <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Next Step</span>
+              <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">Add the April 15 session to your calendar.</h2>
+              <p class="mt-5 text-lg leading-relaxed text-text-secondary">
+                This is the first one, and I want to make it easy to show up. Use the calendar link below and you will have the session details ready to go.
+              </p>
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://calendar.app.google/k94xvJbffrcPpJEz9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover"
+                  data-magnetic
+                >
+                  Open Calendar Invite
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-border-subtle bg-card p-6">
+              <p class="text-xs font-medium uppercase tracking-[0.18em] text-accent">Session Details</p>
+              <div class="mt-5 space-y-4 text-sm">
+                <div class="flex items-center justify-between gap-4 border-b border-border-subtle pb-3">
+                  <span class="text-text-secondary">Date</span>
+                  <span class="font-semibold text-text-primary">April 15, 2026</span>
+                </div>
+                <div class="flex items-center justify-between gap-4 border-b border-border-subtle pb-3">
+                  <span class="text-text-secondary">Bucharest</span>
+                  <span class="font-semibold text-text-primary">3:00 PM</span>
+                </div>
+                <div class="flex items-center justify-between gap-4 border-b border-border-subtle pb-3">
+                  <span class="text-text-secondary">Bali</span>
+                  <span class="font-semibold text-text-primary">8:00 PM</span>
+                </div>
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-text-secondary">New York</span>
+                  <span class="font-semibold text-text-primary">8:00 AM</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm leading-relaxed text-text-muted">
+                The calendar link includes the Google Meet details for the session.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 grid gap-6 md:grid-cols-2">
+        <div class="glass-card p-8 lg:p-10" data-tilt>
+          <span class="text-xs uppercase tracking-[0.18em] text-accent">What Happens Next</span>
+          <ul class="mt-6 space-y-4 text-sm leading-relaxed text-text-secondary">
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>I’ll send any updates for the first session directly to the email you used to sign up.</span></li>
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>If you said you might be open to sharing later, that just gives me context. There is no pressure attached to it.</span></li>
+            <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span><span>The goal is to make this first session useful, relaxed, and worth continuing.</span></li>
+          </ul>
+        </div>
+        <div class="glass-card p-8 lg:p-10" data-tilt>
+          <span class="text-xs uppercase tracking-[0.18em] text-accent">Need Something Sooner?</span>
+          <p class="mt-6 text-sm leading-relaxed text-text-secondary">
+            If you already want help with AI agents, workflow automations, training, or strategy, you do not need to wait for the mastermind to talk.
+          </p>
+          <div class="mt-8">
+            <a
+              href="https://calendly.com/cosminlungu/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex rounded-xl border border-border-subtle px-6 py-3 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary"
+            >
+              Book a Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+</body>
+</html>

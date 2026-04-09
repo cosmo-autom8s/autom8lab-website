@@ -11,6 +11,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/legacy/css', express.static(path.join(__dirname, 'css')));
 app.use('/legacy/js', express.static(path.join(__dirname, 'js')));
 
@@ -53,6 +54,20 @@ app.get('/ai-mastermind', (req, res) => {
   res.render('ai-mastermind', {
     title: 'AI Mastermind',
     description: 'Join the weekly Autom8Lab AI Mastermind for practical conversations about what is actually working with AI.',
+  });
+});
+
+app.get('/ai-mastermind-15', (req, res) => {
+  res.render('ai-mastermind-15', {
+    title: 'AI Mastermind - April 15, 2026',
+    description: 'Join the first Autom8Lab AI Mastermind on Wednesday, April 15, 2026 for a more personal, small-group conversation about what is actually working with AI.',
+  });
+});
+
+app.get('/ai-mastermind-15/thank-you', (req, res) => {
+  res.render('ai-mastermind-15-thank-you', {
+    title: 'AI Mastermind - April 15, 2026 Thank You',
+    description: 'You are in for the first AI Mastermind session on Wednesday, April 15, 2026.',
   });
 });
 
