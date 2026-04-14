@@ -85,6 +85,13 @@ app.get('/75-hard-ai-challenge', (req, res) => {
   });
 });
 
+app.get('/75-hard-ai-challenge/thank-you', (req, res) => {
+  res.render('75-hard-ai-challenge-thank-you', {
+    title: '75 Hard AI Challenge Thank You',
+    description: 'You are in for the 75 Hard AI Challenge. Watch your inbox for onboarding and challenge updates.',
+  });
+});
+
 app.get(['/ai-ea-signup', '/ai-ea-signup.html'], (req, res) => {
   res.render('ai-ea-signup', {
     title: 'Free AI Executive Assistant Guide',
@@ -129,5 +136,7 @@ const contactHandler = require('./api/contact');
 app.post('/api/contact', (req, res) => contactHandler(req, res));
 const mastermindSignupHandler = require('./api/mastermind-signup');
 app.post('/api/mastermind-signup', (req, res) => mastermindSignupHandler(req, res));
+const hardAiSignupHandler = require('./api/hard-ai-signup');
+app.post('/api/75-hard-ai-signup', (req, res) => hardAiSignupHandler(req, res));
 
 module.exports = app;

@@ -532,11 +532,58 @@
         <div class="glass-card p-10 lg:p-14 text-center">
           <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight leading-snug max-w-2xl mx-auto">Join the 75 Hard AI Challenge.</h2>
           <p class="mt-2 text-lg leading-relaxed text-text-secondary">It's free. It starts now.</p>
-          <div class="mt-10 max-w-xl mx-auto rounded-2xl border border-border-subtle bg-page/70 p-6">
-            <p class="text-xs uppercase tracking-[0.2em] text-accent">Signup placeholder</p>
-            <p class="mt-3 text-sm leading-relaxed text-text-secondary">The real signup module will go here next. For now, this section shows the final conversion point and page rhythm.</p>
-            <a href="#join" class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Join the Challenge — It's Free</a>
-          </div>
+          <form id="hard-ai-signup-form" class="mt-10 max-w-2xl mx-auto rounded-2xl border border-border-subtle bg-page/70 p-6 lg:p-8 text-left space-y-6" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="hard-ai-first-name" class="block text-sm font-body font-medium text-text-secondary mb-2">First Name <span class="text-red-400">*</span></label>
+                <input type="text" id="hard-ai-first-name" name="first_name" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="Alex">
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="first_name"></p>
+              </div>
+              <div>
+                <label for="hard-ai-email" class="block text-sm font-body font-medium text-text-secondary mb-2">Email <span class="text-red-400">*</span></label>
+                <input type="email" id="hard-ai-email" name="email" autocomplete="email" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors" placeholder="alex@example.com">
+                <p class="text-red-400 text-xs mt-1 hidden" data-error="email"></p>
+              </div>
+            </div>
+
+            <div>
+              <label for="hard-ai-experience" class="block text-sm font-body font-medium text-text-secondary mb-2">AI Experience <span class="text-red-400">*</span></label>
+              <select id="hard-ai-experience" name="ai_experience" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                <option value="">Select your level</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+              </select>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="ai_experience"></p>
+            </div>
+
+            <div>
+              <label for="hard-ai-why" class="block text-sm font-body font-medium text-text-secondary mb-2">Why are you joining the challenge?</label>
+              <textarea id="hard-ai-why" name="why_joining" rows="4" maxlength="2000" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none" placeholder="What made you want to do this? What are you hoping to get out of it?"></textarea>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="why_joining"></p>
+            </div>
+
+            <div>
+              <label for="hard-ai-support" class="block text-sm font-body font-medium text-text-secondary mb-2">Is there anything specific you'd like support with?</label>
+              <textarea id="hard-ai-support" name="support_needed" rows="4" maxlength="2000" class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none" placeholder="For example: I'm a beginner and don't know where to start, I need help picking a project, I want more accountability, I'm looking for community, etc."></textarea>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="support_needed"></p>
+            </div>
+
+            <div>
+              <label class="flex items-start gap-3 text-sm text-text-secondary">
+                <input type="checkbox" name="consent" class="mt-1 h-4 w-4 rounded border-border-subtle bg-page text-accent focus:ring-accent">
+                <span>I agree to receive challenge emails and updates about the 75 Hard AI Challenge. <span class="text-red-400">*</span></span>
+              </label>
+              <p class="text-red-400 text-xs mt-1 hidden" data-error="consent"></p>
+            </div>
+
+            <p id="hard-ai-signup-success" class="hidden rounded-lg border border-green-400/30 bg-green-400/10 px-4 py-3 text-sm text-green-300"></p>
+            <p id="hard-ai-signup-error" class="hidden rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300"></p>
+
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>
+              Join the Challenge
+            </button>
+          </form>
           <p class="mt-6 text-sm text-text-muted tracking-[0.15em]">#75HardAI</p>
         </div>
       </div>
@@ -550,5 +597,6 @@
   <script src="/js/magnetic.js"></script>
   <script src="/js/tilt.js"></script>
   <script src="/js/animations.js"></script>
+  <script src="/js/hard-ai-form.js"></script>
 </body>
 </html>
