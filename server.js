@@ -78,6 +78,13 @@ app.get('/ai-mastermind/thank-you', (req, res) => {
   });
 });
 
+app.get('/75-hard-ai-challenge', (req, res) => {
+  res.render('75-hard-ai-challenge', {
+    title: '75 Hard AI Challenge',
+    description: '75 Days. 5 Rules. Real AI Fluency. A free 75-day structured challenge to take you from wherever you are to genuine AI fluency — with something real to show for it.',
+  });
+});
+
 app.get(['/ai-ea-signup', '/ai-ea-signup.html'], (req, res) => {
   res.render('ai-ea-signup', {
     title: 'Free AI Executive Assistant Guide',
@@ -98,6 +105,7 @@ app.get('/free-resources.html', (req, res) => res.redirect(302, '/free-resources
 app.get('/ai-audit.html', (req, res) => res.redirect(302, '/ai-audit'));
 app.get('/vision-map.html', (req, res) => res.redirect(302, '/vision-map'));
 app.get('/ai-mastermind.html', (req, res) => res.redirect(302, '/ai-mastermind'));
+app.get('/75-hard-ai-challenge.html', (req, res) => res.redirect(302, '/75-hard-ai-challenge'));
 
 app.get('/case-studies/:slug', (req, res, next) => {
   const study = caseStudies[req.params.slug];

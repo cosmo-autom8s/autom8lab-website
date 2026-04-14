@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description }) %>
+</head>
+<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">
+  <canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+  <div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+  <%- include('partials/nav') %>
+
+  <main class="relative z-10 pt-20">
+    <section class="py-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">Free Challenge</span>
+        <h1 class="mt-8 text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]">75 Hard AI Challenge</h1>
+        <p class="mt-4 text-xl sm:text-2xl font-display font-semibold tracking-tight text-text-secondary">75 Days. 5 Rules. Real AI Fluency.</p>
+        <div class="mt-10 max-w-2xl mx-auto space-y-5 text-lg leading-relaxed text-text-secondary">
+          <p>Everyone's talking about AI. Most people scroll through the headlines, watch the demos, maybe try ChatGPT a few times... and that's where it ends.</p>
+          <p>You've probably thought: <em>I should really learn this stuff.</em></p>
+          <p>But then what? You bookmark a bunch of videos you never go back to. You try a tool for 20 minutes and move on. You tell yourself you'll get to it next week.</p>
+          <p>Next week never comes. And meanwhile, the gap between people who <em>actually know</em> AI and people who just <em>talk about</em> AI gets wider every single day.</p>
+          <p>The 75 Hard AI Challenge is how you close that gap. 75 days of showing up. 5 daily tasks. At the end, you'll have a real project, real skills, and 75 days of proof that you actually did it.</p>
+          <p>This isn't another course. It's not a tutorial playlist. It's a commitment — and the result is something you can point to and say: <em>I built that with AI.</em></p>
+          <p>No coding required. No AI background needed. Just 75 days of doing the work.</p>
+        </div>
+        <div class="mt-10">
+          <a href="#join" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Start Day 1</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-6">The Problem</span>
+          <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+            <p>Every day, AI gets more powerful. Every day, the gap grows between people who use AI and people who just hear about it.</p>
+            <p>You know you should be learning this. You've probably tried.</p>
+            <p>Maybe you started a course and didn't finish it. Maybe you played with ChatGPT for a week and then forgot about it. Maybe you've been meaning to "get into AI" for months now, but there's always something else going on.</p>
+            <p>The problem isn't motivation. The problem isn't intelligence. The problem is that there's no structure, no accountability, and no deadline.</p>
+            <p class="font-bold text-text-primary">That's what this challenge gives you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Challenge</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-8">What is the 75 Hard AI Challenge?</h2>
+        <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+          <p>The 75 Hard AI Challenge is a 75-day structured challenge designed to take you from wherever you are right now to genuine AI fluency — with something real to show for it.</p>
+          <p>Every day, you complete 5 simple AI tasks. You do this for 75 days straight. That's it.</p>
+          <p>Every task can be done using conversational AI tools — Claude, ChatGPT, Gemini, or whatever you prefer. The AI does the heavy lifting. You show up and direct it.</p>
+        </div>
+        <div class="mt-8 inline-block rounded-xl border border-accent/20 bg-accent/10 px-6 py-4 text-accent font-semibold">
+          The challenge is completely free.
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Rules</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-10">These are non-negotiable. Every day, all five.</h2>
+
+        <div class="glass-card p-8 lg:p-12">
+          <div class="space-y-8">
+            <div class="flex gap-6 items-baseline">
+              <span class="text-accent font-display font-bold text-lg shrink-0">01</span>
+              <div>
+                <h3 class="font-display font-bold text-lg">BUILD</h3>
+                <p class="mt-1 text-text-secondary leading-relaxed">Work on your AI project for 1 hour</p>
+              </div>
+            </div>
+            <div class="border-t border-border-subtle"></div>
+            <div class="flex gap-6 items-baseline">
+              <span class="text-accent font-display font-bold text-lg shrink-0">02</span>
+              <div>
+                <h3 class="font-display font-bold text-lg">LEARN</h3>
+                <p class="mt-1 text-text-secondary leading-relaxed">Watch 10 minutes of AI video content</p>
+              </div>
+            </div>
+            <div class="border-t border-border-subtle"></div>
+            <div class="flex gap-6 items-baseline">
+              <span class="text-accent font-display font-bold text-lg shrink-0">03</span>
+              <div>
+                <h3 class="font-display font-bold text-lg">SHARE</h3>
+                <p class="mt-1 text-text-secondary leading-relaxed">Post about your AI journey</p>
+              </div>
+            </div>
+            <div class="border-t border-border-subtle"></div>
+            <div class="flex gap-6 items-baseline">
+              <span class="text-accent font-display font-bold text-lg shrink-0">04</span>
+              <div>
+                <h3 class="font-display font-bold text-lg">CONNECT</h3>
+                <p class="mt-1 text-text-secondary leading-relaxed">Help someone with an AI question</p>
+              </div>
+            </div>
+            <div class="border-t border-border-subtle"></div>
+            <div class="flex gap-6 items-baseline">
+              <span class="text-accent font-display font-bold text-lg shrink-0">05</span>
+              <div>
+                <h3 class="font-display font-bold text-lg">GROW</h3>
+                <p class="mt-1 text-text-secondary leading-relaxed">Use AI for personal development</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-10 text-lg leading-relaxed text-text-secondary">That's it. Five simple rules. One hour, ten minutes, one post, one person, one session.</p>
+        <p class="mt-4 text-lg leading-relaxed text-text-secondary">The rules are straightforward, and each one is explained in depth with examples, ideas, and resources when you join the challenge — so you'll know exactly what to do from Day 1.</p>
+
+        <div class="mt-8">
+          <a href="#join" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Join the Challenge — Free</a>
+        </div>
+
+        <div class="mt-16 space-y-3">
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">BUILD — 1 hour per day<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed space-y-5">
+              <p>Pick a project on Day 1. Work on it every day using your AI tool of choice — you direct, the AI builds.</p>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What can you build?</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A content automation system for your business or niche</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A prompt library tailored to your industry</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A resource hub or knowledge base for a community you care about</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A workflow automation that saves you (or someone else) hours</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>An AI-generated portfolio or visual project</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>An app or web tool — built entirely through conversation with AI</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Literally anything you can track and build over time</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">How does Git work?</p>
+                <p class="text-sm">Every day, your progress gets saved publicly to your Git repository. Think of it as your progress photo — your commit history shows every step of the journey. On Day 75, you can scroll from your first commit to your last and see exactly how far you came.</p>
+                <p class="text-sm mt-3">Don't know Git? Your AI tool sets it up for you. You tell it "create a repository for my project" and it handles everything. You never touch a single command.</p>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What counts?</p>
+                <p class="text-sm">Anything that shows real progress. Code files, documents, images, prompt templates, configuration files, workflow diagrams. If you're building a prompt library, your daily commit might be three new prompts you tested and refined. If you're building an app, it might be a new feature. The format doesn't matter — the progress does.</p>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">LEARN — 10 minutes per day<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed space-y-5">
+              <p>Watch at least 10 minutes of AI-focused video content. Intentionally.</p>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What counts:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>YouTube tutorials on AI tools and techniques</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Online course videos (free or paid)</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Conference talks and keynotes about AI</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Tool-specific walkthroughs and demos</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>AI news breakdowns and analysis</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What doesn't count:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Scrolling through short-form AI clips on TikTok or Reels</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Background listening while doing something else</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Videos you've already watched</span></li>
+                </ul>
+              </div>
+              <p class="text-sm">10 minutes is the minimum. It's a low bar on purpose — most people end up watching longer once they start. But even on your busiest day, 10 minutes of intentional learning is non-negotiable.</p>
+              <p class="text-sm"><strong class="text-text-primary">Bonus:</strong> Leave a comment on the video sharing one thing you learned. This reinforces your learning, contributes to the creator's engagement, and creates a public trail of your AI education.</p>
+            </div>
+          </details>
+
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">SHARE — 1 post per day<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed space-y-5">
+              <p>Pick your platform on Day 1 — LinkedIn, X, Instagram, TikTok, YouTube, a blog — wherever your people are. Post something every day about what you're learning, building, or experiencing.</p>
+              <p><strong class="text-text-primary">This is your public accountability.</strong> You're articulating what you actually did — not just consuming. The same people who probably got you interested in AI will now see your real journey. Be real. That's what resonates.</p>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What counts:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A text post about what you learned or built today</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A screenshot of your project's progress with context</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A short video showing something you built or discovered</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A thread breaking down an AI concept you just learned</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A "Day X" update with reflections on the journey so far</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A tip or technique you discovered while working on your project</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>An honest post about struggling, failing, or being confused — vulnerability performs</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A before/after of your project (yesterday vs. today)</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What doesn't count:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Sharing someone else's content without your own perspective</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>A post with nothing to do with AI or the challenge</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Engagement farming with no substance ("Day 23! Still going!")</span></li>
+                </ul>
+              </div>
+              <p class="text-sm">Every post includes <span class="font-semibold text-accent">#75HardAI</span> — this is how participants find each other across platforms and how the challenge grows organically.</p>
+            </div>
+          </details>
+
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">CONNECT — 1 person per day<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed space-y-5">
+              <p>Every day, help one person with an AI-related question or problem. Online or in person. Publicly or privately.</p>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What counts:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Answering a question in the challenge community</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Responding to someone's AI question on social media (Reddit, X, LinkedIn, Quora)</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Helping a coworker, friend, or family member with something AI-related</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Showing someone how to use an AI tool to solve a problem they mentioned — even if they didn't frame it as an "AI question"</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Jumping into a forum thread where someone is stuck</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Explaining an AI concept to someone who's curious</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">Why this matters:</p>
+                <p class="text-sm">Teaching is the fastest way to learn. Every time you explain something to someone else, you deepen your own understanding. By Day 75, you'll have helped 75 people — and you'll understand AI well enough to explain it to anyone.</p>
+                <p class="text-sm mt-3">There's a deeper purpose here too. People ask questions every day that could be answered with AI — they just don't know it yet. By training yourself to spot these opportunities, you develop a reflex for seeing AI applications in the real world. By Day 75, you'll be the person everyone comes to.</p>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">GROW — 1 session per day<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed space-y-5">
+              <p>This is the rule most people don't expect to love.</p>
+              <p>Use your AI as a thinking partner for your actual life. Not for productivity. Not for work. For <em>you</em>.</p>
+              <div>
+                <p class="font-medium text-text-primary mb-2">What this looks like:</p>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>End your day with: <em>"Here's what happened today — what patterns do you notice in how I handled it?"</em></span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Work through a decision you've been avoiding</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Ask it to help you reframe something that's been weighing on you</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Journal with it about what you're grateful for and what you'd do differently</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Explore your strengths, blind spots, and recurring patterns</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Have a coaching-style conversation about your goals, fears, or mindset</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Prep for a difficult conversation or decision</span></li>
+                  <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent shrink-0"></span><span>Ask it to challenge a limiting belief you've been carrying</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium text-text-primary mb-2">Why this is here:</p>
+                <p class="text-sm">Most people think of AI as a productivity tool. This rule teaches you it's also a mirror, a coach, and a sounding board. AI can help you understand yourself better, make better decisions, and show up as a better version of yourself.</p>
+                <p class="text-sm mt-3">This is the soul of the challenge. AI fluency is the headline — but becoming a more self-aware, intentional person is the transformation most people don't see coming. By Day 75, this might be the rule that changed you the most.</p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Benefits</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-12">75 Days From Now</h2>
+        <div class="space-y-12 max-w-2xl">
+          <div>
+            <h3 class="text-xl font-display font-bold">75+ Hours of Real AI Experience</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">By the end, you'll have more hands-on AI experience than most people accumulate in a year of "meaning to get around to it." Not watching. Not reading about it. Doing it.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">A Finished Project You Can Point To</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">No more "I'm learning AI" with nothing to show. A real project — visible, public, with a full history of how you built it from scratch. It's yours, and it's done.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">Public Accountability That Compounds</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">75 posts documenting a real journey. Not content for content's sake — proof of work. You'll be articulating what you actually built and learned, in public, to the same people who probably got you interested in AI in the first place. By Day 75, that body of work speaks for itself.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">You Become "The AI Person"</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">By Day 75, you've helped 75 people with AI. You've shown up publicly every single day. Whether you planned it or not — you're now the person people come to with AI questions. That reputation compounds.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">You Actually Understand It (Because You Taught It)</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">Teaching is the fastest way to truly learn something. Every time you help someone, you reinforce your own understanding. By Day 75, you won't just know AI tools — you'll understand them deeply enough to explain them to anyone.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">Personal Growth You Didn't Expect</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">The GROW rule is where this challenge gets real. A daily habit of reflection, self-awareness, and intentional growth — powered by AI. AI fluency is the headline. Becoming a more thoughtful, self-aware person is what you didn't see coming.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">The Confidence of Following Through</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">When you finish, you'll know — not believe, <em>know</em> — that you can commit to something hard and see it through. That confidence bleeds into everything else.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Who This Is For</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-12">Is This For You?</h2>
+        <div class="space-y-10 max-w-2xl">
+          <div>
+            <h3 class="text-xl font-display font-bold">Complete beginners.</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">You've heard of ChatGPT but you don't really know what AI can do yet. Perfect. This challenge was designed for you. You don't need to write a single line of code. Your AI tool does the building — you tell it what to build.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">Curious professionals.</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">You use AI a little bit at work, but you know you're barely scratching the surface. This challenge gives you the structure to go deeper, with a project to prove it.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">Career pivoters.</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">You're looking to add AI to your skill set, or you're considering a move into an AI-related field. 75 days of daily building, learning, and sharing gives you both the skills and the portfolio to back it up.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold">Creators and builders.</h3>
+            <p class="mt-2 text-text-secondary leading-relaxed">You have ideas but no system to execute them. This challenge gives you the daily framework to actually ship something — and a community to keep you accountable.</p>
+          </div>
+        </div>
+        <div class="mt-12 max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+          <p>If you've been meaning to "learn AI" and haven't — this is your structure. If you know some AI but haven't built anything real — this is your push.</p>
+        </div>
+        <div class="mt-8">
+          <a href="#join" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>This Is For Me — Join the Challenge (Free)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">Together</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-10">We're Doing This Together</h2>
+        <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+          <p>This challenge isn't something you do alone in your room.</p>
+          <p>I'm doing it right alongside you — same rules, same daily commitment, same 75 days. And so are hundreds of other people who decided that today was the day they stopped just talking about AI.</p>
+          <p>You'll see my progress. I'll see yours. We'll figure things out together, share what's working, and push each other through the days where it feels like a grind.</p>
+          <p>Because that's how real learning happens. Not in isolation. Together.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">The Community</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-10">The 75 Hard AI Community Changes That</h2>
+        <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+          <p>Learning AI by yourself is possible. But it's slow, it's lonely, and it's easy to quit.</p>
+          <p>The 75 Hard AI community changes that. When you join the challenge, you step into a group of people who are on the same 75-day path, facing the same daily rules, building their own projects alongside yours.</p>
+          <p><strong class="text-text-primary">If you're a complete beginner:</strong> The community has everything you need to get started — guides, templates, tool walkthroughs, and project ideas. You will not be left behind. Every resource you need from Day 1 to Day 75 is inside.</p>
+          <p><strong class="text-text-primary">If you're already familiar with AI:</strong> You'll find people pushing into advanced territory, experimenting with new tools, and building ambitious projects. Plus, helping beginners is literally one of the five daily rules — so your knowledge makes the community stronger.</p>
+          <p><strong class="text-text-primary">For everyone:</strong> Daily threads, Showcase Days every 10 days, curated resources, and a culture of constructive feedback. The community is the reason people finish the challenge instead of quitting on Day 14.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-section-sm lg:py-section">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-20">
+          <span class="inline-block text-xs font-body font-medium text-accent uppercase tracking-[0.2em] mb-4">How It Works</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight">From Signup to Day 75</h2>
+        </div>
+        <div class="relative" id="timeline">
+          <div class="timeline-line"></div>
+          <div class="timeline-line-fill" id="timeline-fill"></div>
+          <div class="space-y-24">
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="md:text-right md:pr-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Step 1</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Sign Up</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">Join the challenge. It's free. You'll get access to the community and everything you need to get started.</p>
+                </div>
+              </div>
+              <div class="hidden md:block"></div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">01</span>
+              </div>
+            </div>
+
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="hidden md:block"></div>
+              <div class="md:pl-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Step 2</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Day 1 — Declare Your Commitment</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">On your first day, you make three public declarations: your project, your platform, and your Day 1 post. Tell the world you're starting. Use <span class="text-accent font-semibold">#75HardAI</span>.</p>
+                </div>
+              </div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">02</span>
+              </div>
+            </div>
+
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="md:text-right md:pr-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Step 3</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Do the Work — 75 Days</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">Every day, complete the five rules. Track your progress. Post in the community. Build your project. Learn. Share. Connect. Grow.</p>
+                </div>
+              </div>
+              <div class="hidden md:block"></div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">03</span>
+              </div>
+            </div>
+
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="hidden md:block"></div>
+              <div class="md:pl-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Step 4</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Showcase Days (Every 10 Days)</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">On Days 10, 20, 30, 40, 50, 60, and 70 — the community comes together. Share what you've built so far. Get feedback. See what everyone else is making. These days are about stepping back, looking at the bigger picture, and getting inspired.</p>
+                  <p class="mt-4 text-text-secondary font-body text-sm leading-relaxed"><em>On Showcase Days, the 1-hour build requirement is replaced by the showcase itself. Think of these as your built-in breather — you're still in the challenge, but the focus shifts from building to reflecting and connecting.</em></p>
+                </div>
+              </div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">04</span>
+              </div>
+            </div>
+
+            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16" data-timeline-step>
+              <div class="md:text-right md:pr-12">
+                <div class="glass-card p-8">
+                  <span class="text-xs font-body font-medium text-accent uppercase tracking-[0.15em] inline-block px-3 py-1 rounded-full bg-accent/10 mb-4">Step 5</span>
+                  <h3 class="text-xl font-display font-bold mb-3">Day 75 — You Did It</h3>
+                  <p class="text-text-secondary font-body text-sm leading-relaxed">You have a finished project. A public Git history showing every step of the journey. 75 pieces of content. A community of people who went through it with you. And a level of AI fluency that didn't exist 75 days ago.</p>
+                </div>
+              </div>
+              <div class="hidden md:block"></div>
+              <div class="absolute left-4 md:left-1/2 top-8 w-8 h-8 -ml-4 rounded-full bg-page border-2 border-accent flex items-center justify-center z-10" data-timeline-dot>
+                <span class="text-accent text-xs font-display font-bold">05</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14">
+          <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-6">Alternative</span>
+          <h2 class="text-3xl font-display font-bold tracking-tight mb-8">The 75 Soft AI Option</h2>
+          <div class="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
+            <p>The 75 Hard AI Challenge is 75 consecutive days. All five rules. Every single day. No exceptions.</p>
+            <p>That's the challenge. That's what builds the deepest discipline and the strongest results.</p>
+            <p><strong class="text-text-primary">But the real goal here is AI fluency — not punishment.</strong></p>
+            <p>If 75 consecutive days feels like too much right now, there's the <strong class="text-text-primary">75 Soft AI Challenge</strong>: same five rules, same 75 days, but you can miss a day as long as you never miss two days in a row. Two consecutive missed days and you restart from Day 1.</p>
+            <p>The Soft version still demands consistency. You still put in the work. You still finish with a project, a content trail, and real skills. The difference is a little breathing room for the days life gets in the way.</p>
+            <p>Both paths end at the same place: 75 days of AI work done. One finished project. Real fluency.</p>
+            <p class="font-bold text-text-primary">Pick the version that gets you to the finish line.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-section-sm">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <span class="inline-block text-xs font-medium text-accent uppercase tracking-[0.2em] mb-4">FAQ</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight mb-10">Common Questions</h2>
+        <div class="space-y-4" data-faq-list>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">I don't know how to code.<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">That's the entire point of this challenge. You're not coding — you're using AI tools to build. You tell the AI what you want, and it builds it for you. Claude Code, ChatGPT, Gemini — pick one and talk to it like you'd talk to a colleague. The challenge is designed so that zero coding knowledge is needed, ever.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">I don't know what to build.<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">That's what Day 1 is for. The community has project ideas, templates, and people who've been through this before. Open your AI tool and say: "I'm interested in [your field/hobby/passion]. Help me come up with a project I can build over 75 days." You'll have an idea in 5 minutes.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">75 days is a long time.<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">That's why it works. You can't build real fluency in a weekend. You can't build a portfolio in a week. 75 days is long enough to create genuine transformation and short enough to actually commit to. And if 75 straight days feels like too much, the Soft version gives you flexibility without losing the structure.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">I'll start next month.<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">That's the same thing you said last month about learning AI. And the month before that. The best time to start was when you first thought about it. The second best time is today.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">Can I modify the rules?<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">No. If the Hard version feels like too much, do the 75 Soft AI Challenge — that's the biggest modification available. The rules themselves are simple and anyone can do them.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">I'm already pretty good with AI. Is this too basic?<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">The rules scale with your skill level. A beginner's BUILD session looks completely different from an advanced builder's. The 10-minute LEARN session for someone experienced might be a cutting-edge research paper breakdown instead of an intro tutorial. The challenge isn't about the difficulty of individual tasks — it's about the consistency across all five domains for 75 days. Advanced participants also play a critical role in the CONNECT rule — your knowledge helps the community.</div>
+          </details>
+          <details class="faq-item glass-card overflow-hidden">
+            <summary class="px-8 py-6 cursor-pointer text-text-primary font-display font-semibold flex justify-between items-center">What if I miss a day?<span class="faq-icon text-text-muted text-xl leading-none ml-4 shrink-0">+</span></summary>
+            <div class="px-8 pb-6 text-text-secondary font-body leading-relaxed">In the Hard version: you restart from Day 1. That's the deal.<br>In the Soft version: missing one day is fine. Missing two in a row means restart from Day 1. Pick the version that matches your commitment level.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="pb-section-sm lg:pb-section">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="glass-card p-10 lg:p-14 text-center">
+          <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight leading-snug max-w-2xl mx-auto">75 days from now, you'll either have built something real with AI — or you'll still be thinking about it.</h2>
+          <p class="mt-8 text-xl font-display font-bold">Join the 75 Hard AI Challenge.</p>
+          <p class="mt-2 text-lg leading-relaxed text-text-secondary">It's free. It starts now.</p>
+          <div class="mt-10">
+            <a href="#join" class="inline-flex rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover" data-magnetic>Start Day 1</a>
+          </div>
+          <p class="mt-6 text-sm text-text-muted tracking-[0.15em]">#75HardAI</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/dot-grid.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/magnetic.js"></script>
+  <script src="/js/tilt.js"></script>
+  <script src="/js/animations.js"></script>
+</body>
+</html>

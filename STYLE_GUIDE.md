@@ -1,366 +1,284 @@
-# Autom8Lab — Website Style Guide
+# Autom8Lab V2 Style Guide
 
-This is the **single source of truth** for all visual design decisions on the Autom8Lab website. Every page, component, and future addition must follow these rules. No exceptions.
+This is the current visual source of truth for the Autom8Lab V2 website. It reflects the live Express/EJS + Tailwind implementation, not the archived V1 static site.
 
-> **Important:** `services_menu.html` and `complexity_guide.html` were imported from an external source and contain their own legacy color schemes (category colors, complexity badges, etc.). Those colors are NOT part of the Autom8Lab design system. Do not pull colors, patterns, or styles from those files into new pages. All new work must be based exclusively on the design tokens and patterns defined in this document.
+Core implementation files:
+- `tailwind.config.js` for Tailwind tokens
+- `src/input.css` for font faces, CSS variables, and component utilities
+- `views/partials/head.ejs`, `views/partials/nav.ejs`, and `views/partials/footer.ejs` for shared page structure
 
----
+Do not copy design rules from `archive/root-legacy/` into new V2 pages unless explicitly preserving a legacy page section.
 
-## Design Philosophy
+## Brand Feel
 
-Dark-mode, premium consulting aesthetic. Inspired by Linear, Raycast, Vercel — tools built for high-agency operators.
+Autom8Lab should feel like a focused AI consulting practice: sharp, practical, technical, and calm. The visual system is dark, premium, and operational rather than flashy.
 
-The feeling is **quiet confidence**. Nothing screams. The dark background creates negative space that lets content breathe. Strategic pops of color (gold, teal, purple) guide attention without overwhelming.
+Use:
+- dark canvas with subtle depth
+- glass-like cards
+- clean blue accent actions
+- generous spacing
+- direct, low-fluff copy
+- restrained motion
 
-The design says: *"This is for serious business owners who don't need to be sold — they need to be shown."*
+Avoid:
+- loud gradients
+- generic SaaS purple styling
+- bright white surfaces
+- cramped layouts
+- decorative animations that do not help the user understand the page
 
-**Core principles:**
-1. **Dark mode as canvas** — black isn't background, it's negative space
-2. **Color has meaning** — gold = action/premium, teal = links/trust, purple = tertiary accent
-3. **Generous spacing** — nothing feels cramped, every element has room to breathe
-4. **Subtle depth** — cards float above background through slight color shifts, not shadows
-5. **Gradient restraint** — the hero gradient is bold, but it's the ONLY bold gradient
-6. **Consistent corners** — same large border-radius everywhere, no sharp corners
-7. **No fluff** — matches the brand voice: direct, confident, no filler
+## Colors
 
----
-
-## Color System
-
-### Core Tokens (defined in `css/styles.css`)
+Current tokens are defined in `tailwind.config.js` and `src/input.css`.
 
 ```css
 :root {
-  /* Backgrounds */
-  --bg-page: #0a0a0b;          /* Page background — not pure black, hint of warmth */
-  --bg-card: #141414;          /* Cards, elevated surfaces */
-
-  /* Borders */
-  --border-subtle: #262626;    /* Card borders, dividers */
-
-  /* Text */
-  --text-primary: #ffffff;     /* Headings, key text */
-  --text-secondary: #9ca3af;   /* Body text, descriptions */
-  --text-muted: #6b7280;       /* Captions, footer, helper text */
-
-  /* Brand Accents */
-  --accent-gold: #c9a66b;      /* Primary brand color — CTAs, the "8" in logo, eyebrows */
-  --accent-gold-hover: #d4b07a; /* Gold hover state */
-  --accent-teal: #2dd4bf;      /* Links, trust indicators */
-  --accent-purple: #a78bfa;    /* Tertiary accent */
+  --bg-page: #0b0f1a;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-border: rgba(255, 255, 255, 0.06);
+  --border-subtle: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-warm: #f59e0b;
 }
 ```
 
-**Rules:**
-- Always reference these tokens or their hex values. Do NOT introduce new grays, new blues, or any other colors without explicit approval.
-- `#1f1f1f` is used for footer/nav borders (slightly lighter than `--border-subtle`).
-- `#1a1a1a` is used for hover states on cards (between `--bg-card` and `--border-subtle`).
-- Never use pure `#000000`. Always `#0a0a0b`.
+Usage:
+- `page` / `--bg-page`: page background
+- `card` / `--bg-card`: glass card surface
+- `card-border` / `--bg-card-border`: glass card border
+- `border-subtle`: inputs, dividers, secondary buttons
+- `text-primary`: headings and important labels
+- `text-secondary`: body copy
+- `text-muted`: helper text, captions, footer detail
+- `accent`: primary CTAs, badges, selected states, active lines
+- `accent-hover`: CTA hover states
+- `accent-warm`: occasional status or certification accent
 
-### The Gold Gradient (Hero Text)
-
-The signature look. Warm gold fading into soft lavender. Used ONLY on hero headlines.
-
-```css
-.hero-gradient {
-  background: linear-gradient(135deg, #f5e6d3 0%, #e8c4a0 30%, #d4a574 60%, #c4b5d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-```
-
-**Do NOT** apply this gradient to body text, buttons, cards, or anything other than large hero headings. Its power comes from scarcity.
-
----
+Rules:
+- Keep the site dark-only.
+- Do not introduce new accent colors without a clear reason.
+- Use `accent` blue for the main action language.
+- Use `accent-warm` sparingly, mainly for special badges or highlights.
 
 ## Typography
 
-### Font
+Fonts are self-hosted in `public/fonts/` and loaded in `src/input.css`.
 
-**Inter** — loaded from Google Fonts, weights 400 through 900.
-
-```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-```
-
-Override Tailwind's default sans-serif:
 ```js
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
-    },
-  },
+fontFamily: {
+  display: ['Satoshi', 'system-ui', 'sans-serif'],
+  body: ['Cabinet Grotesk', 'system-ui', 'sans-serif'],
 }
 ```
 
-**Do NOT** use any other font. No Poppins, no Montserrat, no exceptions.
+Use:
+- `font-display` for hero headings, section headings, and strong card titles
+- `font-body` for body text, forms, navigation, and helper text
 
-### Type Scale
+Typical hierarchy:
+- Hero headline: `text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.05]`
+- Section headline: `text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight`
+- Card heading: `text-xl font-display font-bold`
+- Eyebrow label: `text-xs font-medium uppercase tracking-[0.2em] text-accent`
+- Body copy: `text-lg leading-relaxed text-text-secondary`
+- Small copy: `text-sm leading-relaxed text-text-secondary`
 
-| Element             | Size (mobile → desktop)             | Weight        | Color              | Tracking         |
-|---------------------|--------------------------------------|---------------|--------------------|------------------|
-| Hero headline       | `text-4xl` → `text-7xl`             | Black (900)   | `.hero-gradient`   | `tracking-tight` |
-| Section headline    | `text-3xl` → `text-5xl`             | Bold (700)    | White              | `tracking-tight` |
-| Card heading        | `text-lg` → `text-xl`               | Semi-bold (600)| White             | Normal           |
-| Eyebrow/label       | `text-xs`                            | Medium (500)  | Gold `#c9a66b`     | `tracking-widest`, uppercase |
-| Body text           | `text-base` → `text-lg`             | Regular (400) | Secondary `#9ca3af`| Normal           |
-| Muted/caption       | `text-sm` → `text-base`             | Regular (400) | Muted `#6b7280`    | Normal           |
-| Strong body line    | `text-lg` → `text-xl`               | Medium (500)  | White              | Normal           |
+Rules:
+- Do not use Google Fonts for new V2 pages.
+- Do not use Inter for new V2 pages.
+- Keep body text secondary, not pure white.
+- Reserve `font-black` for major hero headlines.
 
-**Rules:**
-- Hierarchy comes from weight and color, not dramatic size jumps.
-- `font-black` (900) is reserved for hero headlines ONLY.
-- Body text is always `#9ca3af`, never white (white body text looks like a heading).
-- Muted text (`#6b7280`) for secondary info: captions, footers, helper text.
+## Layout
 
----
+Default page shell:
+- `<body class="bg-page text-text-primary font-body antialiased overflow-x-hidden">`
+- dot-grid canvas
+- cursor glow
+- shared nav
+- `<main class="relative z-10 pt-20">`
+- shared footer
 
-## Layout & Spacing
+Standard containers:
+- Large marketing sections: `max-w-7xl mx-auto px-6 lg:px-8`
+- Focused sections/forms: `max-w-4xl mx-auto px-6 lg:px-8`
+- Inner copy blocks: `max-w-2xl` or `max-w-3xl`
 
-### Container Widths
+Section spacing:
+- Use `py-section-sm` for most sections
+- Use `py-section` for major page blocks when more vertical breathing room is needed
+- Use `pb-section-sm lg:pb-section` for final CTA/form areas
 
-| Context              | Max Width    | Tailwind Class  |
-|----------------------|-------------|-----------------|
-| Hero / main content  | `max-w-3xl` | 768px           |
-| General content      | `max-w-5xl` | 1024px          |
+Rules:
+- Keep section widths consistent inside a page.
+- Do not create one-off spacing systems unless a page has a specific design need.
+- Forms should generally sit inside `max-w-4xl` glass cards.
 
-### Horizontal Padding
+## Cards
+
+Use the shared card utility:
 
 ```html
-px-6 md:px-8
+<div class="glass-card p-8 lg:p-10">
+  ...
+</div>
 ```
 
-Always. Every section, every page. Consistent edge breathing room.
+Definition:
 
-### Vertical Rhythm
-
-- Sections: `py-20` to `py-32` (generous, creates "chapters")
-- Between elements within a section: `mb-4` to `mb-12` depending on visual weight
-- Dividers: `w-16 h-px bg-[#262626] mx-auto` — short, centered, subtle
-
-### Centering
-
-Most content is centered: `mx-auto text-center`. The site feels focused, not sprawling.
-
----
-
-## Components
-
-### CTA Buttons (Primary)
-
-```html
-<a class="inline-block bg-[#c9a66b] text-black font-semibold text-lg px-10 py-5 rounded-xl hover:bg-[#d4b07a] transition-colors cta-glow">
-  Book Your Free AI Audit &rarr;
-</a>
+```css
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 1rem;
+}
 ```
 
-| Property       | Value                              |
-|----------------|-------------------------------------|
-| Background     | Gold `#c9a66b`                     |
-| Text           | Black (high contrast on gold)       |
-| Font weight    | Semi-bold (600)                     |
-| Padding        | Generous: `px-10 py-5` (large) or `px-5 py-2.5` (nav) |
-| Border-radius  | `rounded-xl` (12px)                |
-| Hover          | `#d4b07a` (lighter gold)           |
-| Glow           | `.cta-glow` — subtle pulsing box-shadow |
-| Arrow          | `&rarr;` at end of label            |
+Rules:
+- Prefer glass cards for main content sections.
+- Use `rounded-xl` or `rounded-2xl` for nested surfaces.
+- Use borders and translucent surfaces for depth, not heavy shadows.
 
-**Smaller CTA (nav bars):**
+## Buttons
+
+Primary CTA:
+
 ```html
-<a class="inline-block bg-[#c9a66b] text-black text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#d4b07a] transition-colors">
+<a class="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-white font-semibold transition-colors hover:bg-accent-hover">
   Book a Call
 </a>
 ```
 
-### Cards
-
-| Property       | Value                   |
-|----------------|-------------------------|
-| Background     | `#141414`               |
-| Border         | `1px solid #262626`     |
-| Border-radius  | `rounded-2xl` (16px)    |
-| Padding        | `px-8 py-6` or similar  |
-| Shadow         | None (depth from color) |
-| Hover BG       | `#1a1a1a`               |
-
-### Dividers / Borders
-
-| Context         | Color     | Style                     |
-|-----------------|-----------|---------------------------|
-| Section divider | `#262626` | `w-16 h-px mx-auto`       |
-| Footer/nav border | `#1f1f1f` | `border-t border-[#1f1f1f]` |
-| Card borders    | `#262626` | `border border-[#262626]`  |
-
-### Nav Bar Pattern
+Secondary CTA:
 
 ```html
-<nav class="border-b border-[#1f1f1f] py-4">
-  <div class="max-w-5xl mx-auto px-6 md:px-8 flex justify-between items-center">
-    <!-- Logo (inline SVG, unlinked on partner pages) -->
-    <!-- CTA or back link on right side -->
-  </div>
-</nav>
+<a class="inline-flex items-center justify-center rounded-xl border border-border-subtle px-8 py-4 text-text-secondary font-semibold transition-colors hover:border-text-muted hover:text-text-primary">
+  Learn More
+</a>
 ```
 
-### Footer Pattern
+Rules:
+- Primary actions use `bg-accent`.
+- Secondary actions use border treatment.
+- Keep corners rounded and padding generous.
+- Use `data-magnetic` only for key CTAs, not every link.
+
+## Forms
+
+Inputs:
 
 ```html
-<footer class="border-t border-[#1f1f1f] py-8">
-  <div class="max-w-5xl mx-auto px-6 md:px-8">
-    <!-- Logo SVG + copyright/status text -->
-  </div>
-</footer>
+<input class="w-full bg-page border border-border-subtle rounded-lg px-4 py-3 text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
 ```
 
----
-
-## Animations
-
-### Fade-in on Scroll
-
-Add `.fade-in` to any element. `js/main.js` uses `IntersectionObserver` to add `.visible` when it scrolls into view. Each element only animates once.
-
-```css
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-```
-
-### Headline Rotation
-
-Uses `display:none/block` swap (NOT opacity crossfade — that causes gradient text ghosting).
-
-```css
-.headline-item { display: none; }
-.headline-item.active {
-  display: block;
-  animation: headline-enter 0.7s ease-out both;
-}
-```
-
-JS swaps `.active` class every 4 seconds with a reflow trick to restart the animation.
-
-### CTA Pulse
-
-```css
-.cta-glow {
-  animation: cta-pulse 3s ease-in-out infinite;
-}
-```
-
-Gentle gold box-shadow pulse. Used on primary CTA buttons only.
-
-### Background Glow
-
-```css
-.bg-glow {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201, 166, 107, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
-}
-```
-
-Subtle gold glow from top-center, faint purple glow from bottom-right. Very low opacity — if you can clearly see it, it's too strong.
-
-### Animation Philosophy
-
-- **Calm, not flashy.** Slow ease-outs, no bouncing, no aggressive movement.
-- **Animate once.** Elements fade in on scroll and stay. No re-triggering.
-- **Subtle always wins.** If an animation is noticeable, dial it back.
-
----
-
-## Logo Usage
-
-### The Autom8Lab Icon
-
-Two overlapping circles (outline, gold stroke) with a solid gold center dot. The "8" in the brand name.
+Selectable cards/chips:
+- Use hidden native inputs inside clickable labels.
+- The visible card should carry the selected state.
+- Match the homepage and mastermind form pattern:
 
 ```html
-<!-- Icon only (hero, nav) -->
-<svg width="48" height="48" viewBox="0 0 48 48">
-  <circle cx="24" cy="14" r="10" fill="none" stroke="#c9a66b" stroke-width="2.5"/>
-  <circle cx="24" cy="34" r="10" fill="none" stroke="#c9a66b" stroke-width="2.5"/>
-  <circle cx="24" cy="24" r="3.5" fill="#c9a66b"/>
-</svg>
+<label class="selectable-card flex cursor-pointer items-center rounded-xl border border-border-subtle bg-page px-4 py-3 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent">
+  <input type="checkbox" class="hidden">
+  <span>Option</span>
+</label>
 ```
 
-### The Full Logo (Footer)
+Selected state is handled in JS by toggling:
+- `bg-accent/20`
+- `border-accent`
+- `text-accent`
 
-Wordmark: **AUTOM8LAB** — the "8" is gold `#c9a66b`, rest is white. Tagline: "YOUR AI PARTNER" in muted gray with wide letter-spacing.
+Rules:
+- Use native visible checkboxes only for legal/consent confirmation.
+- Multi-choice service/goal selections should use clickable rounded cards.
+- Required fields must be validated in both frontend JS and backend API.
 
-### Critical Rule: Inline All SVGs
+## Navigation And Footer
 
-**NEVER use `<img src="...svg">` references.** Always inline the SVG directly into the HTML. External SVG references break on cPanel due to MIME type issues. The files in `assets/logos/` are source references only — no page loads them.
+All new V2 pages should use:
+- `views/partials/nav.ejs`
+- `views/partials/footer.ejs`
+- `views/partials/head.ejs`
 
----
+Rules:
+- Header and footer are universal across the V2 site.
+- Do not recreate custom nav/footer markup per page.
+- Homepage section anchors from inner pages should use `/#section-name`.
 
-## Responsive Behavior
+## Background And Motion
 
-### Breakpoints (Tailwind defaults)
-
-| Prefix | Min-width |
-|--------|-----------|
-| `sm`   | 640px     |
-| `md`   | 768px     |
-| `lg`   | 1024px    |
-
-### Key Responsive Patterns
-
-- Hero headline scales: `text-4xl sm:text-5xl md:text-6xl lg:text-7xl`
-- Body text scales: `text-base md:text-lg` or `text-lg md:text-xl`
-- Layout stacks: `flex-col md:flex-row`
-- Padding stays consistent: `px-6 md:px-8`
-
----
-
-## Tailwind Usage
-
-Tailwind is loaded via CDN. There is no build step.
+Standard V2 pages include:
 
 ```html
-<script src="https://cdn.tailwindcss.com"></script>
+<canvas id="dot-grid" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
+<div id="cursor-glow" class="fixed w-[320px] h-[320px] rounded-full pointer-events-none z-0 opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); transform: translate(-50%, -50%);" aria-hidden="true"></div>
 ```
 
-Use Tailwind utility classes for all layout and most styling. Use `css/styles.css` ONLY for:
-- CSS custom properties (design tokens)
-- Animations / keyframes
-- Complex selectors that can't be expressed as utilities
-- The gradient text technique (requires `background-clip`)
+Standard scripts:
+- `/js/dot-grid.js`
+- `/js/nav.js`
+- `/js/magnetic.js`
+- `/js/tilt.js`
+- `/js/animations.js` when the page uses reveal/timeline/counter behavior
 
-**Do NOT** create new CSS files per page. If a page needs unique styles, use an inline `<style>` block in that page's `<head>`.
+Rules:
+- Motion should be subtle and functional.
+- Respect reduced-motion via the global CSS rule.
+- Use tilt/magnetic sparingly on cards and key CTAs.
 
----
+## Logo And Assets
 
-## Brand Voice (for copy guidance)
+Current shared pages use logo assets from:
+- `assets/logos/`
+- `public/assets/logos/`
 
-- Direct and confident, never salesy or hype-driven
-- "No fluff. No theory. Just systems that work."
-- Speaks to business owners, not developers
-- Uses "we/you" framing — personal, not corporate
-- The "8" in Autom8Lab is always gold in visual contexts
+The about photo is served from:
+- `/assets/cosmo.jpg`
 
----
+Rules:
+- Prefer shared assets and shared partials over per-page recreations.
+- Keep new public assets under `public/` when they are directly referenced by the browser.
+- Root `assets/` is served by Express through `/assets`.
 
-## What NOT to Do
+## Copy Voice
 
-- Do not use pure black `#000000` — always `#0a0a0b`
-- Do not use bright white backgrounds — this is a dark-mode-only site
-- Do not add shadows to cards — depth comes from background color shifts
-- Do not use fonts other than Inter
-- Do not use the hero gradient on anything other than hero headings
-- Do not use external SVG `<img>` tags — always inline
-- Do not add aggressive animations (bouncing, spinning, flashing)
-- Do not use Tailwind's default gray palette — always use the exact hex values above
-- Do not introduce new accent colors without explicit approval
+Voice:
+- direct
+- practical
+- specific
+- confident without hype
+- friendly when the page is personal, like `/ai-mastermind-15`
+
+Avoid:
+- vague “AI transformation” language
+- long theoretical explanations
+- corporate filler
+- overpromising automation outcomes
+
+Good patterns:
+- “No fluff. No gatekeeping.”
+- “What AI can actually do for your business.”
+- “I build the system that fixes the actual problem.”
+
+## Build Notes
+
+This is not a Tailwind CDN site anymore.
+
+Use:
+- `npm run css:build` to compile CSS
+- `npm start` for the Express app
+- `npm run dev` for local dev if needed
+
+Vercel deploys from GitHub `main`.
+
+Rules:
+- Keep `public/css/styles.css` tracked because the current Vercel deployment serves it directly.
+- Do not commit `.env`.
+- Update `.env.example` when adding new environment variables.
