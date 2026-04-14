@@ -9,6 +9,10 @@ Active backlog for the Autom8Lab V2 site.
 - Add `RESEND_API_KEY` and `CONTACT_NOTIFICATION_EMAIL`, then test immediate owner notifications from the homepage form.
 - Add homepage `MAILERLITE_GROUP_ID` if homepage leads should also enter MailerLite automatically.
 - Decide whether the homepage form should redirect to a thank-you page after successful submission.
+- Verify Vercel has the 75 Hard AI env vars:
+  - `HARD_AI_NOTION_DATABASE_ID=b37ec0578839497fbeb72d6882f7f704`
+  - `HARD_AI_MAILERLITE_GROUP_ID=184741991046711115`
+- Retest the live 75 Hard AI signup after Vercel redeploy to confirm Notion write, MailerLite group subscription, `first_name` field mapping, and thank-you redirect.
 
 ## Homepage
 
@@ -27,10 +31,15 @@ Active backlog for the Autom8Lab V2 site.
 ## Content
 
 - Do a dedicated copy pass using `docs/site-copy-inventory.md` as the working reference.
-- Rebuild `free-resources` properly:
-  - decide the 3 final resources
-  - link each resource to the right destination page or asset
-  - tighten the page structure and CTA flow
+- Continue rebuilding `free-resources`:
+  - AI Executive Assistant and 75 Hard AI Challenge are now featured resources
+  - decide the remaining final resource(s)
+  - link each remaining resource to the right destination page or asset
+  - tighten the page structure and CTA flow after the content pass
+- Build out the Skool community resources for 75 Hard AI:
+  - welcome post / orientation
+  - Day 1 instructions
+  - starter tutorials and project-picking guidance
 - Refine `vision-map` copy and page structure.
 - Review `ai-audit` copy and tighten the offer framing.
 - Review `about` page copy for positioning, proof, and credentials.

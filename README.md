@@ -181,8 +181,8 @@ Complete redesign repositioning from "AI agency" to "Cosmo as trusted AI consult
 | Fonts       | Self-hosted Satoshi (display) + Cabinet Grotesk (body)  |
 | Animations  | Vanilla JS + Canvas effects |
 | Interactive | Canvas API (dot grid, node graph), magnetic/tilt effects |
-| Forms       | Express/Vercel-style handlers (`/api/contact`, `/api/mastermind-signup`) |
-| Hosting     | Vercel (not yet deployed)                               |
+| Forms       | Express/Vercel-style handlers (`/api/contact`, `/api/mastermind-signup`, `/api/75-hard-ai-signup`) |
+| Hosting     | Vercel                                                  |
 
 ## V2 Project Structure
 
@@ -197,6 +197,8 @@ autom8-website/
     index.ejs                # Homepage
     about.ejs                # About page
     free-resources.ejs       # Free resources page
+    75-hard-ai-challenge.ejs # 75 Hard AI Challenge landing page
+    75-hard-ai-challenge-thank-you.ejs # 75 Hard AI post-submit page
     ai-audit.ejs             # AI Audit page
     vision-map.ejs           # Vision Map page
     ai-mastermind.ejs        # AI Mastermind page
@@ -221,13 +223,16 @@ autom8-website/
       tilt.js                # 3D tilt on [data-tilt] elements
       form.js                # Homepage lead form
       mastermind-form.js     # AI Mastermind signup form
+      hard-ai-form.js        # 75 Hard AI Challenge signup form
     fonts/                   # Satoshi + Cabinet Grotesk .woff2 variable fonts
   api/
     contact.js               # Homepage lead handler
     mastermind-signup.js     # AI Mastermind signup handler
+    hard-ai-signup.js        # 75 Hard AI Challenge signup handler
   lib/
     contact-integrations.js      # Homepage integrations: Notion / MailerLite / webhook / Resend
     mastermind-integrations.js   # Mastermind integrations: Notion / MailerLite
+    hard-ai-integrations.js      # 75 Hard AI integrations: Notion / MailerLite
     load-env.js                  # Local .env loader for dev
   docs/superpowers/
     specs/                   # Approved design spec
@@ -256,6 +261,8 @@ The repo root is now kept focused on the active V2 app and current project confi
 - **Homepage** (`/`) — live in EJS with updated copy, animations, case study links, and the new lead form structure
 - **About** (`/about`) — route and page implemented
 - **Free Resources** (`/free-resources`) — route and page implemented
+- **75 Hard AI Challenge** (`/75-hard-ai-challenge`) — landing page, signup form, Notion integration, and MailerLite integration implemented
+- **75 Hard AI Thank You** (`/75-hard-ai-challenge/thank-you`) — post-submit page with Skool community CTA
 - **AI Audit** (`/ai-audit`) — route and page implemented
 - **Vision Map** (`/vision-map`) — route and page implemented
 - **AI Mastermind** (`/ai-mastermind`) — route, page, Notion integration, and MailerLite integration implemented
@@ -311,6 +318,8 @@ Local dev server runs on `http://localhost:3000` by default. In local work we of
 2. **Content refinement is still pending** — several V2 pages are structurally in place but still need a dedicated copy/content pass.
 
 3. **Additional funnel work is still pending** — homepage thank-you states, webhook automation wiring, and any expanded lead routing still need to be finalized.
+
+4. **75 Hard AI production setup needs final verification** — code is implemented, Notion writes have been tested, and MailerLite first-name field mapping is wired. Vercel needs the `HARD_AI_NOTION_DATABASE_ID` and `HARD_AI_MAILERLITE_GROUP_ID` env vars present, then the live signup should be retested after redeploy.
 
 ## V2 Nav Links
 
