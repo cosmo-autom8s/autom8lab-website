@@ -1039,6 +1039,10 @@ details.faq-item[open] summary .faq-icon {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1114,6 +1118,15 @@ details.faq-item[open] summary .faq-icon {
 
 .gap-y-3 {
   row-gap: 0.75rem;
+}
+
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+}
+
+.gap-y-2 {
+  row-gap: 0.5rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1234,6 +1247,10 @@ details.faq-item[open] summary .faq-icon {
   border-top-width: 1px;
 }
 
+.border-l-4 {
+  border-left-width: 4px;
+}
+
 .border-\[\#1e293b\] {
   --tw-border-opacity: 1;
   border-color: rgb(30 41 59 / var(--tw-border-opacity, 1));
@@ -1276,6 +1293,14 @@ details.faq-item[open] summary .faq-icon {
 
 .border-red-400\/20 {
   border-color: rgb(248 113 113 / 0.2);
+}
+
+.border-accent-warm\/25 {
+  border-color: rgb(245 158 11 / 0.25);
+}
+
+.border-accent\/25 {
+  border-color: rgb(59 130 246 / 0.25);
 }
 
 .bg-\[\#111827\] {
@@ -1349,6 +1374,14 @@ details.faq-item[open] summary .faq-icon {
   background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
 }
 
+.bg-accent-warm\/10 {
+  background-color: rgb(245 158 11 / 0.1);
+}
+
+.bg-page\/70 {
+  background-color: rgb(11 15 26 / 0.7);
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1386,6 +1419,10 @@ details.faq-item[open] summary .faq-icon {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-7 {
+  padding: 1.75rem;
 }
 
 .px-10 {
@@ -1680,6 +1717,10 @@ details.faq-item[open] summary .faq-icon {
   letter-spacing: 0.1em;
 }
 
+.tracking-\[0\.22em\] {
+  letter-spacing: 0.22em;
+}
+
 .text-\[\#3b82f6\] {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity, 1));
@@ -1743,6 +1784,10 @@ details.faq-item[open] summary .faq-icon {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-accent-warm\/80 {
+  color: rgb(245 158 11 / 0.8);
 }
 
 .antialiased {
@@ -1919,6 +1964,10 @@ html {
 }
 
 @media (min-width: 640px) {
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1952,6 +2001,10 @@ html {
     grid-column: span 2 / span 2;
   }
 
+  .md\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
@@ -1971,6 +2024,10 @@ html {
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .md\:flex-row {
