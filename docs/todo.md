@@ -23,6 +23,7 @@ Active backlog for the Autom8Lab V2 site.
 
 ## AI Mastermind
 
+- Figure out an evergreen calendar link solution so the thank-you page does not need updating every week (options: stable short redirect on own domain like `/mastermind/join`, a permanent recurring Google Calendar event link, or a MailerLite automation that sends the Meet link per-session).
 - Test the thank-you page and redirect flow end to end in the browser.
 - Confirm the recurring event time/date details used in the Google Calendar link and `.ics` file.
 - Decide whether confirmation / reminder emails should come from MailerLite, Resend, or both.
